@@ -5,8 +5,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    logged:false,
+    avatarUrl:'',
+    userInfo:''
   },
+
+  onGetUserInfo: function (e) {
+    if (!this.logged && e.detail.userInfo) {
+      this.setData({
+        logged: true,
+        avatarUrl: e.detail.userInfo.avatarUrl,
+        userInfo: e.detail.userInfo
+      })
+    }
+  },
+
 
   /**
    * 生命周期函数--监听页面加载

@@ -1,1 +1,30 @@
 /* miniprogram/pages/user/user.wxss */
+page,.wrap{
+  width: 100%;
+  height: 100%;
+}
+
+.wrap{
+  position: relative;
+}
+.user-bg{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.user-bg>image{
+  height: 100%;
+  width: 100%;
+}
+.user-box{
+  width: 100%;
+  margin-top: 400px;
+  height: 2px;
+}
+.user-info{
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  height: 600px;
+  background: #ffff;
+}

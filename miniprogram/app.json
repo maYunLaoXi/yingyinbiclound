@@ -11,14 +11,17 @@
     "pages/openapi/serverapi/serverapi",
     "pages/openapi/callback/callback",
     "pages/openapi/cloudid/cloudid",
-    "pages/user/user"
+    "pages/user/user",
+    "pages/home/home"
   ],
   "window": {
-    "backgroundColor": "#F6F6F6",
+    "navigationStyle": "custom",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "小程序",
+    "backgroundColor": "#F1F3F4",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
-    "navigationBarTextStyle": "black"
+    "enablePullDownRefresh": true
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {
@@ -30,11 +33,18 @@
         "selectedIconPath": "images/icons/home.png"
       },
       {
+        "pagePath": "pages/home/home",
+        "text": "home",
+        "iconPath": "images/icons/home.png",
+        "selectedIconPath": "images/icons/home.png"
+      },
+      {
         "pagePath": "pages/user/user",
         "text": "我的",
         "iconPath": "images/icons/face.png",
         "selectedIconPath": "images/icons/face.png"
       }
+
     ]
   }
 }
