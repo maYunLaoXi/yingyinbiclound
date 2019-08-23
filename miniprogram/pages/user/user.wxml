@@ -17,6 +17,7 @@
         class="userinfo-avatar"
         style="background-image: url({{avatarUrl}})"
       ></button>
+      <view></view>
     </movable-view>
   </movable-area>
 </view>
