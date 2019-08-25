@@ -1,4 +1,5 @@
 // miniprogram/pages/user/user.js
+const app = getApp();
 Page({
 
   /**
@@ -6,8 +7,7 @@ Page({
    */
   data: {
     logged:false,
-    avatarUrl:'',
-    userInfo:''
+    userInfo:{}
   },
 
   onGetUserInfo: function (e) {
@@ -25,7 +25,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      userInfo: app.globalData.rserInfo
+    })
   },
 
   /**
@@ -39,6 +41,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    console.log('aaaa')
 
   },
 

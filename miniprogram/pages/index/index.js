@@ -29,6 +29,7 @@ Page({
                 avatarUrl: res.userInfo.avatarUrl,
                 userInfo: res.userInfo
               })
+              app.globalData.rserInfo = res.userInfo;
             }
           })
         }

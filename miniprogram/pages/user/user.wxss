@@ -4,11 +4,12 @@ page,.wrap{
   height: 100%;
 }
 
-.wrap{
+/* .wrap{
   position: relative;
-}
+  top: 0;
+} */
 .user-bg{
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
   height: 100%;
@@ -27,4 +28,26 @@ page,.wrap{
   width: 100%;
   height: 600px;
   background: #ffff;
+}
+.profile{
+  display: inline-block;
+  background: rgba(255,255,255,0.5);
+  /* padding: 1rpx; */
+  border-radius: 50%;
+  position: relative;
+  top: -39rpx;
+  left: 35rpx;
+
+}
+.main{
+  position: relative;
+  top: -29rpx;
+}
+.nick-name{
+  margin-left: 50rpx;
+  font-weight: 500;
+}
+.user-detail{
+  padding-bottom: 40rpx;
+  border-bottom: 1rpx solid lightgray;
 }

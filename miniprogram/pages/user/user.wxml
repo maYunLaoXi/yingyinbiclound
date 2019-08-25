@@ -11,13 +11,19 @@
     function="10"
     class="user-info"
     >
-      <button 
-        open-type="getUserInfo" 
-        bindgetuserinfo="onGetUserInfo"
-        class="userinfo-avatar"
-        style="background-image: url({{avatarUrl}})"
-      ></button>
-      <view></view>
+      <view class="profile">
+        <button
+          class="userinfo-avatar"
+          style="background-image: url({{userInfo.avatarUrl}})"
+        ></button>
+      </view>
+      <view class="main">
+        <view class="user-detail">
+          <text class="nick-name">{{userInfo.nickName}}</text>
+          <text class="discript"></text>
+        </view>
+      </view>
+
     </movable-view>
   </movable-area>
 </view>
