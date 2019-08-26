@@ -25,23 +25,25 @@
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {
+    "color": "#cccccc",
+    "selectedColor": "#000000",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "images/icons/home.png",
+        "iconPath": "images/icons/home-gray.png",
         "selectedIconPath": "images/icons/home.png"
       },
       {
         "pagePath": "pages/home/home",
         "text": "home",
-        "iconPath": "images/icons/home.png",
-        "selectedIconPath": "images/icons/home.png"
+        "iconPath": "images/icons/wx-gray.png",
+        "selectedIconPath": "images/icons/wx.png"
       },
       {
         "pagePath": "pages/user/user",
         "text": "我的",
-        "iconPath": "images/icons/face.png",
+        "iconPath": "images/icons/face-gray.png",
         "selectedIconPath": "images/icons/face.png"
       }
 
