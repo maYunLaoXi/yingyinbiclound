@@ -17,23 +17,20 @@
 
   <swiper 
     display-multiple-items="3"
-    next-margin="10rpx"
+    next-margin="30rpx"
     class="s-2"
   >
-        <swiper-item class="s-i2">
-          <image class="navigation-img" src="https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/index-swiper/114716533.jpg?sign=c0df94ccae71bb9038ed14403144a469&t=1566905998"></image>
+        <swiper-item style="margin-right: 30rpx" class="s-i2">
+          <image class="navigation-img" src="{{indexImg2}}"></image>
         </swiper-item>
-        <swiper-item class="s-i2">
-          <image class="navigation-img" src="https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/index-swiper/114716533.jpg?sign=c0df94ccae71bb9038ed14403144a469&t=1566905998"></image>
+        <swiper-item style="margin-right: 30rpx" class="s-i2">
+          <image class="navigation-img" src="{{indexImg2}}"></image>
         </swiper-item>
-        <swiper-item class="s-i2">
-          <image class="navigation-img" src="https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/index-swiper/114716533.jpg?sign=c0df94ccae71bb9038ed14403144a469&t=1566905998"></image>
+        <swiper-item style="margin-right: 30rpx" class="s-i2">
+          <image class="navigation-img" src="{{indexImg2}}"></image>
         </swiper-item>
-        <swiper-item class="s-i2">
-          <image class="navigation-img" src="https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/index-swiper/114716533.jpg?sign=c0df94ccae71bb9038ed14403144a469&t=1566905998"></image>
-        </swiper-item>
-        <swiper-item class="s-i2">
-          <image class="navigation-img" src="https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/index-swiper/114716533.jpg?sign=c0df94ccae71bb9038ed14403144a469&t=1566905998"></image>
+        <swiper-item style="margin-right: 30rpx" class="s-i2">
+          <image class="navigation-img" src="{{indexImg2}}"></image>
         </swiper-item>
   </swiper>
 

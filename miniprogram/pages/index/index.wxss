@@ -11,11 +11,13 @@
 .s-i2{
   width: 160rpx;
   border-radius: 20rpx;
-  padding: 0 20rpx;
 }
 .s-2{
   height: 120rpx;
-  padding-left: 25rpx;
+}
+.navigation-img{
+  margin-right: 20rpx;
+  width: 100%;
 }
 page {
   background: #f6f6f6;
