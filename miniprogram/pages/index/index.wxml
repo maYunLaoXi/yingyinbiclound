@@ -1,6 +1,21 @@
 <!--index.wxml-->
+
+  <swiper 
+    indicator-dots
+    autoplay
+  >
+      <block wx:for="{{swiper}}"  wx:key="index">
+        <swiper-item>
+          <image class="swiper-img" src="{{item}}" ></image>
+        </swiper-item>
+      </block>
+  </swiper>
+
+
 <view class="container">
 
+  <view bindtap="show">show</view>
+  
   <!-- 用户 openid -->
   <view class="userinfo">
     <button 

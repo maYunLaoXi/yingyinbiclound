@@ -1,5 +1,8 @@
 /**index.wxss**/
 
+.swiper-img{
+  width: 100%;
+}
 page {
   background: #f6f6f6;
   display: flex;

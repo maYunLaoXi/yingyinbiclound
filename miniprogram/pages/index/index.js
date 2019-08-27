@@ -7,7 +7,8 @@ Page({
     userInfo: {},
     logged: false,
     takeSession: false,
-    requestResult: ''
+    requestResult: '',
+    swiper:[],
   },
 
   onLoad: function() {
@@ -34,7 +35,30 @@ Page({
           })
         }
       }
+    });
+
+    // 获取云数据，swiper的图片地址
+    const db = wx.cloud.database();
+    db.collection('index-data').doc("fd9fa871-d12a-4c78-bb4d-a376c7b4e004").get({
+      success:(res) => {
+        console.log('clound',res);
+        const arr = [];
+        for(var i in res.data.swiper){
+          arr.push(res.data.swiper[i])
+        }
+        this.setData({
+          swiper: arr,
+        })
+      },
+      error:function(err){
+        console.log('err',err)
+      }
     })
+
+  },
+
+  show:function(){
+    console.log(this.data.swiper)
   },
 
   onGetUserInfo: function(e) {
