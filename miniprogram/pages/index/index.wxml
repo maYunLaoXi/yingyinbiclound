@@ -1,20 +1,47 @@
 <!--index.wxml-->
-
+<view class="swiper">
   <swiper 
     indicator-dots
     autoplay
   >
       <block wx:for="{{swiper}}"  wx:key="index">
         <swiper-item>
-          <image class="swiper-img" src="{{item}}" ></image>
+          <!-- <image class="swiper-img" src="{{item}}" ></image> -->
+          <view class="swiper-view" style="background-image: url({{item}})"></view>
         </swiper-item>
       </block>
   </swiper>
+</view> 
 
+<view class="main">
+
+  <swiper 
+    display-multiple-items="3"
+    next-margin="10rpx"
+    class="s-2"
+  >
+        <swiper-item class="s-i2">
+          <image class="navigation-img" src="https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/index-swiper/114716533.jpg?sign=c0df94ccae71bb9038ed14403144a469&t=1566905998"></image>
+        </swiper-item>
+        <swiper-item class="s-i2">
+          <image class="navigation-img" src="https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/index-swiper/114716533.jpg?sign=c0df94ccae71bb9038ed14403144a469&t=1566905998"></image>
+        </swiper-item>
+        <swiper-item class="s-i2">
+          <image class="navigation-img" src="https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/index-swiper/114716533.jpg?sign=c0df94ccae71bb9038ed14403144a469&t=1566905998"></image>
+        </swiper-item>
+        <swiper-item class="s-i2">
+          <image class="navigation-img" src="https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/index-swiper/114716533.jpg?sign=c0df94ccae71bb9038ed14403144a469&t=1566905998"></image>
+        </swiper-item>
+        <swiper-item class="s-i2">
+          <image class="navigation-img" src="https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/index-swiper/114716533.jpg?sign=c0df94ccae71bb9038ed14403144a469&t=1566905998"></image>
+        </swiper-item>
+  </swiper>
+
+
+</view>
 
 <view class="container">
 
-  <view bindtap="show">show</view>
   
   <!-- 用户 openid -->
   <view class="userinfo">
