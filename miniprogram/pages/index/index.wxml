@@ -1,36 +1,39 @@
-<!--index.wxml-->
-<view class="swiper">
+<!--顶部大swiper-->
+<view>
   <swiper 
     indicator-dots
     autoplay
+    class="sw1"
   >
       <block wx:for="{{swiper}}"  wx:key="index">
         <swiper-item>
-          <!-- <image class="swiper-img" src="{{item}}" ></image> -->
-          <view class="swiper-view" style="background-image: url({{item}})"></view>
+          <view class="s-v1" style="background-image: url({{item}})"></view>
         </swiper-item>
       </block>
   </swiper>
 </view> 
 
 <view class="main">
-
+<!-- 每二个左右swiper -->
   <swiper 
     display-multiple-items="3"
     next-margin="30rpx"
     class="s-2"
   >
-        <swiper-item style="margin-right: 30rpx" class="s-i2">
-          <image class="navigation-img" src="{{indexImg2}}"></image>
+        <swiper-item class="s-i2">
+          <view class="s-v2"></view>
         </swiper-item>
-        <swiper-item style="margin-right: 30rpx" class="s-i2">
-          <image class="navigation-img" src="{{indexImg2}}"></image>
+        <swiper-item class="s-i2">
+          <view class="s-v2"></view>
         </swiper-item>
-        <swiper-item style="margin-right: 30rpx" class="s-i2">
-          <image class="navigation-img" src="{{indexImg2}}"></image>
+        <swiper-item class="s-i2">
+          <view class="s-v2"></view>
         </swiper-item>
-        <swiper-item style="margin-right: 30rpx" class="s-i2">
-          <image class="navigation-img" src="{{indexImg2}}"></image>
+        <swiper-item class="s-i2">
+          <view class="s-v2"></view>
+        </swiper-item>
+        <swiper-item class="s-i2">
+          <view class="s-v2"></view>
         </swiper-item>
   </swiper>
 
