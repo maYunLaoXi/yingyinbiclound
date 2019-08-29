@@ -9,6 +9,7 @@ Page({
     takeSession: false,
     requestResult: '',
     swiper:[],
+    swiper2:[],
     indexImg2: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/index/index-swiper2/yingyinbi.jpg?sign=3d1f063624787274aaf87672b5fd8568&t=1566917901',
   },
 

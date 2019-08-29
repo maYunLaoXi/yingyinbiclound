@@ -17,11 +17,12 @@
 <!-- 每二个左右swiper -->
   <swiper 
     display-multiple-items="3"
-    next-margin="30rpx"
-    class="s-2"
+    next-margin="110rpx"
+    class="sw2"
   >
         <swiper-item class="s-i2">
           <view class="s-v2"></view>
+          <text class="s-t2">film</text>
         </swiper-item>
         <swiper-item class="s-i2">
           <view class="s-v2"></view>

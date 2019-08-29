@@ -34,6 +34,7 @@
   s-i1:swiper-item1
   s-v1:里在面的view1
  */
+ 
 .s-v1{
   width: 100%;
   height: 100%;
@@ -44,15 +45,29 @@
 .sw1{
   height: 600rpx;
 }
-
+.sw2{
+  height: 145rpx;
+}
+.s-i2{
+  padding: 10rpx;
+  background-color: pink;
+  height: 125rpx !important;
+}
 .s-v2{
   width: 100%;
   height: 100%;
-  background-position: center;
-  background-size: 100%;
+  background-image: url('https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/index/index-swiper2/yingyinbi.jpg?sign=3d1f063624787274aaf87672b5fd8568&t=1566917901');
   background-repeat: no-repeat;
-  background: url('https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/index/index-swiper2/yingyinbi.jpg?sign=3d1f063624787274aaf87672b5fd8568&t=1566917901');
+  background-position: center;
+  background-size: 100% 100%;
 }
+.s-t2{
+  color: #ffff;
+  position: absolute;
+  top: 45rpx;
+  left: 82rpx;
+}
+
 page {
   background: #f6f6f6;
   display: flex;
