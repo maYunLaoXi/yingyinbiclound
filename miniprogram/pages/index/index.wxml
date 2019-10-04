@@ -1,13 +1,13 @@
-<!--index.wxml-->
-<view class="swiper">
+<!--顶部大swiper-->
+<view>
   <swiper 
     indicator-dots
     autoplay
-    class="s-1"
+    class="sw1"
   >
       <block wx:for="{{swiper}}"  wx:key="index">
         <swiper-item>
-          <view class="swiper-view" style="background-image: url({{item}})"></view>
+          <view class="s-v1" style="background-image: url({{item}})"></view>
         </swiper-item>
       </block>
   </swiper>
