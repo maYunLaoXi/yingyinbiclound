@@ -12,7 +12,7 @@
     "pages/openapi/callback/callback",
     "pages/openapi/cloudid/cloudid",
     "pages/user/user",
-    "pages/home/home"
+    "pages/activity/activity"
   ],
   "window": {
     "navigationStyle": "custom",
@@ -35,8 +35,8 @@
         "selectedIconPath": "images/icons/home.png"
       },
       {
-        "pagePath": "pages/home/home",
-        "text": "home",
+        "pagePath": "pages/activity/activity",
+        "text": "活动",
         "iconPath": "images/icons/wx-gray.png",
         "selectedIconPath": "images/icons/wx.png"
       },

@@ -1,5 +1,0 @@
-<!--miniprogram/pages/home/home.wxml-->
-<van-button icon="photo" size="large" type="primary" bindtap="doUpload">上传图片</van-button>
-<view wx:for="{{tempFilePaths}}" wx:for-item="item">
-  <image src="{{item}}"></image>
-</view>

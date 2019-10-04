@@ -1,0 +1,57 @@
+/* miniprogram/pages/home/home.wxss */
+image{
+  height: 0;
+  width: 0;
+}
+.top-img{
+  width: 100%;
+  height: 360rpx;
+}
+.main{
+  padding: 0 25rpx;
+}
+.top-button{
+  width: 400rpx;
+  background: linear-gradient(to right, #e12649,#ec6461);
+  border-radius: 10em;
+  color: #ffff;
+  font-size: 15px;
+  position: relative;
+  top: -35rpx;
+}
+.title{
+  font-size: 40rpx;
+}
+.end-text,.auth-name{
+  font-size: 25rpx;
+  color: #999999;
+}
+.end-day{
+  color: #ec6461;
+}
+.auth-profile{
+  margin-right: 15rpx;
+  width: 30rpx;
+  height: 30rpx;
+}
+.auth-name{
+  color: #000;
+}
+.act-detial{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid #999999;
+  padding-bottom: 10rpx;
+}
+.detial-right{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.follow-text{
+  font-size: 25rpx;
+  color: #ec6461;
+  margin-left: 40rpx;
+}

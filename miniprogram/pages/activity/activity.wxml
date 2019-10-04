@@ -1,0 +1,23 @@
+<!--miniprogram/pages/home/home.wxml-->
+<!-- <van-button icon="photo" size="large" type="primary" bindtap="doUpload">上传图片</van-button>
+<view wx:for="{{tempFilePaths}}" wx:for-item="item">
+  <image src="{{item}}"></image>
+</view> -->
+
+<view class="act-container">
+  <view class="top-img" style="background-image: url({{topImg}})"></view>
+
+  <view class="main">
+  <button class="top-button">立即参加</button>
+  <text class="title">{{activityTitle}}</text>
+  <view class="act-detial">
+    <text class="end-text">距结束还有<text class="end-day">{{endDay}}</text>天</text>  
+    <view class="detial-right">
+      <image class="auth-profile" src="{{authProfile}}"></image>
+      <text class="auth-name">{{authName}}</text>
+      <text class="follow-text">+关注</text>
+    </view>    
+  </view>
+  
+  </view>
+</view>

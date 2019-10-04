@@ -3,10 +3,10 @@
   <swiper 
     indicator-dots
     autoplay
+    class="s-1"
   >
       <block wx:for="{{swiper}}"  wx:key="index">
         <swiper-item>
-          <!-- <image class="swiper-img" src="{{item}}" ></image> -->
           <view class="swiper-view" style="background-image: url({{item}})"></view>
         </swiper-item>
       </block>
@@ -14,27 +14,56 @@
 </view> 
 
 <view class="main">
+  <view>
+    <text class="main-title">标签</text>
+    <swiper 
+      display-multiple-items="3"
+      next-margin="30rpx"
+      class="s-2"
+    >
 
-  <swiper 
-    display-multiple-items="3"
-    next-margin="30rpx"
-    class="s-2"
-  >
-        <swiper-item style="margin-right: 30rpx" class="s-i2">
-          <image class="navigation-img" src="{{indexImg2}}"></image>
+      <block wx:for="{{swiper2}}" wx:key="index">
+        <swiper-item class="s-i2">
+          <view class="s-w-2" style="background-image: url({{item.backgroundImg}})">
+            <view class="s-w-2-mask">
+              #{{item.text}}
+            </view> 
+          </view>
         </swiper-item>
-        <swiper-item style="margin-right: 30rpx" class="s-i2">
-          <image class="navigation-img" src="{{indexImg2}}"></image>
-        </swiper-item>
-        <swiper-item style="margin-right: 30rpx" class="s-i2">
-          <image class="navigation-img" src="{{indexImg2}}"></image>
-        </swiper-item>
-        <swiper-item style="margin-right: 30rpx" class="s-i2">
-          <image class="navigation-img" src="{{indexImg2}}"></image>
-        </swiper-item>
-  </swiper>
+      </block>
 
+    </swiper>
+  </view>
 
+  <view class="activity">
+    <van-panel title="免费晒相4.0" desc="你的照片我来晒" status="进行中" >
+      <view class="act-img"></view>
+      <view class="act-footer">
+        <text class="act-footer-left f-l">立即参加</text>
+        <text class="act-footer-right f-r">></text>
+      </view>
+    </van-panel>
+  </view>
+
+  <view class="article">
+    <van-panel title="精选文章" desc="不更新的这几个月我在做什么">
+      <view class="act-img"></view>
+      <view class="act-footer">
+        <text class="act-footer-left f-l">点击阅读</text>
+        <text class="act-footer-right f-r">></text>
+      </view>
+    </van-panel>
+  </view>
+
+  <view class="camera">
+    <van-panel title="器材评测" desc="从胶片到数码，没有最好，只有合适">
+      <view class="act-img"></view>
+      <view class="act-footer">
+        <text class="act-footer-left f-l">点击阅读</text>
+        <text class="act-footer-right f-r">></text>
+      </view>
+    </van-panel>
+  </view>
 </view>
 
 <view class="container">
@@ -88,3 +117,4 @@
 
 
 </view>
+

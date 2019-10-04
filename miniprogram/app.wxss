@@ -18,6 +18,12 @@ button::after{
   border: none;
 }
 
+.f-l{
+  float: left;
+}
+.f-r{
+  float: right;
+}
 
 page {
   background: #f6f6f6;
