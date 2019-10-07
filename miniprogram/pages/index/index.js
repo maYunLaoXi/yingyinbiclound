@@ -99,6 +99,12 @@ Page({
 
   },
 
+  // 去活动页
+  toActivity(){
+    wx.switchTab({
+      url: '/pages/activity/activity',
+    })
+  },
   show:function(){
     console.log(this.data.swiper)
   },

@@ -4,20 +4,97 @@
   <image src="{{item}}"></image>
 </view> -->
 
-<view class="act-container">
-  <view class="top-img" style="background-image: url({{topImg}})"></view>
 
-  <view class="main">
-  <button class="top-button">立即参加</button>
-  <text class="title">{{activityTitle}}</text>
-  <view class="act-detial">
-    <text class="end-text">距结束还有<text class="end-day">{{endDay}}</text>天</text>  
-    <view class="detial-right">
-      <image class="auth-profile" src="{{authProfile}}"></image>
-      <text class="auth-name">{{authName}}</text>
-      <text class="follow-text">+关注</text>
-    </view>    
-  </view>
-  
+<view class="act-container">
+  <scroll-view scroll-y class="DrawerPage {{modalName=='viewModal'?'show':''}}">
+
+    <image src="{{topImg}}" class="top-img" mode="aspectFill"></image>
+    <view class="main bg-c-w">
+      <button class="top-button">立即参加</button>
+      <text class="title">{{activityTitle}}</text>
+      <view class="act-detial">
+        <text class="end-text">距结束还有<text class="end-day">{{endDay}}</text>天</text>  
+        <view class="detial-right">
+          <image class="auth-profile" src="{{authProfile}}" mode="aspectFill"></image>
+          <text class="auth-name">{{authName}}</text>
+          <text class="follow-text">+关注</text>
+        </view>  
+      </view>
+      <view class="description">
+        <text>{{descriptionShort}}</text>
+      </view>
+    </view>
+    <view 
+      class="description-total bg-c-w" 
+      bindtap="showModal" 
+      data-target="viewModal"
+    >查看全部活动介绍</view>
+    <view class="step-box bg-c-w">
+      <text>参与方式</text>
+      <view class="cu-timeline">
+        <view class="cu-item">
+          <view class="content">
+            <view class="cu-capsule radius">
+              <view class="cu-tag bg-cyan">step1</view>
+              <view class="cu-tag line-cyan">点击上方立即参加</view>
+            </view>
+            <view class="margin-top">上传图片并完善收件信息就可以了</view>
+          </view>
+        </view>
+
+        <view class="cu-item">
+          <view class="content">
+            <view class="cu-capsule radius">
+              <view class="cu-tag bg-cyan">step2</view>
+              <view class="cu-tag line-cyan">+关注作者以获最新进展</view>
+            </view>
+            <view class="margin-top">最关注作者公众号（影音笔），以便获得活动的最新进展。当然，关注本小程序也可以的</view>
+            <button class="cu-btn bg-cyan shadow qrcode-btn" bindtap="showModal" data-target="Image">点击查看二维码</button>
+          </view>
+        </view>
+
+        <view class="cu-item">
+          <view class="content">
+            <view class="cu-capsule radius">
+              <view class="cu-tag bg-cyan">step3</view>
+              <view class="cu-tag line-cyan">希望得到你收到后的分享</view>
+            </view>
+            <view class="margin-top">最后，如果可以的话，收到相片后可以发一个『买家秀』吗？这会默认会在下一期相同活动作为展示。当然你也可以选择不展示，作为私密信发给我</view>
+          </view>
+        </view>
+
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+<view class="DrawerClose {{modalName=='viewModal'?'show':''}}" bindtap="hideModal">
+  <text class="cuIcon-pullright"></text>
+</view>
+
+<!-- 全屏抽屉组件 -->
+<scroll-view scroll-y class="DrawerWindow {{modalName=='viewModal'?'show':''}}">
+  <image src="{{topImg}}" class="top-img" mode="aspectFill"></image>
+  <!-- <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
+    <view class="cu-item arrow" wx:for="{{20}}" wx:key="index">
+      <view class="content">
+        <text class="cuIcon-github text-grey"></text>
+        <text class="text-grey">{{index +1}}</text>
+      </view>
+    </view>
+  </view> -->
+</scroll-view>
+
+<!-- 图片二维码弹窗 -->
+<view class="cu-modal {{modalName=='Image'?'show':''}}">
+  <view class="cu-dialog">
+    <image class="qrcode-img" 
+      bindtap="longTapScan"    src="https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/%E5%BD%B1%E9%9F%B3%E7%AC%94%E7%9B%B8%E5%85%B3/%E5%BD%B1%E9%9F%B3%E7%AC%94-qrcodd.jpg?sign=8bbb26ad4ec95904fb0c2f3c5708fc86&t=1570374091"></image>
+    <view>
+      <text>由于小程序限制，无法直接扫公众号二维码\n点击预览二维码再长按保存再扫吧</text>
+    </view>
+    <view class="cu-bar bg-white">
+      <view class="action margin-0 flex-sub  solid-left" bindtap="hideModal">我知道了</view>
+    </view>
   </view>
 </view>

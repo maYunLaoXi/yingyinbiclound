@@ -2,6 +2,8 @@
 <view>
   <swiper 
     indicator-dots
+    indicator-color="rgba(255,255,255,.5)"
+    indicator-active-color="#ec6461"
     autoplay
     class="sw1"
   >
@@ -35,7 +37,7 @@
     </swiper>
   </view>
 
-  <view class="activity">
+  <view class="activity" bindtap="toActivity">
     <van-panel title="免费晒相4.0" desc="你的照片我来晒" status="进行中" >
       <view class="act-img"></view>
       <view class="act-footer">

@@ -6,11 +6,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    topImg: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/activities/%E6%99%92%E7%9B%B84.0/DSC07052.jpg?sign=ba39d1109a96c0a5ff8e3e5472555f98&t=1570185640',
+    topImg: '',
     activityTitle: '晒相4.0',
-    endDay: 30,
-    authProfile: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/%E5%BD%B1%E9%9F%B3%E7%AC%94%E7%9B%B8%E5%85%B3/%E5%BD%B1%E9%9F%B3%E7%AC%94-logo.jpg?sign=e09dcc5fe3b837c59c3fdab98ee61ee0&t=1570200737',
+    endDay: 0,
+    authProfile: '',
     authName: '影音笔',
+    descriptionShort: '',
     tempFilePaths:[]
   },
 
@@ -76,7 +77,55 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // 数据请求
+    const db = wx.cloud.database();
+    db.collection('activity-data').doc("activity-data-develop4.0").get({
+      success: (res) => {
+        console.log('activity-data', res);
+        const {
+          activityTitle,
+          authName,
+          authProfile,
+          endDay,
+          topImg,
+          descriptionShort,
+        } = res.data;
 
+        this.setData({
+          authName,
+          authProfile,
+          endDay,
+          topImg,
+          activityTitle,
+          descriptionShort,
+        })
+      },
+      error: function (err) {
+        console.log('err', err)
+      }
+    })
+
+  },
+
+// colorui
+  showModal(e) {
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      modalName: null
+    })
+  },
+
+  longTapScan(e){
+    var current = e.target.dataset.src;
+    console.log(e.target)
+    wx.previewImage({
+      current: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/%E5%BD%B1%E9%9F%B3%E7%AC%94%E7%9B%B8%E5%85%B3/%E5%BD%B1%E9%9F%B3%E7%AC%94-qrcodd.jpg?sign=8bbb26ad4ec95904fb0c2f3c5708fc86&t=1570374091',
+      urls: ['https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/%E5%BD%B1%E9%9F%B3%E7%AC%94%E7%9B%B8%E5%85%B3/%E5%BD%B1%E9%9F%B3%E7%AC%94-qrcodd.jpg?sign=8bbb26ad4ec95904fb0c2f3c5708fc86&t=1570374091']
+    })
   },
 
   /**
