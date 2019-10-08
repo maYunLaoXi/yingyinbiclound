@@ -10,7 +10,7 @@
 
     <image src="{{topImg}}" class="top-img" mode="aspectFill"></image>
     <view class="main bg-c-w">
-      <button class="top-button">立即参加</button>
+      <button class="top-button" bindtap="doUpload">立即参加</button>
       <text class="title">{{activityTitle}}</text>
       <view class="act-detial">
         <text class="end-text">距结束还有<text class="end-day">{{endDay}}</text>天</text>  

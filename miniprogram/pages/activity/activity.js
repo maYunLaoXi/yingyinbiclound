@@ -15,13 +15,13 @@ Page({
     tempFilePaths:[]
   },
 
-  //图片上传
+  //图片上传 
   doUpload: function () {
     // 选择图片
     wx.chooseImage({
       count: 9,//最多可选的张数是9
-      sizeType: ['original','compressed'],
-      sourceType: ['album', 'camera'],
+      sizeType: ['original'],//不压缩图片
+      sourceType: ['album'],
       success: (res) => {
 
         wx.showLoading({
@@ -29,39 +29,39 @@ Page({
         })
 
         //更改数据并绑定到视图
-        this.setData({
-          tempFilePaths:res.tempFilePaths
-        })
-        const filePath = res.tempFilePaths;
-        console.log(this.data.tempFilePaths)
+        // this.setData({
+        //   tempFilePaths:res.tempFilePaths
+        // })
+        // const filePath = res.tempFilePaths;
+        // console.log(this.data.tempFilePaths)
 
         // 上传图片
-        // const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
-        // wx.cloud.uploadFile({
-        //   cloudPath,
-        //   filePath,
-        //   success: res => {
-        //     console.log('[上传文件] 成功：', res)
+        const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
+        wx.cloud.uploadFile({
+          cloudPath,
+          filePath,
+          success: res => {
+            console.log('[上传文件] 成功：', res)
 
-        //     app.globalData.fileID = res.fileID
-        //     app.globalData.cloudPath = cloudPath
-        //     app.globalData.imagePath = filePath
+            app.globalData.fileID = res.fileID
+            app.globalData.cloudPath = cloudPath
+            app.globalData.imagePath = filePath
 
-        //     wx.navigateTo({
-        //       url: '../storageConsole/storageConsole'
-        //     })
-        //   },
-        //   fail: e => {
-        //     console.error('[上传文件] 失败：', e)
-        //     wx.showToast({
-        //       icon: 'none',
-        //       title: '上传失败',
-        //     })
-        //   },
-        //   complete: () => {
-        //     wx.hideLoading()
-        //   }
-        // })
+            wx.navigateTo({
+              url: '../storageConsole/storageConsole'
+            })
+          },
+          fail: e => {
+            console.error('[上传文件] 失败：', e)
+            wx.showToast({
+              icon: 'none',
+              title: '上传失败',
+            })
+          },
+          complete: () => {
+            wx.hideLoading()
+          }
+        })
 
       },
       fail: e => {
