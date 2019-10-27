@@ -1,5 +1,13 @@
 @import 'colorui/main.wxss';
 @import 'colorui/icon.wxss';
+@import './css/index';
+
+/* 自定 */
+.notice{
+  color: #757575;
+  border-left: 7rpx solid #009A61;
+  padding-left: 14rpx;
+}
 
 /**app.wxss**/
 .container {

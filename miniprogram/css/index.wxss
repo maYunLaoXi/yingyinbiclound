@@ -1,0 +1,19 @@
+/* 默认样式 */
+.bg-c-w{
+  background-color: #ffff;
+}
+.fs-25r{
+  font-size: 25rpx;
+}
+.fs-28r{
+  font-size: 28rpx;
+}
+.fs-30r{
+  font-size: 30rpx;
+}
+.c-w-1{
+  color: #ffff;
+}
+strong{
+  font-weight: 500;
+}

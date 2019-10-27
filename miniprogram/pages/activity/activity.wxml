@@ -74,15 +74,29 @@
 
 <!-- 全屏抽屉组件 -->
 <scroll-view scroll-y class="DrawerWindow {{modalName=='viewModal'?'show':''}}">
-  <image src="{{topImg}}" class="top-img" mode="aspectFill"></image>
-  <!-- <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
-    <view class="cu-item arrow" wx:for="{{20}}" wx:key="index">
-      <view class="content">
-        <text class="cuIcon-github text-grey"></text>
-        <text class="text-grey">{{index +1}}</text>
-      </view>
+  <view class="top-img drawer-top fs-25r" mode="aspectFill">
+    <text class="title dra-title c-w-1">#{{activityTitle}}\n</text>
+    <text class="c-w-1">纸照片，真的是件无比美妙的事。\n</text>
+  </view>
+  <view class="dra-text-box fs-28r">
+    <text>四年前当我从暗房晒出我的第一张照片时，我就发现纸质照片相对于屏幕上的电子照片更能够给我带来喜悦\n</text>
+    <text>在传统暗房即将被淘汰的今天，虽然我们不能体会到自己手工冲洗的乐趣，但是凭借着数码冲印，我们同样能得到很优质的纸质相片。\n</text>
+    <text>三年前我也曾经组织过两期的免费冲印。我想，纸质相片的这片喜悦应该分享给更多的人。三年前公众号才刚刚成立不久，粉丝都是身边的同学。冲印完收到照片后我就骑自行车送过去。冲印的成本并不高，却收到很多人的微笑。\n</text>
+    <strong style="margin-left: -20rpx">【活动对像】：</strong><text>\n影音笔公众号粉丝\n</text>
+    <strong style="margin-left: -20rpx">【活动时间】：</strong><text>\n一个月为一个周期，详情请留意活动页\n</text>
+    <strong style="margin-left: -20rpx">【对照片的要求】：</strong><text>
+      1.任何形式的照片，建议多为创作形式照片，当然也可以有适当的游客照。
+      2.冲洗的尺寸为5英寸3.5：5。对于4：3形式会进行留白或裁剪。对于正形大头照留白会很多，建议多张拼接如6张。
+      3.照片需为jpg,jpeg或png格式。最大不要超过5M。
+      4.数量不限。\n</text>
+    <strong stye="margin-left: -20rpx">【回寄形式】：</strong><text>以信件的形式回寄，所以必需注意地址和邮编的准确性\n</text>
+    <view class="notice">
+      <text>注：由于信封对体积重量有限制，对于数量过多的读者会对照片进行筛选。</text>
     </view>
-  </view> -->
+    <view>
+      <text class="dev-discript"></text>
+    </view>
+  </view>
 </scroll-view>
 
 <!-- 图片二维码弹窗 -->

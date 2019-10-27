@@ -77,6 +77,25 @@ image{
   margin-top: 32rpx;
 }
 
+/* 全屏抽屉组件 */
+.dra-text-box{
+  margin: 0 10px;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: rgba(255,255,255,0.6);
+  line-height: 44rpx;
+}
+.drawer-top{
+  background-image: url('https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/activities/%E6%99%92%E7%9B%B84.0/IMG_0206mohu.jpg?sign=b779ad36004423e6b615052ecfc90b28&t=1572144936');
+  background-size: 100%;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 25rpx;
+}
+
+
 /* colorui */
 page {
   background-image: var(--gradualBlue);

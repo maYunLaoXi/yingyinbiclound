@@ -1,7 +1,7 @@
 <!--miniprogram/pages/user/user.wxml-->
 <view class="wrap">
   <view class="user-bg">
-    <image src="../../images/114716533.jpg"></image>
+    <image mode="aspectFill" src="{{userInfo.profile ? userInfo.profile : userProfile}}"></image>
   </view>
   <movable-area class="user-box">
     <movable-view
@@ -22,6 +22,9 @@
           <text class="nick-name">{{userInfo.nickName}}</text>
           <text class="discript"></text>
         </view>
+      </view>
+      <view class="user-content">
+        用户的信息，如参与活动，收藏的文章等
       </view>
 
     </movable-view>

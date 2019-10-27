@@ -12,7 +12,8 @@ Page({
     authProfile: '',
     authName: '影音笔',
     descriptionShort: '',
-    tempFilePaths:[]
+    tempFilePaths:[],
+    drawerImg1: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/activities/%E6%99%92%E7%9B%B84.0/IMG_0206mohu.jpg?sign=b779ad36004423e6b615052ecfc90b28&t=1572144936',
   },
 
   //图片上传 
