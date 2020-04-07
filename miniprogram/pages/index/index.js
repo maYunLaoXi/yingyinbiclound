@@ -52,7 +52,7 @@ Page({
 
     // 操作tabbar的数字： 
     wx.setTabBarBadge({
-      index: 0, //第几个
+      index: 2, //第几个
       text: '6',  //显示的字
     })
 
