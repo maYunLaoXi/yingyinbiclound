@@ -17,3 +17,9 @@
 strong{
   font-weight: 500;
 }
+.bg-pink{
+  background-color: pink
+}
+.bg-yellow{
+  background-color: yellowgreen
+}

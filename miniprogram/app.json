@@ -12,7 +12,9 @@
     "pages/openapi/callback/callback",
     "pages/openapi/cloudid/cloudid",
     "pages/user/user",
-    "pages/activity/activity"
+    "pages/activity/activity",
+    "pages/waterfall/waterfall",
+    "pages/component/waterfall/waterfall"
   ],
   "window": {
     "navigationStyle": "custom",
@@ -46,7 +48,6 @@
         "iconPath": "images/icons/face-gray.png",
         "selectedIconPath": "images/icons/face.png"
       }
-
     ]
   },
   "usingComponents": {

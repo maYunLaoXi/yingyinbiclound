@@ -1,0 +1,13 @@
+/* miniprogram/pages/component/waterfall/waterfall.wxss */
+.wrap{
+  padding: 6rpx;
+}
+.left, .right{
+  width: 366rpx;
+}
+.left{
+  float: left;
+}
+.right{
+  float: right;
+}

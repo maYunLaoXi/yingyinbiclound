@@ -1,0 +1,11 @@
+<!--miniprogram/pages/component/waterfall/waterfall.wxml-->
+<!-- 瀑布流组件 -->
+<view class="wrap">
+  <view class="left bg-pink">
+  a
+  </view>
+  <view class="right bg-yellow">
+  b
+  </view>
+</view>
+
