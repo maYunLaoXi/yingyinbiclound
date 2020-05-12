@@ -26,7 +26,7 @@
       <view class="user-content">
         用户的信息，如参与活动，收藏的文章等
       </view>
-
+      <button class="cu-btn round line-red" bindtap="toAddPicArticle">发表图文</button>
     </movable-view>
   </movable-area>
 </view>

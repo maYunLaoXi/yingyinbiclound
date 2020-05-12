@@ -1,42 +1,18 @@
-// miniprogram/pages/user/user.js
-const app = getApp();
+// miniprogram/pages/component/portrait/portrait.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    logged:false,
-    userInfo:{},
-    userProfile: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/users/feigle/IMG_0987.JPG?sign=76b26af236b150caa9b1b4aa14aa74da&t=1572185422',
+
   },
 
-  onGetUserInfo: function (e) {
-    if (!this.logged && e.detail.userInfo) {
-      this.setData({
-        logged: true,
-        avatarUrl: e.detail.userInfo.avatarUrl,
-        userInfo: e.detail.userInfo
-      })
-    }
-  },
-
-  /**
-   *  发表文章
-   * @param {*} options 
-   */
-  toAddPicArticle() {
-    wx.navigateTo({
-      url: '/pages/components/add-picture-article/add-picture-article'
-    })
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      userInfo: app.globalData.rserInfo
-    })
+
   },
 
   /**
@@ -50,7 +26,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log('aaaa')
 
   },
 

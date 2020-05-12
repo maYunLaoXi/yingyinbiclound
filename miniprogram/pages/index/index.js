@@ -14,6 +14,7 @@ Page({
       {
         text: '人像',
         backgroundImg: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/index/index-swiper2/yingyinbi-portrait-min.jpg?sign=13190be9a6160ccfb98003ff5d62ef5a&t=1570169029',
+        page: 'portrait'
       },
       {
         text: '风光',
@@ -104,6 +105,14 @@ Page({
   toActivity(){
     wx.switchTab({
       url: '/pages/activity/activity',
+    })
+  },
+  // 点击标签
+  TagNavigate(page) {
+    debugger
+    const url = page.currentTarget.dataset.tagType
+    wx.navigateTo({
+      url: '/pages/components/' + url + '/' + url
     })
   },
   show:function(){

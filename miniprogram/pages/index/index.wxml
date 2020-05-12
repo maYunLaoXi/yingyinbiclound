@@ -23,17 +23,15 @@
       next-margin="30rpx"
       class="s-2"
     >
-
       <block wx:for="{{swiper2}}" wx:key="index">
         <swiper-item class="s-i2">
           <view class="s-w-2" style="background-image: url({{item.backgroundImg}})">
-            <view class="s-w-2-mask">
+            <view bindtap="TagNavigate" class="s-w-2-mask" data-tag-type="{{ item.page }}">
               #{{item.text}}
             </view> 
           </view>
         </swiper-item>
       </block>
-
     </swiper>
   </view>
 

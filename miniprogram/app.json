@@ -14,7 +14,9 @@
     "pages/user/user",
     "pages/activity/activity",
     "pages/waterfall/waterfall",
-    "pages/component/waterfall/waterfall"
+    "pages/components/waterfall/waterfall",
+    "pages/components/portrait/portrait",
+    "pages/components/add-picture-article/add-picture-article"
   ],
   "window": {
     "navigationStyle": "custom",

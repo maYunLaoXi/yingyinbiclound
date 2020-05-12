@@ -57,6 +57,13 @@
 					"id": 1,
 					"name": "pages/component/waterfall/waterfall",
 					"pathName": "pages/component/waterfall/waterfall",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/components/add-picture-article/add-picture-article",
+					"pathName": "pages/components/add-picture-article/add-picture-article",
 					"scene": null
 				}
 			]
