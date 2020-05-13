@@ -16,6 +16,49 @@ App({
       })
     }
 
-    this.globalData = {}
+    this.globalData = {
+      PhotographyClass: [
+        {
+          nameCh: '人像',
+          nameEn: 'portrait',
+          page: ''
+        },
+        {
+          nameCh: '风光',
+          nameEn: 'landscape',
+          page: ''
+        },
+        {
+          nameCh: '胶片',
+          nameEn: 'film',
+          page: ''
+        },
+        {
+          nameCh: '旅行',
+          nameEn: 'travel',
+          page: ''
+        },
+        {
+          nameCh: '日常',
+          nameEn: 'daily',
+          page: ''
+        },
+        {
+          nameCh: '后期',
+          nameEn: 'afterShoot',
+          page: ''
+        },
+        {
+          nameCh: '视频',
+          nameEn: 'video',
+          page: ''
+        },
+        {
+          nameCh: '其它',
+          nameEn: 'others',
+          page: ''
+        },
+      ]
+    }
   }
 })

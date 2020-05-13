@@ -1,1 +1,18 @@
 /* miniprogram/pages/components/add-picture-article/add-picture-article.wxss */
+.cu-form-group textarea{
+  height: 11em;
+}
+.tag-box{
+  justify-content: start;
+}
+/* 解决伪类盖信点击事件 */
+.cu-form-group picker::after{
+  pointer-events: none;
+}
+.cu-form-group picker .picker{
+  padding-right: 40rpx;
+  text-align: left;
+}
+.cu-form-group picker{
+  padding-right: 0;
+}
