@@ -64,6 +64,13 @@
 					"id": -1,
 					"name": "pages/components/add-picture-article/add-picture-article",
 					"pathName": "pages/components/add-picture-article/add-picture-article",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/drag-test/index",
+					"pathName": "pages/drag-test/index",
 					"scene": null
 				}
 			]

@@ -1,0 +1,19 @@
+/* miniprogram/pages/components/navigation-bar/navigation-bar.wxss */
+.wrap{
+  height: 125rpx;
+  background: #FFFFFF;
+  padding-top: 64rpx;
+}
+.title{
+  display: flex;
+  flex-direction: row;
+}
+.text-1{
+  /* background: pink; */
+  width: 150rpx;
+}
+.text-2{
+  /* background: red; */
+  width: 420rpx;
+  text-align: center;
+}

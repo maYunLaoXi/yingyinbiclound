@@ -1,30 +1,125 @@
-/*
- * @Author: your name
- * @Date: 2020-05-12 22:41:30
- * @LastEditTime: 2020-05-13 22:52:11
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: /yingyinbiclound/miniprogram/pages/components/add-picture-article/add-picture-article.js
- */
 // miniprogram/pages/components/add-picture-article/add-picture-article.js
 const app = getApp()
+import { randomStr } from '../../../utils/index'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    imgList: [],
+    imgList: [
+      {
+        dragId: '11',
+        images: 'http://tmp/wxcb8ec180defd86c6.o6zAJsxonSqBNkniIz_OFsGkFD7w.i3XsIENSBxcV3fc07851883bf0069d9eacf25947a08e.png'
+      },
+      {
+        dragId: '11',
+        images: 'http://tmp/wxcb8ec180defd86c6.o6zAJsxonSqBNkniIz_OFsGkFD7w.i3XsIENSBxcV3fc07851883bf0069d9eacf25947a08e.png'
+      },
+    ],
     arcicle: '',
     PhotographyClass: [],
-    class: null
+    class: null,
+    navigationBar: 'fasfdas',
+    // drag组件
+    isIphoneX: app.globalData.isIphoneX,
+    size: 4,
+    listData: [],
+    extraNodes: [
+      {
+        type: "after",
+        dragId: "plus",
+        slot: "plus",
+        fixed: true
+      }
+    ],
+    pageMetaScrollTop: 0,
+    scrollTop: 0,
+    // drag组件end
+    
+    // 是否参加晒相活动
+    isJoinDevelop: false
   },
+  // drag组件方法
+  sortEnd(e) {
+    console.log("sortEnd", e.detail.listData)
+    this.setData({
+      listData: e.detail.listData
+    });
+  },
+  change(e) {
+    console.log("change", e.detail.listData)
+  },
+  delImg(e) {
+    wx.vibrateShort();
+    this.reListData({
+      item: e.detail
+    })
+  },
+  sizeChange(e) {
+    wx.pageScrollTo({ scrollTop: 0 })
+    this.setData({
+      size: e.detail.value
+    });
+    this.drag.init();
+  },
+  itemClick(e) {
+    console.log(e);
+  },
+  toggleFixed(e) {
+    let key = e.currentTarget.dataset.key;
 
+    let { listData } = this.data;
+
+    listData[key].fixed = !listData[key].fixed
+
+    this.setData({
+      listData: listData
+    });
+
+    this.drag.init();
+  },
+  scroll(e) {
+    this.setData({
+      pageMetaScrollTop: e.detail.scrollTop
+    })
+  },
+  // 页面滚动
+  onPageScroll(e) {
+    this.setData({
+      scrollTop: e.scrollTop
+    });
+  },
+  // drag组件方法end
+  
+  /**
+   * 增加或删除图片
+   * @param {*} options 
+   */
+  reListData({ item, type} = {}) {
+    if(!item)return
+    const { listData } = this.data
+    let newListData
+
+    if(type){
+      // 增
+      listData.push(item)
+      newListData = listData
+    }else{
+      // 删
+      newListData = listData.filter(imgItem => imgItem.dragId !== item.dragId)
+    }
+    this.setData({
+      listData: newListData
+    });
+    this.drag.init();
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('aa', app)
+    this.drag = this.selectComponent('#drag');
+    console.log(this.drag)
     this.setData({
       PhotographyClass: app.globalData.PhotographyClass
     })
@@ -40,26 +135,12 @@ Page({
    this.doWxChooseImage()
   },
   ViewImage(e) {
+    const urls = []
+    this.data.listData.forEach(item => urls.push(item.images))
     wx.previewImage({
-      urls: this.data.imgList,
+      urls,
       current: e.currentTarget.dataset.url
     });
-  },
-  DelImg(e) {
-    wx.showModal({
-      title: '召唤师',
-      content: '确定要删除这段回忆吗？',
-      cancelText: '再看看',
-      confirmText: '再见',
-      success: res => {
-        if (res.confirm) {
-          this.data.imgList.splice(e.currentTarget.dataset.index, 1);
-          this.setData({
-            imgList: this.data.imgList
-          })
-        }
-      }
-    })
   },
   doWxChooseImage() {
     wx.chooseImage({
@@ -67,15 +148,17 @@ Page({
       sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album'], //从相册选择
       success: (res) => {
-        if (this.data.imgList.length != 0) {
-          this.setData({
-            imgList: this.data.imgList.concat(res.tempFilePaths)
+        const tempFilePaths = res.tempFilePaths
+
+        tempFilePaths.forEach((item, i) => {
+          this.reListData({
+            item: {
+              dragId: randomStr(),
+              images: item
+            },
+            type: 'add'
           })
-        } else {
-          this.setData({
-            imgList: res.tempFilePaths
-          })
-        }
+        })
       }
     });
   },

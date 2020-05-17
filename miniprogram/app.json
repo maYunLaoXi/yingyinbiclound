@@ -16,13 +16,15 @@
     "pages/waterfall/waterfall",
     "pages/components/waterfall/waterfall",
     "pages/components/portrait/portrait",
-    "pages/components/add-picture-article/add-picture-article"
+    "pages/components/add-picture-article/add-picture-article",
+    "pages/components/navigation-bar/navigation-bar",
+    "pages/drag-test/index"
   ],
   "window": {
     "navigationStyle": "custom",
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "小程序",
+    "navigationBarTitleText": "影音笔",
     "backgroundColor": "#F1F3F4",
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": true

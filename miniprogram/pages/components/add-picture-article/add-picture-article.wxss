@@ -16,3 +16,58 @@
 .cu-form-group picker{
   padding-right: 0;
 }
+.footer{
+  height: 20px;
+}
+/* drag组件 */
+.plus-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%; 
+}
+
+.plus {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0; 
+}
+.plus::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 60rpx;
+  margin-top: -30rpx;
+  margin-left: -2rpx;
+  border-left: 4rpx solid #cccccc; 
+}
+.plus::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60rpx;
+  margin-left: -30rpx;
+  margin-top: -2rpx;
+  border-top: 4rpx solid #cccccc; 
+}
+/* drag组件 */
+.info__item{
+  border: none;
+}
+.cuIcon-cameraadd{
+  font-size: 52rpx;
+  position: absolute;
+  color: var(--grey);
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

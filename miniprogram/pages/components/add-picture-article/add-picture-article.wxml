@@ -1,27 +1,33 @@
 <!--miniprogram/pages/components/add-picture-article/add-picture-article.wxml-->
 <!-- 图文新建页 -->
 <view>
-  <view class="cu-bar bg-white margin-top img">
+	<navigation-bar navigation-bar-title-text="发表图片"></navigation-bar>
+  <view class="cu-bar bg-white bd-t-g1 img">
 		<view class="action">
 			图片上传
 		</view>
 		<view class="action">
-			{{imgList.length}}/4
+			{{listData.length}}
 		</view>
 	</view>
-  <view class="cu-form-group">
-    <view class="grid col-4 grid-square flex-sub">
-      <view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage" data-url="{{imgList[index]}}">
-        <image src='{{imgList[index]}}' mode='aspectFill'></image>
-        <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
-          <text class="cuIcon-close"></text>
-        </view>
-      </view>
-      <view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<15}}">
-        <text class="cuIcon-cameraadd"></text>
-      </view>
+  <drag-comp id="drag"
+    class="bg-c-w"
+    bind:click="ViewImage"
+    bind:change="change"
+    bind:sortend="sortEnd"
+    bind:scroll="scroll"
+    binddelImg="delImg"
+    extra-nodes="{{extraNodes}}"
+    list-data="{{listData}}"
+    columns="4"
+    scroll-top="{{scrollTop}}"
+    top-size="110"
+    bottom-size="{{isIphoneX ? 380 : 300 }}"
+    data-url="{{listData[index].images}}">
+    <view slot="plus" class="solids plus-wrap" bindtap="ChooseImage">
+      <text class="cuIcon-cameraadd"></text>
     </view>
-  </view>
+  </drag-comp>
   <view class="cu-form-group">
     <input placeholder="标题写在这～"></input>
   </view>
@@ -35,5 +41,13 @@
 				{{class?class.nameCh:'选择分类'}}
 			</view>
 		</picker>
-	</view>
+  </view>
+  <view class="cu-form-group margin-top">
+		<view class="title">参加免费晒相</view>
+		<switch checked="{{isJoinDevelop}}"></switch>
+  </view>
+  <view class="solid-bottom text-xs padding">
+    <text class="text-gray">参加免费晒相需要你的地址和邮编，如没有设置，可以稍后在个人中心设置</text>
+  </view>
+	<view class="footer"></view>
 </view>
