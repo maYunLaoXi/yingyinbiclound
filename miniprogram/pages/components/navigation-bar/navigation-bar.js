@@ -1,4 +1,7 @@
 Component({
+  options: {
+    addGlobalClass: true,
+  },
   properties: {
     // min: {
     //   type: Number,
@@ -19,7 +22,7 @@ Component({
     // },
     left: {
       type: String,
-      value: ''
+      value: '返回'
     },
     navigationBarTitleText: {
       type: String,
@@ -30,5 +33,10 @@ Component({
     // backgroundColor: "#F1F3F4",
     // backgroundTextStyle: "light",
     // enablePullDownRefresh: true
+  },
+  methods: {
+    back() {
+      wx.navigateBack()
+    }
   }
 })

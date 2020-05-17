@@ -17,8 +17,7 @@
     "pages/components/waterfall/waterfall",
     "pages/components/portrait/portrait",
     "pages/components/add-picture-article/add-picture-article",
-    "pages/components/navigation-bar/navigation-bar",
-    "pages/drag-test/index"
+    "pages/components/navigation-bar/navigation-bar"
   ],
   "window": {
     "navigationStyle": "custom",

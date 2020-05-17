@@ -1,7 +1,10 @@
 <!--miniprogram/pages/components/navigation-bar/navigation-bar.wxml-->
 <view class="wrap">
   <view class="title ">
-    <view class="text-1">{{left}}</view>
+    <view class="text-1" bind:tap="back">
+      <text class="cuIcon-back lg text-gray"></text>
+      <text>{{left}}</text>
+    </view>
     <view class="text-2">{{navigationBarTitleText}}</view>
   </view>
 </view>
