@@ -105,53 +105,48 @@ Page({
   upload() {
     const { openid, listData, title, arcicle, picClass, isJoinDevelop } = this.data
     const db = wx.cloud.database()
-    const allNeedToAdd = [];
+    const promiseAll = []
     
-    // db.collection(picClass.nameEn)
+    // 先将所有图片上传
     listData.forEach(item => {
       const name = picClass.nameEn + item.dragId + item.images.match(/\.[^.]+?$/)[0];
 
-      wx.cloud.uploadFile({
+      promiseAll.push(wx.cloud.uploadFile({
         cloudPath: name,
         filePath: item.images, // 文件路径
-      }).then(res => {
+      }))
+    })
+    Promise.all(promiseAll).then(res => {
+      const allNeedToAdd = [];
 
+      res.forEach(item => {
+        allNeedToAdd.push(item.fileID)
       })
-
-      this.doWxUpload({ openid, item, title, arcicle, picClass, isJoinDevelop, db })
+      // 统一上传数据库
+      this.cloudDbUpload({ openid, title, arcicle, picClass, isJoinDevelop, fileID: allNeedToAdd })
+    }).catch(err => {
+      debugger
     })
   },
   // 上传
-  doWxUpload({ openid, item, title, arcicle, picClass, isJoinDevelop, db } = {}){
-    if(!item || !picClass) return
-    const name = picClass.nameEn + item.dragId + item.images.match(/\.[^.]+?$/)[0];
-
-    wx.cloud.uploadFile({
-      cloudPath: name,
-      filePath: item.images, // 文件路径
-    }).then(res => {
-      // get resource ID
-      console.log(res.fileID)
-      const fileID = res.fileID
-
-      // 云调用
-      wx.cloud.callFunction({
-        name: 'class-edit-add',
+  cloudDbUpload({ openid, title, arcicle, picClass, isJoinDevelop, fileID } = {}){    
+    // 云调用
+    wx.cloud.callFunction({
+      name: 'class-edit-add',
+      data: {
+        _id: 'id_class_portrait',
+        class: picClass.nameEn,
         data: {
-          _id: 'id_class_portrait',
+          openid,
+          fileID,
+          title,
+          arcicle,
           class: picClass.nameEn,
-          data: {
-            openid,
-            fileID,
-            title,
-            arcicle,
-            class: picClass.nameEn,
-            isJoinDevelop,
-          }
+          isJoinDevelop,
         }
-      }).then(res => {
-        debugger
-      })
+      }
+    }).then(res => {
+      debugger
     })
   },
   /**
