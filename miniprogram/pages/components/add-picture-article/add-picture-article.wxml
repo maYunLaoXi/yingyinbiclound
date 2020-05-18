@@ -29,7 +29,7 @@
     </view>
   </drag-comp>
   <view class="cu-form-group">
-    <input placeholder="标题写在这～" model:value="{{title}}"></input>
+    <input placeholder="标题写在这～" value="{{title}}" bindblur="inputTitle"></input>
   </view>
   	<view class="cu-form-group">
 		<textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="articleInput" placeholder="添加正文..."></textarea>

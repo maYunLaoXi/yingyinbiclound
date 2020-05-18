@@ -2,10 +2,6 @@
 const app = getApp()
 import { randomStr } from '../../../utils/index'
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     openid: '',
     title: '',
@@ -109,8 +105,19 @@ Page({
   upload() {
     const { openid, listData, title, arcicle, picClass, isJoinDevelop } = this.data
     const db = wx.cloud.database()
+    const allNeedToAdd = [];
+    
     // db.collection(picClass.nameEn)
-    listData.forEach(item => {r
+    listData.forEach(item => {
+      const name = picClass.nameEn + item.dragId + item.images.match(/\.[^.]+?$/)[0];
+
+      wx.cloud.uploadFile({
+        cloudPath: name,
+        filePath: item.images, // 文件路径
+      }).then(res => {
+
+      })
+
       this.doWxUpload({ openid, item, title, arcicle, picClass, isJoinDevelop, db })
     })
   },
@@ -127,11 +134,13 @@ Page({
       console.log(res.fileID)
       const fileID = res.fileID
 
-      let dd = db.collection("photographyClass")
-      .doc('05f2c36f5ec15c120102c27a3752a602')
-      .update({
+      // 云调用
+      wx.cloud.callFunction({
+        name: 'class-edit-add',
         data: {
-          [picClass.nameEn]: {
+          _id: 'id_class_portrait',
+          class: picClass.nameEn,
+          data: {
             openid,
             fileID,
             title,
@@ -197,6 +206,9 @@ Page({
         })
       }
     });
+  },
+  inputTitle(e) {
+    this.data.title = e.detail.value
   },
   articleInput(e) {
     this.setData({
