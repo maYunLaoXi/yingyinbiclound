@@ -44,7 +44,7 @@
   </view>
   <view class="cu-form-group margin-top">
 		<view class="title">参加免费晒相</view>
-		<switch checked="{{isJoinDevelop}}"></switch>
+		<switch bindchange="handleJoin" checked="{{isJoinDevelop}}"></switch>
   </view>
   <view class="solid-bottom text-xs padding">
     <text class="text-gray">参加免费晒相需要你的地址和邮编，如没有设置，可以稍后在个人中心设置</text>
@@ -53,4 +53,5 @@
     <button class="cu-btn bg-red margin-tb-sm round lg" bind:tap="upload">发布</button>
   </view>
 	<view class="footer"></view>
+  <van-toast id="van-toast" />
 </view>

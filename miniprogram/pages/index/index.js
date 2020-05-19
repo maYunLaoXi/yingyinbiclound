@@ -74,10 +74,13 @@ Page({
                 avatarUrl: res.userInfo.avatarUrl,
                 userInfo: res.userInfo
               })
-              app.globalData.rserInfo = res.userInfo;
+              app.globalData.userInfo = res.userInfo;
             }
           })
         }
+      },
+      fail: err => {
+        debugger
       }
     });
 
@@ -98,7 +101,14 @@ Page({
         console.log('err',err)
       }
     })
-
+    // 获取openid
+    wx.cloud.callFunction({
+      name: 'login',
+      data: {},
+      success: res => {
+        app.globalData.openid = res.result.openid
+      }
+    })
   },
 
   // 去活动页
@@ -120,6 +130,7 @@ Page({
   },
 
   onGetUserInfo: function(e) {
+    console.log('userInfo', e)
     if (!this.logged && e.detail.userInfo) {
       this.setData({
         logged: true,

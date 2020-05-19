@@ -1,6 +1,7 @@
 // miniprogram/pages/components/add-picture-article/add-picture-article.js
 const app = getApp()
 import { randomStr } from '../../../utils/index'
+import Toast from '/vant-weapp/toast/toast.js'
 Page({
   data: {
     openid: '',
@@ -103,16 +104,17 @@ Page({
     this.drag.init();
   },
   upload() {
-    const { openid, listData, title, arcicle, picClass, isJoinDevelop } = this.data
+    this.showToast()
+    const { listData, title, arcicle, picClass, isJoinDevelop } = this.data
     const db = wx.cloud.database()
     const promiseAll = []
     
     // 先将所有图片上传
     listData.forEach(item => {
-      const name = picClass.nameEn + item.dragId + item.images.match(/\.[^.]+?$/)[0];
+      const name = picClass.nameEn + '/' + item.dragId + item.images.match(/\.[^.]+?$/)[0];
 
       promiseAll.push(wx.cloud.uploadFile({
-        cloudPath: name,
+        cloudPath: 'photography-class/' + name,
         filePath: item.images, // 文件路径
       }))
     })
@@ -123,13 +125,13 @@ Page({
         allNeedToAdd.push(item.fileID)
       })
       // 统一上传数据库
-      this.cloudDbUpload({ openid, title, arcicle, picClass, isJoinDevelop, fileID: allNeedToAdd })
+      this.cloudDbUpload({ title, arcicle, picClass, isJoinDevelop, fileID: allNeedToAdd })
     }).catch(err => {
       debugger
     })
   },
   // 上传
-  cloudDbUpload({ openid, title, arcicle, picClass, isJoinDevelop, fileID } = {}){    
+  cloudDbUpload({ title, arcicle, picClass, isJoinDevelop, fileID } = {}){    
     // 云调用
     wx.cloud.callFunction({
       name: 'class-edit-add',
@@ -137,27 +139,30 @@ Page({
         _id: 'id_class_portrait',
         class: picClass.nameEn,
         data: {
-          openid,
+          openid: app.globalData.openid,
           fileID,
           title,
           arcicle,
           class: picClass.nameEn,
           isJoinDevelop,
+          uploadTime: new Date().getTime(),
+          userInfo: app.globalData.userInfo
         }
       }
     }).then(res => {
-      debugger
+      console.log('上传成功', res)
+      Toast.clear()
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.ChooseImage()
     this.drag = this.selectComponent('#drag');
     this.setData({
       PhotographyClass: app.globalData.PhotographyClass
     })
-    console.log({app})
     if (app.globalData.openid) {
       this.setData({
         openid: app.globalData.openid
@@ -214,5 +219,26 @@ Page({
     this.setData({
       picClass: this.data.PhotographyClass[e.detail.value]
     })
+  },
+  // switch 
+  handleJoin(e) {
+    this.setData({
+      isJoinDevelop: e.detail.value
+    })
+  },
+  // 上传提示
+  showToast() {
+    Toast.loading({
+      message: '上传中...',
+      duration: 0,
+      onClose: _ => {
+        Toast.success({
+          message: '上传完成',
+          onClose: _ => {
+            wx.navigateBack()
+          }
+        });
+      }
+    });
   }
 })

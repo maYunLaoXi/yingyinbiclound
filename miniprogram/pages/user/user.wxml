@@ -24,9 +24,19 @@
         </view>
       </view>
       <view class="user-content">
-        用户的信息，如参与活动，收藏的文章等
+        <view wx:if="{{logged}}">
+          用户的信息，如参与活动，收藏的文章等
+          <button class="cu-btn round line-red" bindtap="toAddPicArticle">发表图文</button>
+        </view>
+        <view class="login-box" wx:else>
+          <button
+            class="login-btn"
+            open-type="getUserInfo" 
+            bindgetuserinfo="onGetUserInfo"
+            style="background-image: url({{avatarUrl}})"
+          > 点我登录</button>
+        </view>
       </view>
-      <button class="cu-btn round line-red" bindtap="toAddPicArticle">发表图文</button>
     </movable-view>
   </movable-area>
 </view>

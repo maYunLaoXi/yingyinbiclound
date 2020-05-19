@@ -72,6 +72,13 @@
 					"id": -1,
 					"name": "pages/drag-test/index",
 					"pathName": "pages/drag-test/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/user/user",
+					"pathName": "pages/user/user",
 					"scene": null
 				}
 			]
