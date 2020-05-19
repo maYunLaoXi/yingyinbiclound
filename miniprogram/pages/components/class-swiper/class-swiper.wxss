@@ -1,0 +1,30 @@
+/* miniprogram/pages/components/class-swiper/class-swiper.wxss */
+.main-title{
+  font-size: 30rpx;
+  margin-left: 30rpx;
+}
+.s-2{
+  height: 120rpx;
+}
+.s-i2{
+  width: 160rpx;
+  padding: 5rpx;
+  margin-left: 20rpx;
+}
+.s-w-2{
+  border-radius: 10rpx;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+  color: #ffff;
+  line-height: 110rpx;
+  text-shadow: #000 1rpx 1rpx 0;
+}
+.s-w-2-mask{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(19,7,7,0.2);
+}

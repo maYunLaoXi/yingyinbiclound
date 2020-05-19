@@ -5,14 +5,34 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    imageBox: [
+      {
+        position: 'left',
+      },
+      {
+        position: 'right',
+      },
+    ],
+    imagesLeft: [],
+    imagesRight: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.cloud.callFunction({
+      name: 'get-class',
+      data: {
+        class: 'portrait'
+      }
+    }).then(res => {
+      console.log({res})
+      this.setData({
+        imagesLeft: res.result,
+        imagesRight: res.result
+      })
+    })
   },
 
   /**

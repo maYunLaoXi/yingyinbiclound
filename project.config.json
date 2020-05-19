@@ -77,8 +77,8 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/user/user",
-					"pathName": "pages/user/user",
+					"name": "pages/components/portrait/portrait",
+					"pathName": "pages/components/portrait/portrait",
 					"scene": null
 				}
 			]

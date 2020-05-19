@@ -119,7 +119,6 @@ Page({
   },
   // 点击标签
   TagNavigate(page) {
-    debugger
     const url = page.currentTarget.dataset.tagType
     wx.navigateTo({
       url: '/pages/components/' + url + '/' + url

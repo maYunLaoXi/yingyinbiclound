@@ -1,3 +1,34 @@
 <!--miniprogram/pages/component/portrait/portrait.wxml-->
 <!-- 人像页 -->
-<text>miniprogram/pages/component/portrait/portrait.wxml</text>
+<view>
+  <view class="fixed">
+    <navigation-bar navigation-bar-title-text="影音笔小程序"></navigation-bar>
+    <class-swiper />
+  </view>
+  <view class="img-wrap">
+    <view wx:for="{{imageBox}}" wx:key="{{item.position}}" class="{{item.position}}">
+      <view class="img-item" wx:for="{{item.position === 'left' ? imagesLeft : imagesRight}}">
+        <view class="cu-card case {{isCard?'no-card':''}}">
+          <view class="cu-item shadow">
+            <view class="image">
+              <image src="{{item.fileID[0]}}" mode="widthFix"></image>
+              <view class="cu-tag bg-blue">史诗</view>
+            </view>
+            <view class="cu-list menu-avatar">
+              <text class="title">{{item.title}}</text>
+              <view class="cu-item">
+                <view>
+                  <view class="cu-avatar round lg" style="background-image:url({{item.userInfo.avatarUrl}});"></view>
+                  <text class="user-name">{{item.userInfo.nickName}}</text>
+                </view>
+                <view class="text-gray text-sm">
+                  <text class="cuIcon-appreciatefill margin-lr-xs"></text> 20
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

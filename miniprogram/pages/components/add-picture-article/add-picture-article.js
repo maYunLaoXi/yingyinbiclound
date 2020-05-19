@@ -108,7 +108,10 @@ Page({
     const { listData, title, arcicle, picClass, isJoinDevelop } = this.data
     const db = wx.cloud.database()
     const promiseAll = []
-    
+    if(!listData.length) {
+      Toast('你还没有选择图片')
+      return
+    }
     // 先将所有图片上传
     listData.forEach(item => {
       const name = picClass.nameEn + '/' + item.dragId + item.images.match(/\.[^.]+?$/)[0];
@@ -146,7 +149,15 @@ Page({
           class: picClass.nameEn,
           isJoinDevelop,
           uploadTime: new Date().getTime(),
-          userInfo: app.globalData.userInfo
+          userInfo: app.globalData.userInfo,
+          // 评论
+          comment: [],  
+          // 点赞
+          start: 0,
+          // 收藏 
+          collection: 0,
+          // 分享
+          share: 0,
         }
       }
     }).then(res => {
