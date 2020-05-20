@@ -240,6 +240,7 @@ Page({
   // 上传提示
   showToast() {
     Toast.loading({
+      mask: true,
       message: '上传中...',
       duration: 0,
       onClose: _ => {

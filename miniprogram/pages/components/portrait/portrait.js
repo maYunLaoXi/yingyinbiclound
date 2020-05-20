@@ -28,9 +28,13 @@ Page({
       }
     }).then(res => {
       console.log({res})
+      const { result } = res
+      const revResult = result.reverse()
+      const left = result.filter((item, i) => i % 2 === 0)
+      const right = result.filter((item,i) => i % 2 === 1)
       this.setData({
-        imagesLeft: res.result,
-        imagesRight: res.result
+        imagesLeft: left,
+        imagesRight: right
       })
     })
   },
