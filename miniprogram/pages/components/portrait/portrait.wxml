@@ -18,7 +18,7 @@
           <view class="cu-item shadow">
             <view class="image">
               <image src="{{itemObj.fileID[0]}}" mode="widthFix"></image>
-              <view class="cu-tag bg-black-7" wx:if="{{itemObj.fileID.length > 1}}">{{itemObj.fileID.length}}</view>
+              <view class="cu-tag bg-black-5" wx:if="{{itemObj.fileID.length > 1}}">{{itemObj.fileID.length}}</view>
             </view>
             <view class="cu-list menu-avatar">
               <text class="title">{{itemObj.title}}</text>
