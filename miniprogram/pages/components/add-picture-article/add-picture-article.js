@@ -139,7 +139,7 @@ Page({
     wx.cloud.callFunction({
       name: 'class-edit-add',
       data: {
-        _id: 'id_class_portrait',
+        _id: `id_class_${picClass.nameEn}`,
         class: picClass.nameEn,
         data: {
           openid: app.globalData.openid,
@@ -164,6 +164,7 @@ Page({
       }
     }).then(res => {
       console.log('上传成功', res)
+      debugger
       Toast.clear()
     })
   },

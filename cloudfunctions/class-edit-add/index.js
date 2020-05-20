@@ -8,17 +8,22 @@ const _ = db.command
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const wxContext = cloud.getWXContext()
-
+  debugger
   try {
-    await db.collection('photographyClass')
-    .where({
-      _id: event._id
-    }).update({
+    return await db.collection('photographyClass').add({
       data: {
-        [event.class]: _.push(event.data)
+        _id: 'id_class_landscape',
+        ...event.data
       }
     })
+  //   await db.collection('photographyClass')
+  //   .where({
+  //     _id: event._id
+  //   }).update({
+  //     data: {
+  //       [event.class]: _.push(event.data)
+  //     }
+  //   })
   } catch(err) {
     console.log(err)
   }
