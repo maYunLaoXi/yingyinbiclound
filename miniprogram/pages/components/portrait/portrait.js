@@ -38,19 +38,19 @@ Page({
       })
     })
 
-    wx.cloud.callFunction({
-      name: 'page-list',
-      data: {
-        collection: 'photographyClass',
-        where: {
-          _id: 'id_class_portrait',
-          portrait: {
-            fn: 'exists',
-            params: true
-          }
-        }
-      }
-    })
+    // wx.cloud.callFunction({
+    //   name: 'page-list',
+    //   data: {
+    //     collection: 'photographyClass',
+    //     where: {
+    //       _id: 'id_class_portrait',
+    //       portrait: {
+    //         fn: 'exists',
+    //         params: true
+    //       }
+    //     }
+    //   }
+    // })
   },
 
   /**

@@ -158,6 +158,8 @@ Page({
           collection: 0,
           // 分享
           share: 0,
+          // 审核
+          pass: false,
         }
       }
     }).then(res => {
@@ -246,6 +248,7 @@ Page({
       onClose: _ => {
         Toast.success({
           message: '上传完成',
+          duration: 1,
           onClose: _ => {
             wx.navigateBack()
           }
