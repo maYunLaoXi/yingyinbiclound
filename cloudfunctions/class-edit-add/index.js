@@ -8,10 +8,11 @@ const _ = db.command
 
 // 云函数入口函数
 exports.main = async (event, context) => {
+  debugger
   try {
     return await db.collection('photographyClass').add({
       data: {
-        ...event.data
+        ...event
       }
     })
   } catch(err) {

@@ -69,7 +69,6 @@ Page({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
-              console.log(res)
               this.setData({
                 avatarUrl: res.userInfo.avatarUrl,
                 userInfo: res.userInfo
@@ -107,6 +106,25 @@ Page({
       data: {},
       success: res => {
         app.globalData.openid = res.result.openid
+      }
+    })
+    this.getNowActivity()
+  },
+
+  getNowActivity(){
+    const db = wx.cloud.database({env: "development-zgtnu"});
+    const _ = db.command
+    debugger
+    let a = db.collection('photoDevelop').doc('photo_develop_activity').get({
+      success: res => {
+        debugger
+      }
+    })
+    db.collection('photoDevelop').where({
+      open: _.eq(true)
+    }).get({
+      success: res => {
+        debugger
       }
     })
   },
