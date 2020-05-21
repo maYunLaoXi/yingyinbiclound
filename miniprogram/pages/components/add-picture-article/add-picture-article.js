@@ -104,34 +104,49 @@ Page({
     this.drag.init();
   },
   upload() {
-    this.showToast()
     const { listData, title, arcicle, picClass, isJoinDevelop } = this.data
-    const db = wx.cloud.database()
-    const promiseAll = []
-    if(!listData.length) {
-      Toast('你还没有选择图片')
-      return
-    }
-    // 先将所有图片上传
-    listData.forEach(item => {
-      const name = picClass.nameEn + '/' + item.dragId + item.images.match(/\.[^.]+?$/)[0];
-
-      promiseAll.push(wx.cloud.uploadFile({
-        cloudPath: 'photography-class/' + name,
-        filePath: item.images, // 文件路径
-      }))
-    })
-    Promise.all(promiseAll).then(res => {
-      const allNeedToAdd = [];
-
-      res.forEach(item => {
-        allNeedToAdd.push(item.fileID)
-      })
-      // 统一上传数据库
-      this.cloudDbUpload({ title, arcicle, picClass, isJoinDevelop, fileID: allNeedToAdd })
+    wx.cloud.callFunction({
+      name: 'class-edit-add',
+      data: {
+        class: picClass.nameEn,
+        title,
+        arcicle,
+        isJoinDevelop,
+      }
+    }).then(res => {
+      debugger
     }).catch(err => {
       debugger
     })
+    return
+    // this.showToast()
+    // const { listData, title, arcicle, picClass, isJoinDevelop } = this.data
+    // const db = wx.cloud.database()
+    // const promiseAll = []
+    // if(!listData.length) {
+    //   Toast('你还没有选择图片')
+    //   return
+    // }
+    // // 先将所有图片上传
+    // listData.forEach(item => {
+    //   const name = picClass.nameEn + '/' + item.dragId + item.images.match(/\.[^.]+?$/)[0];
+
+    //   promiseAll.push(wx.cloud.uploadFile({
+    //     cloudPath: 'photography-class/' + name,
+    //     filePath: item.images, // 文件路径
+    //   }))
+    // })
+    // Promise.all(promiseAll).then(res => {
+    //   const allNeedToAdd = [];
+
+    //   res.forEach(item => {
+    //     allNeedToAdd.push(item.fileID)
+    //   })
+    //   // 统一上传数据库
+    //   this.cloudDbUpload({ title, arcicle, picClass, isJoinDevelop, fileID: allNeedToAdd })
+    // }).catch(err => {
+    //   debugger
+    // })
   },
   // 上传
   cloudDbUpload({ title, arcicle, picClass, isJoinDevelop, fileID } = {}){    
