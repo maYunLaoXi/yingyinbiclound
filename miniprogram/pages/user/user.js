@@ -52,7 +52,6 @@ Page({
     wx.getStorage({
       key: 'userInfo',
       success (res) {
-        debugger
         this.setData({
           logged: true
         })

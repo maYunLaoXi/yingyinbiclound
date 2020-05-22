@@ -27,7 +27,8 @@ Page({
     // drag组件end
     
     // 是否参加晒相活动
-    isJoinDevelop: false
+    isJoinDevelop: false,
+    activity: {}
   },
   // drag组件方法
   sortEnd(e) {
@@ -145,7 +146,10 @@ Page({
           title,
           arcicle,
           class: picClass.nameEn,
-          isJoinDevelop,
+          activity: {
+            isJoinDevelop,
+            activityId: isJoinDevelop ? this.data.activity._id : ''
+          },
           uploadTime: new Date().getTime(),
           // 点赞 [点过的openid]
           start: [],
@@ -162,7 +166,6 @@ Page({
       }
     }).then(res => {
       console.log('上传成功', res)
-      debugger
       Toast.clear()
     })
   },
@@ -180,6 +183,25 @@ Page({
         openid: app.globalData.openid
       })
     }
+    this.getNowActivity()
+  },
+  // 获取当前进行的晒相活动
+  getNowActivity() {
+    const db = wx.cloud.database({env: "development-zgtnu"});
+    const _ = db.command
+    db.collection('activity').where({
+      open: true,
+      actName: 'photoDevelop'
+    }).get({
+      success: res => {
+        if(res.data.length){
+          let a = res.data[0]
+          this.setData({
+            activity: res.data[0]
+          })
+        }
+      }
+    })
   },
 
   /**

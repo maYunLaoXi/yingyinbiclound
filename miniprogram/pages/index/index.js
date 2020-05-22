@@ -108,25 +108,6 @@ Page({
         app.globalData.openid = res.result.openid
       }
     })
-    this.getNowActivity()
-  },
-
-  getNowActivity(){
-    const db = wx.cloud.database({env: "development-zgtnu"});
-    const _ = db.command
-    debugger
-    let a = db.collection('photoDevelop').doc('photo_develop_activity').get({
-      success: res => {
-        debugger
-      }
-    })
-    db.collection('photoDevelop').where({
-      open: _.eq(true)
-    }).get({
-      success: res => {
-        debugger
-      }
-    })
   },
 
   // 去活动页

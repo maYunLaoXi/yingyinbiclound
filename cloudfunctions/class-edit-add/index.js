@@ -12,7 +12,7 @@ exports.main = async (event, context) => {
   try {
     return await db.collection('photographyClass').add({
       data: {
-        ...event
+        ...event.data
       }
     })
   } catch(err) {

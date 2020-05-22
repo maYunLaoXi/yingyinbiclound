@@ -9,33 +9,20 @@ const db = cloud.database()
 const _ = db.command
 
 // 云函数入口函数
-exports.main = async ({ collection, pageSize = 10, page = 1, where = {} }, context) => {
-  const totalSizeRes = await db.collection('photographyClass').where({
-    _id: "id_class_portrait",
-    portrait: _.exists(true)
-  }).get()
-  .then(res => {
-    debugger
-  })
-  debugger
+exports.main = async ({ collection, pageSize = 10, page = 1, className }, context) => {
+  const where = { class: className }
+  const totalSizeRes = await db.collection(collection).where(where).count()
   const totalSize = totalSizeRes.total
-  const totalPage = Math.ceil(totalSizeRes / pageSize)
-  debugger
-  const all = await db.collection(collection).where(where)
-  .skip(
+  const totalPage = Math.ceil(totalSize / pageSize)
+  const all = await db.collection(collection).where(where).skip(
     (page - 1) * pageSize
-  )
-  .limit(pageSize)
-  .get()
-  .then(res => {
-    console.log({res})
-    debugger
-  })
+  ).limit(pageSize).get()
 
-  // return {
-  //   event,
-  //   openid: wxContext.OPENID,
-  //   appid: wxContext.APPID,
-  //   unionid: wxContext.UNIONID,
-  // }
+  return {
+    data: all.data,
+    page,
+    pageSize,
+    totalSize,
+    totalPage
+  }
 }

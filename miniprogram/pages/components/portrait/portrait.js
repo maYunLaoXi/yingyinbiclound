@@ -21,35 +21,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // wx.cloud.callFunction({
-    //   name: 'get-class',
-    //   data: {
-    //     class: 'portrait'
-    //   }
-    // }).then(res => {
-    //   console.log({res})
-    //   const { result } = res
-    //   const revResult = result.reverse()
-    //   const left = result.filter((item, i) => i % 2 === 0)
-    //   const right = result.filter((item,i) => i % 2 === 1)
-    //   this.setData({
-    //     imagesLeft: left,
-    //     imagesRight: right
-    //   })
-    // })
-
     wx.cloud.callFunction({
-      name: 'db',
+      name: 'page-list',
       data: {
         collection: 'photographyClass',
-        where: {
-          _id: 'id_class_portrait',
-          portrait: {
-            fn: 'exists',
-            params: true
-          }
-        }
+        className: 'portrait',
+        page: 1,
+        pageSize: 10
       }
+    }).then(res => {
+      debugger
+      const { result } = res
+      const revResult = result.data.reverse()
+      const left = revResult.filter((item, i) => i % 2 === 0)
+      const right = revResult.filter((item,i) => i % 2 === 1)
+      this.setData({
+        imagesLeft: left,
+        imagesRight: right
+      })
     })
   },
 
