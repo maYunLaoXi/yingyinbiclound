@@ -15,31 +15,51 @@ Page({
     ],
     imagesLeft: [],
     imagesRight: [],
+    nowPage: NaN,
+    totalPage: NaN,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getData()
+  },
+
+  getData(page = 1) {
+    const { nowPage, totalPage } = this.data
+    if(nowPage === totalPage)return
+
     wx.cloud.callFunction({
       name: 'page-list',
       data: {
         collection: 'photographyClass',
         className: 'portrait',
-        page: 1,
+        page: page,
         pageSize: 10
       }
     }).then(res => {
-      debugger
       const { result } = res
+      console.log({result})
       const revResult = result.data.reverse()
       const left = revResult.filter((item, i) => i % 2 === 0)
       const right = revResult.filter((item,i) => i % 2 === 1)
+      const { imagesLeft, imagesRight } = this.data
+  
       this.setData({
-        imagesLeft: left,
-        imagesRight: right
+        nowPage: result.page,
+        totalPage: result.totalPage,
+        imagesLeft: imagesLeft.concat(left),
+        imagesRight: imagesRight.concat(right)
       })
     })
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    this.getData(this.data.nowPage + 1)
   },
 
   /**
@@ -74,14 +94,6 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
   },
 
   /**

@@ -269,7 +269,7 @@ Page({
       onClose: _ => {
         Toast.success({
           message: '上传完成',
-          duration: 1,
+          duration: 2000,
           onClose: _ => {
             wx.navigateBack()
           }

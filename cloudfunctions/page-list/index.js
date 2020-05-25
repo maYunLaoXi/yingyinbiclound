@@ -10,6 +10,7 @@ const _ = db.command
 
 // 云函数入口函数
 exports.main = async ({ collection, pageSize = 10, page = 1, className }, context) => {
+  console.log(wxContext)
   const where = { class: className }
   const totalSizeRes = await db.collection(collection).where(where).count()
   const totalSize = totalSizeRes.total
@@ -17,7 +18,7 @@ exports.main = async ({ collection, pageSize = 10, page = 1, className }, contex
   const all = await db.collection(collection).where(where).skip(
     (page - 1) * pageSize
   ).limit(pageSize).get()
-
+  await getUserInfo(all.data)
   return {
     data: all.data,
     page,
@@ -25,4 +26,20 @@ exports.main = async ({ collection, pageSize = 10, page = 1, className }, contex
     totalSize,
     totalPage
   }
+}
+
+async function getUserInfo(data) {
+  if(!data.length) return
+  const allArr = []
+  data.forEach(item => {
+    allArr.push(new Promise((resolve, reject) => {
+      db.collection('user').where({
+        openid: item.openid
+      }).get().then(res => {
+        item.userInfo = res.data[0]
+        resolve(res)
+      })
+    }))
+  })
+  return Promise.all(allArr)
 }
