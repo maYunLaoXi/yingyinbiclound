@@ -41,7 +41,7 @@ Page({
     }).then(res => {
       const { result } = res
       console.log({result})
-      const revResult = result.data.reverse()
+      const revResult = result.data
       const left = revResult.filter((item, i) => i % 2 === 0)
       const right = revResult.filter((item,i) => i % 2 === 1)
       const { imagesLeft, imagesRight } = this.data
@@ -55,6 +55,13 @@ Page({
     })
   },
 
+  getHeighter() {
+    const query = wx.createSelectorQuery();
+  },
+  onPageScroll: function(e) {
+    console.log(e.scrollTop)
+    // 页面滚动时执行
+  },
   /**
    * 页面上拉触底事件的处理函数
    */

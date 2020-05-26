@@ -15,7 +15,7 @@ exports.main = async ({ collection, pageSize = 10, page = 1, className }, contex
   const totalSizeRes = await db.collection(collection).where(where).count()
   const totalSize = totalSizeRes.total
   const totalPage = Math.ceil(totalSize / pageSize)
-  const all = await db.collection(collection).where(where).skip(
+  const all = await db.collection(collection).orderBy('uploadTime', 'desc').where(where).skip(
     (page - 1) * pageSize
   ).limit(pageSize).get()
   await getUserInfo(all.data)
