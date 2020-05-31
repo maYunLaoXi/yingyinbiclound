@@ -1,0 +1,5 @@
+<!--垂直 1：1-->
+<view class="flex">
+  <view class="flex-sub">1</view>
+  <view class="flex-sub">1</view>
+</view>

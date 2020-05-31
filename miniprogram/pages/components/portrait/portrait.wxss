@@ -37,6 +37,12 @@
 .title{
   font-size: 26rpx;
   padding: 0 10rpx;
+  height:78rpx;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 .user-name{
   font-size: 20rpx;

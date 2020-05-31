@@ -2,5 +2,6 @@
   "usingComponents": {
     "navigation-bar": "../components/navigation-bar/navigation-bar",
     "class-swiper": "../class-swiper/class-swiper"
-  }
+  },
+  "onReachBottomDistance": 300
 }

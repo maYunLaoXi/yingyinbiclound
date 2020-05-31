@@ -21,7 +21,7 @@
 	},
 	"appid": "wxcb8ec180defd86c6",
 	"projectname": "yingyinbi",
-	"libVersion": "2.2.5",
+	"libVersion": "2.11.1",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",

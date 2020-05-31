@@ -29,23 +29,31 @@ Page({
   getData(page = 1) {
     const { nowPage, totalPage } = this.data
     if(nowPage === totalPage)return
-
+    // 这是一个异步
+    const heightArr = this.getHeighter()
+    
     wx.cloud.callFunction({
       name: 'page-list',
       data: {
         collection: 'photographyClass',
         className: 'portrait',
         page: page,
-        pageSize: 10
+        pageSize: 9
       }
     }).then(res => {
+      const [leftNum, rightNum] = heightArr
       const { result } = res
-      console.log({result})
       const revResult = result.data
-      const left = revResult.filter((item, i) => i % 2 === 0)
-      const right = revResult.filter((item,i) => i % 2 === 1)
+      // 如果返回的是奇数条，那么left.lenght比right.length多一条
+      let left = revResult.filter((item, i) => i % 2 === 0)
+      let right = revResult.filter((item,i) => i % 2 === 1)
       const { imagesLeft, imagesRight } = this.data
-  
+      if(leftNum && rightNum){
+        if(leftNum >= rightNum){
+          // 左边长
+          [left, right] = [right, left]
+        }
+      }
       this.setData({
         nowPage: result.page,
         totalPage: result.totalPage,
@@ -56,10 +64,23 @@ Page({
   },
 
   getHeighter() {
-    const query = wx.createSelectorQuery();
+    const arr = []
+    //创建节点选择器
+    const query = wx.createSelectorQuery()
+    query.select('#left').boundingClientRect()
+    query.selectViewport().scrollOffset()
+    query.exec(function (res) {
+      arr[0] = res[0].height
+    })
+    const query2 = wx.createSelectorQuery()
+    query2.select('#right').boundingClientRect()
+    query2.selectViewport().scrollOffset()
+    query2.exec(res => {
+      arr[1] = res[0].height
+    })
+    return arr
   },
   onPageScroll: function(e) {
-    console.log(e.scrollTop)
     // 页面滚动时执行
   },
   /**
@@ -68,7 +89,25 @@ Page({
   onReachBottom: function () {
     this.getData(this.data.nowPage + 1)
   },
-
+  showImage(e) {
+    const { itemObj } = e.currentTarget.dataset
+    wx.navigateTo({
+      url: "../img-article/img-article?redirect=portrait",
+      events: {
+        // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+        // acceptDataFromOpenedPage: function(data) {
+        //   console.log(data)
+        // },
+        // someEvent: function(data) {
+        //   console.log(data)
+        // }
+      },
+      success: function(res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', { ...itemObj })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

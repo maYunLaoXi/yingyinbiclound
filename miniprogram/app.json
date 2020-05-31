@@ -18,7 +18,8 @@
     "pages/components/portrait/portrait",
     "pages/components/add-picture-article/add-picture-article",
     "pages/components/navigation-bar/navigation-bar",
-    "pages/components/class-swiper/class-swiper"
+    "pages/components/class-swiper/class-swiper",
+    "pages/components/img-article/img-article"
   ],
   "window": {
     "navigationStyle": "custom",
