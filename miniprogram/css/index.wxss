@@ -23,3 +23,6 @@ strong{
 .bg-yellow{
   background-color: yellowgreen
 }
+.mt-10{
+  margin-top: 10px;
+}

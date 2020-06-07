@@ -1,0 +1,21 @@
+<!--miniprogram/pages/address-edit-add/index.wxml-->
+<navigation-bar />
+<view class="section mt-10">
+  <view class="cu-form-group">
+		<view class="title">收件人</view>
+		<input placeholder="真实姓名或邻里皆知的小名"></input>
+	</view>
+  <view class="cu-form-group">
+		<view class="title">选择地区</view>
+    <picker mode="region" bindchange="bindRegionChange">
+      <view>
+        {{ address }}
+      </view>
+    </picker>
+		<text class="cuIcon-locationfill text-gray" bind:tap="getLocation"></text>
+	</view>
+  <view class="cu-form-group">
+		<view class="title">收件人</view>
+		<input placeholder="真实姓名或邻里皆知的小名"></input>
+	</view>
+</view>

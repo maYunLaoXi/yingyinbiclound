@@ -180,10 +180,10 @@ page {
   flex: 1;
 }
 
-.DrawerPage .nav .cu-item.cur {
+/* .DrawerPage .nav .cu-item.cur {
   border-bottom: 0;
   position: relative;
-}
+} */
 
 .DrawerPage .nav .cu-item.cur::after {
   content: "";
@@ -208,4 +208,11 @@ page {
 .qrcode-img{
   width: 500rpx;
   height: 500rpx;
+}
+
+/* 中间的nav */
+.nav2{
+  display: inline-block;
+  width: 50%;
+  text-align: center;
 }
