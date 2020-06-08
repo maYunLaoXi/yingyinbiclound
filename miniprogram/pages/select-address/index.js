@@ -75,5 +75,5 @@ Page({
     this.setData({
       region: e.detail.value
     })
-  }
+  },
 })
