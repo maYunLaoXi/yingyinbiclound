@@ -10,7 +10,7 @@
 
     <image src="{{topImg}}" class="top-img" mode="aspectFill"></image>
     <view class="main bg-c-w">
-      <button class="top-button" bindtap="doUpload">立即参加</button>
+      <button class="top-button" bindtap="joinActivity">立即参加</button>
       <text class="title">{{activityTitle}}</text>
       <view class="act-detial">
         <text class="end-text">距结束还有<text class="end-day">{{endDay}}</text>天</text>  
@@ -29,8 +29,19 @@
       bindtap="showModal" 
       data-target="viewModal"
     >查看全部活动介绍</view>
-    <view class="step-box bg-c-w">
-      <text>参与方式</text>
+    <scroll-view scroll-x class="bg-white nav text-center">
+      <view class="nav2" >
+        <view class="cu-item {{0==TabCur?'text-black cur':''}}" bindtap="tabSelect" data-id="0">
+          <text class="cuIcon-camerafill"></text> 参与方式
+        </view>
+      </view>
+      <view class="nav2" >
+        <view class="cu-item {{1==TabCur?'text-black cur':''}}" bindtap="tabSelect" data-id="1">
+          <text class="cuIcon-upstagefill"></text> 活动精选
+        </view>
+      </view>
+    </scroll-view>
+    <view class="step-box bg-c-w" style="display: {{ 1==TabCur ? 'none': 'block'}}">
       <view class="cu-timeline">
         <view class="cu-item">
           <view class="content">
@@ -65,6 +76,7 @@
 
       </view>
     </view>
+    <view class="bg-white" style="display: {{ 0==TabCur ? 'none': 'block'}}">收集</view>
   </scroll-view>
 </view>
 

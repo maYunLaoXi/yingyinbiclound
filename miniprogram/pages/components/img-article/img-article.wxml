@@ -1,0 +1,14 @@
+<!--miniprogram/pages/components/img-article/img-article.wxml-->
+<view >
+  <navigation-bar />
+  <view >
+    <v-1-1 />
+    <image src="{{singleUrl}}" mode="widthFix"></image>
+    <view class="flex">
+      <view class="flex-sub">
+        <image src="{{singleUrl}}" mode="widthFix"></image>
+      </view>
+      <view class="flex-sub"><image src="{{singleUrl}}" mode="widthFix"></image></view>
+    </view>
+  </view>
+</view>

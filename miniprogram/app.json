@@ -18,7 +18,12 @@
     "pages/components/portrait/portrait",
     "pages/components/add-picture-article/add-picture-article",
     "pages/components/navigation-bar/navigation-bar",
-    "pages/components/class-swiper/class-swiper"
+    "pages/components/class-swiper/class-swiper",
+    "pages/components/img-article/img-article",
+    "pages/components/add-image-comp/add-image-comp",
+    "pages/join-activity/join-activity",
+    "pages/select-address/index",
+    "pages/address-edit-add/index"
   ],
   "window": {
     "navigationStyle": "custom",

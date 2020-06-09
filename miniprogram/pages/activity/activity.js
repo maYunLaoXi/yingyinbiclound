@@ -14,10 +14,15 @@ Page({
     descriptionShort: '',
     tempFilePaths:[],
     drawerImg1: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/activities/%E6%99%92%E7%9B%B84.0/IMG_0206mohu.jpg?sign=b779ad36004423e6b615052ecfc90b28&t=1572144936',
+    TabCur: 0,
   },
 
   //图片上传 
-  doUpload: function () {
+  joinActivity: function () {
+    wx.navigateTo({
+      url: '/pages/join-activity/join-activity?redirect=activity'
+    })
+    return
     // 选择图片
     wx.chooseImage({
       count: 9,//最多可选的张数是9
@@ -28,13 +33,6 @@ Page({
         wx.showLoading({
           title: '上传中',
         })
-
-        //更改数据并绑定到视图
-        // this.setData({
-        //   tempFilePaths:res.tempFilePaths
-        // })
-        // const filePath = res.tempFilePaths;
-        // console.log(this.data.tempFilePaths)
 
         // 上传图片
         const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
@@ -129,52 +127,10 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  tabSelect(e) {
+    const { id } = e.currentTarget.dataset
+    this.setData({
+      TabCur: id
+    })
   }
 })

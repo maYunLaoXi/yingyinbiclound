@@ -176,3 +176,10 @@ page {
   line-height: 36rpx;
   word-break: break-all;
 }
+
+/* flex布局 */
+.flex-row-around{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

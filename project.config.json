@@ -21,7 +21,7 @@
 	},
 	"appid": "wxcb8ec180defd86c6",
 	"projectname": "yingyinbi",
-	"libVersion": "2.2.5",
+	"libVersion": "2.11.1",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
@@ -86,6 +86,25 @@
 					"id": -1,
 					"name": "pages/components/portrait/portrait",
 					"pathName": "pages/components/portrait/portrait",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/activity/activity",
+					"pathName": "pages/activity/activity",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/join-activity/join-activity",
+					"pathName": "pages/join-activity/join-activity",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/address-edit-add/index",
+					"pathName": "pages/address-edit-add/index",
 					"scene": null
 				}
 			]

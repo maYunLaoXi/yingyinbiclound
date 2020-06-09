@@ -1,7 +1,6 @@
 {
   "usingComponents": {
     "navigation-bar": "../components/navigation-bar/navigation-bar",
-    "class-swiper": "../class-swiper/class-swiper"
-  },
-  "onReachBottomDistance": 300
+    "add-image-comp": "/pages/components/add-image-comp/add-image-comp"
+  }
 }

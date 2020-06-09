@@ -1,0 +1,19 @@
+<!--添加图片组件 pages/components/add-image-comp/add-image-comp.wxml-->
+<drag-comp id="drag"
+  class="bg-c-w"
+  bind:click="ViewImage"
+  bind:change="change"
+  bind:sortend="sortEnd"
+  bind:scroll="scroll"
+  binddelImg="delImg"
+  extra-nodes="{{extraNodes}}"
+  list-data="{{listData}}"
+  columns="4"
+  scroll-top="{{scrollTop}}"
+  top-size="110"
+  bottom-size="{{isIphoneX ? 380 : 300 }}"
+  data-url="{{listData[index].images}}">
+  <view slot="plus" class="solids plus-wrap" bindtap="wxChooseImage">
+    <text class="cuIcon-cameraadd"></text>
+  </view>
+</drag-comp>
