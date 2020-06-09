@@ -17,7 +17,7 @@ Page({
     TabCur: 0,
   },
 
-  //图片上传 
+  //立即参加 
   joinActivity: function () {
     wx.navigateTo({
       url: '/pages/join-activity/join-activity?redirect=activity'

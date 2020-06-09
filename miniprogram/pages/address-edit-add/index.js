@@ -84,5 +84,15 @@ Page({
         debugger
       }
     }
+    wx.cloud.callFunction({
+      name: 'user',
+      data: {
+        add: {
+          address: [{ ...address, name}]
+        }
+      }
+    }).then(res => {
+      debugger
+    })
   }
 })

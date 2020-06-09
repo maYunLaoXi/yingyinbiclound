@@ -24,7 +24,7 @@ Page({
       wx.cloud.callFunction({
         name: 'user',
         data: {
-          userInfo: e.detail.userInfo
+          add: e.detail.userInfo
         }
       }).then(res => {
         app.globalData.openid = res.result.openid
