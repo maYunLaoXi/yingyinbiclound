@@ -58,7 +58,11 @@ App({
           nameEn: 'others',
           page: ''
         },
-      ]
+      ], 
+      router: {
+        back: false,
+        redirect: ''
+      }
     }
   }
 })

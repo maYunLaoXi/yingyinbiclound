@@ -73,7 +73,7 @@ Page({
                 avatarUrl: res.userInfo.avatarUrl,
                 userInfo: res.userInfo
               })
-              app.globalData.userInfo = res.userInfo;
+              this.getDbUserInfo(res.userInfo)
             }
           })
         }
@@ -107,6 +107,22 @@ Page({
       success: res => {
         app.globalData.openid = res.result.openid
       }
+    })
+  },
+
+  // 获取数据库的用户信息
+  getDbUserInfo(userInfo){
+    wx.cloud.callFunction({
+      name: 'user',
+      data: {
+        getInfo: true
+      }
+    }).then(res => {
+      const { data } = res.result;
+      app.globalData.userInfo = data.length
+      ? data[0]
+      : userInfo
+      console.log({globalData: app.globalData})
     })
   },
 

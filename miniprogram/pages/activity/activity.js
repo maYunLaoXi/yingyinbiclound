@@ -1,4 +1,5 @@
 // miniprogram/pages/home/home.js
+const app = getApp()
 Page({
   
 
@@ -19,6 +20,16 @@ Page({
 
   //立即参加 
   joinActivity: function () {
+    const { userInfo } = app.globalData
+    debugger
+    if(userInfo){
+      let modal = '你还没有登录,点确定去登吧'
+      app.globalData.router.redirect = 'activity'
+      wx.switchTab({
+        url: '/pages/user/user?redirect=activity',
+      })
+      return
+    }
     wx.navigateTo({
       url: '/pages/join-activity/join-activity?redirect=activity'
     })
@@ -76,6 +87,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(app.globalData.router.redirect === 'activity')app.globalData.router.redirect = ''
     // 数据请求
     const db = wx.cloud.database();
     db.collection('activity-data').doc("activity-data-develop4.0").get({

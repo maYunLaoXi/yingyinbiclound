@@ -93,12 +93,21 @@
 					"id": -1,
 					"name": "pages/activity/activity",
 					"pathName": "pages/activity/activity",
+					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
 					"name": "pages/join-activity/join-activity",
 					"pathName": "pages/join-activity/join-activity",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/address-edit-add/index",
+					"pathName": "pages/address-edit-add/index",
+					"query": "",
 					"scene": null
 				},
 				{

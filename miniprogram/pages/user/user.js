@@ -27,13 +27,21 @@ Page({
           add: e.detail.userInfo
         }
       }).then(res => {
-        app.globalData.openid = res.result.openid
+        app.globalData.userInfo = {
+          openid: res.result.openid,
+          ...e.detail.userInfo
+        }
+        if(app.globalData.router.redirect === 'activity'){
+          wx.switchTab({
+            url: '/pages/activity/activity',
+          })
+        }
       })
       // 存在本地
-      wx.setStorage({
-        key: 'userInfo',
-        data: e.detail.userInfo
-      })
+      // wx.setStorage({
+      //   key: 'userInfo',
+      //   data: e.detail.userInfo
+      // })
     }
   },
   /**
