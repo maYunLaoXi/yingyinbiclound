@@ -24,25 +24,35 @@ Page({
       wx.cloud.callFunction({
         name: 'user',
         data: {
-          add: e.detail.userInfo
+          info: e.detail.userInfo
         }
       }).then(res => {
-        app.globalData.userInfo = {
-          openid: res.result.openid,
-          ...e.detail.userInfo
-        }
+        app.globalData.userInfo = res.result.data[0]
         if(app.globalData.router.redirect === 'activity'){
           wx.switchTab({
             url: '/pages/activity/activity',
           })
         }
       })
-      // 存在本地
-      // wx.setStorage({
-      //   key: 'userInfo',
-      //   data: e.detail.userInfo
-      // })
     }
+  },
+  // 获取数据库的用户信息
+  getDbUserInfo(userInfo){
+    wx.cloud.callFunction({
+      name: 'user',
+      data: {
+        userInfo,
+        getInfo: true
+      }
+    }).then(res => {
+      const { data } = res.result;
+      app.globalData.userInfo = data.length
+      ? data[0]
+      : userInfo
+      console.log({globalData: app.globalData})
+    }).catch(err => {
+      app.globalData.userInfo = userInfo
+    })
   },
   /**
    *  发表文章
@@ -57,16 +67,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.getStorage({
-      key: 'userInfo',
-      success (res) {
-        this.setData({
-          logged: true
-        })
-        console.log(res.data)
-      }
-    })
     // 获取用户信息
+    if(app.globalData.userInfo)return
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -79,7 +81,7 @@ Page({
                 avatarUrl: res.userInfo.avatarUrl,
                 userInfo: res.userInfo
               })
-              app.globalData.userInfo = res.userInfo;
+              this.getDbUserInfo(res.userInfo)
             }
           })
         } else {

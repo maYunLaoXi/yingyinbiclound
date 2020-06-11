@@ -21,68 +21,28 @@ Page({
   //立即参加 
   joinActivity: function () {
     const { userInfo } = app.globalData
-    debugger
-    if(userInfo){
-      let modal = '你还没有登录,点确定去登吧'
-      app.globalData.router.redirect = 'activity'
-      wx.switchTab({
-        url: '/pages/user/user?redirect=activity',
+    if(!userInfo){
+      this.showModal({
+        currentTarget: {
+          dataset: { target: 'loginTips'}
+        }
       })
-      return
+    }else{
+      wx.navigateTo({
+        url: '/pages/join-activity/join-activity?redirect=activity'
+      })
     }
-    wx.navigateTo({
-      url: '/pages/join-activity/join-activity?redirect=activity'
-    })
-    return
-    // 选择图片
-    wx.chooseImage({
-      count: 9,//最多可选的张数是9
-      sizeType: ['original'],//不压缩图片
-      sourceType: ['album'],
-      success: (res) => {
-
-        wx.showLoading({
-          title: '上传中',
-        })
-
-        // 上传图片
-        const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
-        wx.cloud.uploadFile({
-          cloudPath,
-          filePath,
-          success: res => {
-            console.log('[上传文件] 成功：', res)
-
-            app.globalData.fileID = res.fileID
-            app.globalData.cloudPath = cloudPath
-            app.globalData.imagePath = filePath
-
-            wx.navigateTo({
-              url: '../storageConsole/storageConsole'
-            })
-          },
-          fail: e => {
-            console.error('[上传文件] 失败：', e)
-            wx.showToast({
-              icon: 'none',
-              title: '上传失败',
-            })
-          },
-          complete: () => {
-            wx.hideLoading()
-          }
-        })
-
-      },
-      fail: e => {
-        console.error(e)
-      }
+  },
+  /**
+   * 去 我的 页
+   */
+  goLogin(){
+    this.hideModal()
+    app.globalData.router.redirect = 'activity'
+    wx.switchTab({
+      url: '/pages/user/user?redirect=activity',
     })
   },
-
-
-
-
   /**
    * 生命周期函数--监听页面加载
    */
