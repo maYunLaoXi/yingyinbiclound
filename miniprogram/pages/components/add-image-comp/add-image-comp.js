@@ -51,10 +51,7 @@ Component({
   methods: {
     // drag组件方法
     sortEnd(e) {
-      console.log("sortEnd", e.detail.listData)
-      this.setData({
-        listData: e.detail.listData
-      });
+      this.setListData({ listData: e.detail.listData})
     },
     change(e) {
       console.log("change", e.detail.listData)

@@ -11,12 +11,12 @@
     <image src="{{topImg}}" class="top-img" mode="aspectFill"></image>
     <view class="main bg-c-w">
       <button class="top-button" bindtap="joinActivity">立即参加</button>
-      <text class="title">{{activityTitle}}</text>
+      <text class="title">{{name}}</text>
       <view class="act-detial">
-        <text class="end-text">距结束还有<text class="end-day">{{endDay}}</text>天</text>  
+        <text class="end-text">距结束还有<text class="end-day">{{beforeEnd}}</text>天</text>  
         <view class="detial-right">
-          <image class="auth-profile" src="{{authProfile}}" mode="aspectFill"></image>
-          <text class="auth-name">{{authName}}</text>
+          <image class="auth-profile" src="{{authorAvatar}}" mode="aspectFill"></image>
+          <text class="auth-name">{{author}}</text>
           <text class="follow-text">+关注</text>
         </view>  
       </view>

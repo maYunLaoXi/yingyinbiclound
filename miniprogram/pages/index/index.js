@@ -118,9 +118,9 @@ Page({
         getInfo: true
       }
     }).then(res => {
-      const { data } = res.result;
-      app.globalData.userInfo = data.length
-      ? data[0]
+      const { result } = res
+      app.globalData.userInfo = result
+      ? result
       : userInfo
       console.log({globalData: app.globalData})
     })

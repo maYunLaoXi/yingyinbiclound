@@ -1,1 +1,4 @@
 /* miniprogram/pages/join-activity.wxss */
+.address-title{
+  width: 630rpx;
+}

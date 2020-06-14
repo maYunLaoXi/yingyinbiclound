@@ -1,17 +1,12 @@
 // miniprogram/pages/home/home.js
 const app = getApp()
 Page({
-  
-
-  /**
-   * 页面的初始数据
-   */
   data: {
     topImg: '',
-    activityTitle: '晒相4.0',
-    endDay: 0,
-    authProfile: '',
-    authName: '影音笔',
+    name: '晒相4.0',
+    beforeEnd: 0,
+    authorAvatar: '',
+    author: '影音笔',
     descriptionShort: '',
     tempFilePaths:[],
     drawerImg1: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/activities/%E6%99%92%E7%9B%B84.0/IMG_0206mohu.jpg?sign=b779ad36004423e6b615052ecfc90b28&t=1572144936',
@@ -50,24 +45,34 @@ Page({
     if(app.globalData.router.redirect === 'activity')app.globalData.router.redirect = ''
     // 数据请求
     const db = wx.cloud.database();
-    db.collection('activity-data').doc("activity-data-develop4.0").get({
+    db.collection('activity').where({
+      open: true
+    }).get({
       success: (res) => {
-        console.log('activity-data', res);
+        let data = res.data
+        if(!data.length)return
+        data = data[0]
         const {
-          activityTitle,
-          authName,
-          authProfile,
-          endDay,
+          name,
+          actName,
+          author,
+          authorAvatar,
+          endTime,
           topImg,
           descriptionShort,
-        } = res.data;
-
+        } = data
+        app.globalData.activity = data
+        const end = new Date(endTime).getTime()
+        const now = new Date().getTime()
+        let beforeEnd = Math.floor((end - now) / (1000 * 60 * 60 * 24))
+        beforeEnd = beforeEnd < 0 ? 0 : beforeEnd
         this.setData({
-          authName,
-          authProfile,
-          endDay,
+          name,
+          actName,
+          author,
+          authorAvatar,
+          beforeEnd,
           topImg,
-          activityTitle,
           descriptionShort,
         })
       },

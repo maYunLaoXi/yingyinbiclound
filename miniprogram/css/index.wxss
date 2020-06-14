@@ -26,3 +26,10 @@ strong{
 .mt-10{
   margin-top: 10px;
 }
+
+/* 超出换行 */
+.ellipsis{
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}

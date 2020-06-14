@@ -6,7 +6,7 @@ Page({
   data: {
     openid: '',
     title: '',
-    arcicle: '',
+    article: '',
     PhotographyClass: [],
     picClass: null,
     navigationBar: 'fasfdas',
@@ -106,7 +106,7 @@ Page({
   },
   upload() {
     this.showToast()
-    const { listData, title, arcicle, picClass, isJoinDevelop } = this.data
+    const { listData, title, article, picClass, isJoinDevelop } = this.data
     const promiseAll = []
 
     if(!listData.length) {
@@ -129,13 +129,13 @@ Page({
         allNeedToAdd.push(item.fileID)
       })
       // 统一上传数据库
-      this.cloudDbUpload({ title, arcicle, picClass, isJoinDevelop, fileID: allNeedToAdd })
+      this.cloudDbUpload({ title, article, picClass, isJoinDevelop, fileID: allNeedToAdd })
     }).catch(err => {
       debugger
     })
   },
   // 上传
-  cloudDbUpload({ title, arcicle, picClass, isJoinDevelop, fileID } = {}){    
+  cloudDbUpload({ title, article, picClass, isJoinDevelop, fileID } = {}){    
     // 云调用
     wx.cloud.callFunction({
       name: 'class-edit-add',
@@ -144,7 +144,7 @@ Page({
           openid: app.globalData.openid,
           fileID,
           title,
-          arcicle,
+          article,
           class: picClass.nameEn,
           activity: {
             isJoinDevelop,
@@ -246,7 +246,7 @@ Page({
   },
   articleInput(e) {
     this.setData({
-      arcicle: e.detail.value
+      article: e.detail.value
     })
   },
   classPicker(e) {

@@ -9,15 +9,23 @@
 </view>
 <view class="cu-form-group margin-top">
   <view class="title">展示在活动页</view>
-  <switch bindchange="handleJoin" checked="{{isJoinDevelop}}"></switch>
+  <switch bindchange="handleShow" checked="{{isShow}}"></switch>
 </view>
 <view class="solid-bottom text-xs padding">
   <text class="text-gray">同意展示的作品将会在活动页里的活动精选中展示</text>
 </view>
-<view class="cu-form-group margin-top" bind:tap="selAddress">
-  <view class="title">选取地址</view>
-  <text class="cuIcon-right"></text>
-</view>
+<van-collapse value="{{ activeNames }}" bind:change="onChange">
+  <van-collapse-item name="1">
+    <view slot="title" class="ellipsis address-title">收件人：{{address.name}} {{address.detail}}</view>
+    <view>
+      {{address.province + address.city + address.district + address.detail}}
+      {{address.name}}
+      <view>邮政编码：{{address.mailCode}}</view>
+      <button class="cu-btn bg-gray" bind:tap="addressEdit">{{address ? '修改' : '添加'}}</button>
+    </view>
+  </van-collapse-item>
+</van-collapse>
 <view class="padding flex flex-direction">
   <button class="cu-btn bg-red margin-tb-sm round lg" bind:tap="upload">提交</button>
 </view>
+<van-toast id="van-toast" />

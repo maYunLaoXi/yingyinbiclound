@@ -27,7 +27,9 @@ Page({
           info: e.detail.userInfo
         }
       }).then(res => {
-        app.globalData.userInfo = res.result.data[0]
+        console.log(res)
+        debugger
+        app.globalData.userInfo = res.result
         if(app.globalData.router.redirect === 'activity'){
           wx.switchTab({
             url: '/pages/activity/activity',
@@ -68,7 +70,15 @@ Page({
    */
   onLoad: function (options) {
     // 获取用户信息
-    if(app.globalData.userInfo)return
+    if(app.globalData.userInfo){
+      this.setData({
+        userInfo: app.globalData.userInfo,
+        logged: true,
+        isUser:true,
+      })
+      return
+    }
+    debugger
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {

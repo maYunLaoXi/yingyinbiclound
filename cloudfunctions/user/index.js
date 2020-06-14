@@ -13,25 +13,29 @@ exports.main = async (data, context) => {
   let result = await getUserInfo(wxContext)
   console.log(result)
   debugger
-  // 如果是老用户
   if(result.data && result.data.length){
-    isUser = true
+    // 如果是老用户
+    isUser = true  
     if(info){
       // 更新信息
       const newInfo = {
         ...result.data[0],
         ...info,
       }
+      console.log(result.data[0],{newInfo})
+      const _id = newInfo._id;
+
       delete newInfo._id
       db.collection('user').where({ openid: wxContext.OPENID }).update({
         data: newInfo
       })
-    }
-    if(getInfo){
       result = {
+        _id,
         ...result.data[0],
         ...info,
       }
+    }else{
+      result = result.data[0]
     }
   }else{
     // 新用户
