@@ -1,11 +1,37 @@
-<!--miniprogram/pages/component/waterfall/waterfall.wxml-->
-<!-- 瀑布流组件 -->
-<view class="wrap">
-  <view class="left bg-pink">
-  a
-  </view>
-  <view class="right bg-yellow">
-  b
+<!--pages/components/waterfall/waterfall.wxml 瀑布流组件-->
+<view class="img-wrap">
+  <view wx:for="{{imageBox}}" wx:key="position" class="{{item.position}}" >
+    <view class="box" id="{{item.position}}">
+      <view 
+        class="img-item" 
+        wx:for="{{item.position === 'left' ? imagesLeft : imagesRight}}"
+        wx:for-index="i"
+        wx:for-item="itemObj"
+        wx:key="title"
+        bind:tap="showImage"
+        data-item-obj="{{itemObj}}"
+      >
+        <view class="cu-card case">
+          <view class="cu-item shadow">
+            <view class="image">
+              <image lazy-load src="{{itemObj.fileID[0]}}" mode="widthFix"></image>
+              <view class="cu-tag bg-black-5" wx:if="{{itemObj.fileID.length > 1}}">{{itemObj.fileID.length}}</view>
+            </view>
+            <view class="cu-list menu-avatar">
+              <text class="title">{{itemObj.title}}</text>
+              <view class="cu-item">
+                <view>
+                  <view class="cu-avatar round lg" style="background-image:url({{itemObj.userInfo.avatarUrl}});"></view>
+                  <text class="user-name">{{itemObj.userInfo.nickName}}</text>
+                </view>
+                <view class="text-gray text-sm">
+                  <text class="cuIcon-appreciatefill margin-lr-xs"></text> {{itemObj.start}}
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
 </view>
-

@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "van-button": "vant-weapp/button"
+    "van-button": "vant-weapp/button",
+    "waterfall-com": "/pages/components/waterfall/waterfall"
   }
 }

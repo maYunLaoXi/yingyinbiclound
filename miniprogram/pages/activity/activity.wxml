@@ -46,7 +46,7 @@
         </view>
       </view>
     </scroll-view>
-    <view class="step-box bg-c-w" style="display: {{ 1==TabCur ? 'none': 'block'}}">
+    <view style="display: {{0==TabCur ? 'block' : 'none'}}" class="step-box bg-c-w">
       <view class="cu-timeline">
         <view class="cu-item">
           <view class="content">
@@ -81,7 +81,12 @@
 
       </view>
     </view>
-    <view class="bg-white" style="display: {{ 0==TabCur ? 'none': 'block'}}">收集</view>
+    <view style="display: {{1==TabCur ? 'block' : 'none'}}" class="bg-white">
+      <waterfall-com image-list="{{imageShow}}" />
+    </view>
+    <view style="display: {{2==TabCur ? 'block' : 'none'}}">
+      <!-- <waterfall-com /> -->
+    </view>
   </scroll-view>
 </view>
 
