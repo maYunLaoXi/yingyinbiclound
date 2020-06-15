@@ -40,6 +40,11 @@
           <text class="cuIcon-upstagefill"></text> 活动精选
         </view>
       </view>
+      <view class="nav2" >
+        <view class="cu-item {{2==TabCur?'text-black cur':''}}" bindtap="tabSelect" data-id="2">
+          <text class="cuIcon-upstagefill"></text> 往期晒图
+        </view>
+      </view>
     </scroll-view>
     <view class="step-box bg-c-w" style="display: {{ 1==TabCur ? 'none': 'block'}}">
       <view class="cu-timeline">

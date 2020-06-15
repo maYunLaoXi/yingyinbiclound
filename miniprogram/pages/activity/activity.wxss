@@ -213,6 +213,5 @@ page {
 /* 中间的nav */
 .nav2{
   display: inline-block;
-  width: 50%;
   text-align: center;
 }
