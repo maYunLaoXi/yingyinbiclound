@@ -11,7 +11,7 @@ Page({
     tempFilePaths:[],
     drawerImg1: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/activities/%E6%99%92%E7%9B%B84.0/IMG_0206mohu.jpg?sign=b779ad36004423e6b615052ecfc90b28&t=1572144936',
     TabCur: 0,
-    imageShow: [{}]
+    imageShow: []
   },
 
   //立即参加 
@@ -43,19 +43,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    setTimeout(() => {
-      this.setData({
-        imageShow: [{
-          fileID: ['cloud://development-zgtnu.6465-development-zgtnu-1259664929/photography-class/portrait/7rl3xst911i.jpg'], // url01为封面(必须)
-          title: '标题',
-          userInfo: {
-            avatarUrl: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL0msB8jbgywsOpnhwpBBiaibGriciam9qibUZpFe3zAibXcGAmMhstwOXLzcoxGHKtBkIJqCwfm66v1rzA/132',
-            nickName: '用户尼称'
-          },
-          start: 0,// 点赞数
-        }]
-      })
-    }, 4000);
     if(app.globalData.router.redirect === 'activity')app.globalData.router.redirect = ''
     // 数据请求
     const db = wx.cloud.database();
@@ -94,9 +81,52 @@ Page({
         console.log('err', err)
       }
     })
+    this.getShow()
+  },
+  init(){
 
   },
 
+  /**
+   * 精选内容
+   * @param {*} e 
+   */
+  getShow({ page = 1, pageSize = 9 } = {}){
+    wx.cloud.callFunction({
+      name: 'activity-get',
+      data: {
+        collection: 'activity-data',
+        page,
+        pageSize,
+        where: {
+          check: true,
+          show: true
+        }
+      }
+    }).then(res => {
+      const data = res.result.data;
+      if(!data.length) return
+      const newData =  []
+      data.forEach(item => {
+        newData.push({
+          fileID: item.photo,
+          ...item,
+        })
+      })
+      this.setData({
+        imageShow: newData
+      })
+    })
+  },
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    this.setData({
+      imageShow: []
+    })
+    this.onLoad()
+  },
 // colorui
   showModal(e) {
     this.setData({

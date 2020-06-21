@@ -1,40 +1,32 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init({
-  env: "development-zgtnu"
-})
-const wxContext = cloud.getWXContext()
-const db = cloud.database()
-const _ = db.command
+cloud.init()
+const db = cloud.database({ env: "development-zgtnu"})
 
 // 云函数入口函数
-exports.main = async ({ collection, pageSize = 10, page = 1, className }, context) => {
-  console.log(wxContext)
-  const where = { class: className }
+exports.main = async (event, context) => {
+  const { collection = 'activity-data', pageSize = 9, page = 1, where }  = event;
+
   const totalSizeRes = await db.collection(collection).where(where).count()
   const totalSize = totalSizeRes.total
   const totalPage = Math.ceil(totalSize / pageSize)
-  const all = await db.collection(collection)
-  .orderBy('uploadTime', 'desc') // 排序条件，对uploadTime字段进行desc(降序：越大越靠前)
-  .where(where)
-  .skip( // 跳过条件中的第(page -1) * pageSize 条, 从它的下一条开始
-    (page - 1) * pageSize
-  )
-  .limit(pageSize) // 限制返回数量为 pageSize 条
+  const all = await db.collection(collection).where(where)
+  .skip((page -1) * pageSize)
+  .limit(pageSize)
   .get()
   await getUserInfo(all.data)
+
   return {
     data: all.data,
     page,
     pageSize,
     totalSize,
-    totalPage
+    totalPage,
   }
 }
-
 async function getUserInfo(data) {
-  if(!data.length) return
+  if(!data.length) return data
   const allArr = []
   data.forEach(item => {
     allArr.push(new Promise((resolve, reject) => {

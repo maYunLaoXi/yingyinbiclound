@@ -32,7 +32,7 @@
 .title{
   font-size: 26rpx;
   padding: 0 10rpx;
-  height:78rpx;
+  max-height:78rpx;
   overflow:hidden;
   text-overflow: ellipsis;
   display:-webkit-box;

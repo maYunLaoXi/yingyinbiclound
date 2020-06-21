@@ -21,15 +21,15 @@ Component({
       },
     ],
     imagesLeft: [
-      {
-        fileID: ['cloud://development-zgtnu.6465-development-zgtnu-1259664929/photography-class/portrait/7rl3xst911i.jpg'], // url01为封面(必须)
-        title: '标题',
-        userInfo: {
-          avatarUrl: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL0msB8jbgywsOpnhwpBBiaibGriciam9qibUZpFe3zAibXcGAmMhstwOXLzcoxGHKtBkIJqCwfm66v1rzA/132',
-          nickName: '用户尼称'
-        },
-        start: 0,// 点赞数
-      }
+      // {
+      //   fileID: ['cloud://development-zgtnu.6465-development-zgtnu-1259664929/photography-class/portrait/7rl3xst911i.jpg'], // url01为封面(必须)
+      //   title: '标题',
+      //   userInfo: {
+      //     avatarUrl: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL0msB8jbgywsOpnhwpBBiaibGriciam9qibUZpFe3zAibXcGAmMhstwOXLzcoxGHKtBkIJqCwfm66v1rzA/132',
+      //     nickName: '用户尼称'
+      //   },
+      //   start: 0,// 点赞数
+      // }
     ],
     imagesRight: [],
     // imageLeft imageRight的模型
@@ -47,9 +47,13 @@ Component({
   },
   observers: {
     'imageList': async function(list){
-      if(!list || !list.length)return
+      if(list && list.length === 0){
+        this.setData({
+          imagesLeft: [],
+          imagesRight: []
+        })
+      }
       const [leftNum, rightNum] = await this.getHeighter();
-      debugger
       // 如果返回的是奇数条，那么left.lenght比right.length多一
       let left = list.filter((item, i) => i % 2 === 0)
       let right = list.filter((item,i) => i % 2 === 1)
@@ -67,26 +71,32 @@ Component({
       })
     }
   },
+  lifetimes: {
+    attached() {
+    }
+  },
   methods: {
     getHeighter() {
-      const arr = []
       //创建节点选择器
-      const query = wx.createSelectorQuery()
-      query.select('#left').boundingClientRect()
-      query.selectViewport().scrollOffset()
-      query.exec(function (res) {
-        debugger
-        arr[0] = res[0].height
+      const promise1 = new Promise(resolve => {
+        const query = wx.createSelectorQuery().in(this)
+        query.select('#left').boundingClientRect()
+        query.selectViewport().scrollOffset()
+        query.exec(function (res) {
+          const height = res[0] ? res[0].height : 0
+          resolve(height)
+        })
       })
-      const query2 = wx.createSelectorQuery()
-      query2.select('#right').boundingClientRect()
-      query2.selectViewport().scrollOffset()
-      query2.exec(res => {
-        arr[1] = res[0].height
+      const promise2 = new Promise(resolve => {
+        const query2 = wx.createSelectorQuery().in(this)
+        query2.select('#right').boundingClientRect()
+        query2.selectViewport().scrollOffset()
+        query2.exec(res => {
+          const height = res[0] ? res[0].height : 0
+          resolve(height)
+        })
       })
-      console.log({arr})
-      debugger
-      return arr
+      return Promise.all([promise1, promise2])
     },
   }
 })
