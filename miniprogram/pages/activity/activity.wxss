@@ -100,12 +100,12 @@ image{
 page {
   background-image: var(--gradualBlue);
   width: 100vw;
-  overflow: hidden;
+  overflow: scroll;
   background-color: #f4f5f6;
 }
 
 .DrawerPage {
-  position: fixed;
+  position: relative;
   /* width: 100vw; */
   /* height: 100vh; */
   left: 0vw;

@@ -11,7 +11,9 @@ Page({
     tempFilePaths:[],
     drawerImg1: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/activities/%E6%99%92%E7%9B%B84.0/IMG_0206mohu.jpg?sign=b779ad36004423e6b615052ecfc90b28&t=1572144936',
     TabCur: 0,
-    imageShow: []
+    imageShow: [],
+    imageShowPage: 1,
+    imageShowTatalPage: NaN
   },
 
   //立即参加 
@@ -92,6 +94,8 @@ Page({
    * @param {*} e 
    */
   getShow({ page = 1, pageSize = 9 } = {}){
+    const { imageShowPage, imageShowTatalPage } = this.data
+    if(imageShowPage === imageShowTatalPage)return
     wx.cloud.callFunction({
       name: 'activity-get',
       data: {
@@ -104,7 +108,7 @@ Page({
         }
       }
     }).then(res => {
-      const data = res.result.data;
+      const {data, page, totalPage} = res.result;
       if(!data.length) return
       const newData =  []
       data.forEach(item => {
@@ -114,7 +118,9 @@ Page({
         })
       })
       this.setData({
-        imageShow: newData
+        imageShow: newData,
+        imageShowPage: page,
+        imageShowTatalPage: totalPage
       })
     })
   },
@@ -123,9 +129,16 @@ Page({
    */
   onPullDownRefresh: function () {
     this.setData({
-      imageShow: []
+      imageShow: [],
+      imageShowPage: 1,
+      imageShowTatalPage: NaN,
     })
     this.onLoad()
+  },
+  onReachBottom() {
+    if(this.data.TabCur == 1) {
+      this.getShow({page: this.data.imageShowPage + 1})
+    }
   },
 // colorui
   showModal(e) {

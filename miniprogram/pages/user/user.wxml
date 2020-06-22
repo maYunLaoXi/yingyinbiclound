@@ -36,6 +36,14 @@
             style="background-image: url({{avatarUrl}})"
           > 点我登录</button>
         </view>
+        <van-tabs swipeable>
+          <van-tab title="作品">
+            <waterfall-com image-list="{{images}}" />
+          </van-tab>
+          <van-tab title="活动">
+            <view >bbbb</view>
+          </van-tab>
+        </van-tabs>
       </view>
     </movable-view>
   </movable-area>

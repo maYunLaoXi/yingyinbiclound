@@ -1,6 +1,9 @@
 {
   "usingComponents": {
-    "van-button": "vant-weapp/button"
+    "van-button": "vant-weapp/button",
+    "van-tab": "vant-weapp/tab/index",
+    "van-tabs": "vant-weapp/tabs/index",
+    "waterfall-com": "/pages/components/waterfall/waterfall"
   },
   "window": {
     "enablePullDownRefresh": false

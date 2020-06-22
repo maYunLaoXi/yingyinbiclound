@@ -11,6 +11,7 @@ Page({
     isUser: false,
     userInfo:{},
     userProfile: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/users/feigle/IMG_0987.JPG?sign=76b26af236b150caa9b1b4aa14aa74da&t=1572185422',
+    images: []
   },
   // 点击获取用户信息 
   onGetUserInfo: function (e) {

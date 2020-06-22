@@ -1,9 +1,9 @@
-/* miniprogram/pages/component/portrait/portrait.wxss */
 .img-wrap{
   padding: 0 5rpx;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  background-color: #f6f6f6;
 }
 .left, .right{
   width: 363rpx;
