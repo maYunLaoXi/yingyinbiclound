@@ -38,7 +38,7 @@
         </view>
         <van-tabs swipeable>
           <van-tab title="作品">
-            <waterfall-com image-list="{{images}}" />
+            <photos-comp />
           </van-tab>
           <van-tab title="活动">
             <view >bbbb</view>

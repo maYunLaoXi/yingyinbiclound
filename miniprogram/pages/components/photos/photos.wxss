@@ -1,0 +1,5 @@
+/* pages/components/photos/photos.wxss */
+image{
+  width: 33.3vw;
+  height: 33.3vw;
+}

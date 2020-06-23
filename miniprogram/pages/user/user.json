@@ -3,7 +3,8 @@
     "van-button": "vant-weapp/button",
     "van-tab": "vant-weapp/tab/index",
     "van-tabs": "vant-weapp/tabs/index",
-    "waterfall-com": "/pages/components/waterfall/waterfall"
+    "waterfall-com": "/pages/components/waterfall/waterfall",
+    "photos-comp": "../components/photos/photos"
   },
   "window": {
     "enablePullDownRefresh": false
