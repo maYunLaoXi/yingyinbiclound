@@ -150,7 +150,6 @@ Page({
             isJoinDevelop,
             activityId: isJoinDevelop ? this.data.activity._id : ''
           },
-          uploadTime: new Date().getTime(),
           // 点赞 [点过的openid]
           start: [],
           // 收藏 
