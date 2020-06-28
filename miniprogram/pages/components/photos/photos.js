@@ -7,7 +7,13 @@ Component({
     imageList: {
       type: Array,
       value: []
+    },
+    height: {
+      type: String,
+      value: 'auto'
     }
+  },
+  observers: {
   },
 
   /**

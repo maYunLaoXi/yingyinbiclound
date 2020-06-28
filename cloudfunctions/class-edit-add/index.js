@@ -12,7 +12,8 @@ exports.main = async (event, context) => {
   try {
     return await db.collection('photographyClass').add({
       data: {
-        ...event.data
+        ...event.data,
+        uploadTime: db.serverDate()
       }
     })
   } catch(err) {

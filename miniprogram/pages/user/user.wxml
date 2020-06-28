@@ -5,11 +5,13 @@
   </view>
   <movable-area class="user-box">
     <movable-view
-    direction="vertical" 
-    out-of-bounds 
-    inertia 
-    function="10"
-    class="user-info"
+      direction="vertical" 
+      inertia 
+      out-of-bounds
+      function="10"
+      class="user-info"
+      y="700"
+      bindchange="moving"
     >
       <view class="profile">
         <button
@@ -38,10 +40,14 @@
         </view>
         <van-tabs swipeable>
           <van-tab title="作品">
-            <photos-comp />
+            <scroll-view style="height: {{contentHeight}}" scroll-y="true">
+              <photos-comp image-list="{{imageList}}" />
+            </scroll-view>
           </van-tab>
           <van-tab title="活动">
-            <view >bbbb</view>
+            <scroll-view style="height: {{contentHeight}}" scroll-y="true">
+              <photos-comp image-list="{{activityList}}" />
+            </scroll-view>
           </van-tab>
         </van-tabs>
       </view>

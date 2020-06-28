@@ -11,7 +11,10 @@ Page({
     isUser: false,
     userInfo:{},
     userProfile: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/users/feigle/IMG_0987.JPG?sign=76b26af236b150caa9b1b4aa14aa74da&t=1572185422',
-    images: []
+    images: [],
+    imageList: [],
+    activityList: [],
+    contentHeight: 'auto'
   },
   // 点击获取用户信息 
   onGetUserInfo: function (e) {
@@ -79,7 +82,6 @@ Page({
       })
       return
     }
-    debugger
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -103,8 +105,54 @@ Page({
         debugger
       }
     })
+    this.getImageList()
+    this.getActivityList()
   },
-
+  /**
+   * 获取用户上传的作品
+   */
+  getImageList({page = 1, pageSize = 20} = {}){
+    wx.cloud.callFunction({
+      name: 'get-user-image',
+      data: {
+        page,
+        pageSize
+      }
+    }).then(res => {
+      const { imageList } = this.data
+      this.setData({
+        imageList: imageList.concat(res.result.data)
+      })
+    })
+  },
+  getActivityList({ page = 1, pageSize = 20 } = {}) {
+    wx.cloud.callFunction({
+      name: 'get-user-image',
+      data: {
+        page,
+        pageSize,
+        collection: 'activity-data'
+      }
+    }).then(res => {
+      debugger
+      const { activityList } = this.data
+      this.setData({
+        activityList: activityList.concat(res.result.data)
+      })
+    })
+  },
+  moving(e) {
+    if(e.detail.y === 0) {
+      this.setData({
+        contentHeight: 'calc(100vh - 43px)'
+      })
+    }
+    if(e.detail.y > 0 && this.data.contentHeight === 'calc(100vh - 43px)') {
+      this.setData({
+        contentHeight: 'auto'
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

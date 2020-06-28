@@ -1,5 +1,17 @@
 /* pages/components/photos/photos.wxss */
+.wrap{
+  padding: 20px 0 20px 1vw;
+}
+.wrap>view{
+  display: inline-block;
+  margin-top: 1vw;
+  position: relative;
+}
+.wrap>view:nth-child(3n),.wrap>view:nth-child(3n+2){
+  margin-left: 1vw;
+}
 image{
-  width: 33.3vw;
-  height: 33.3vw;
+  width: 32vw;
+  height: 32vw;
+  vertical-align: bottom;
 }

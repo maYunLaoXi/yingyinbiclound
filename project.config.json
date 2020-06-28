@@ -118,6 +118,13 @@
 					"id": -1,
 					"name": "pages/address-edit-add/index",
 					"pathName": "pages/address-edit-add/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/user/user",
+					"pathName": "pages/user/user",
 					"scene": null
 				}
 			]

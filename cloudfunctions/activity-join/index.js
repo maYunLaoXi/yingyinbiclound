@@ -11,7 +11,8 @@ exports.main = async (event, context) => {
   await db.collection('activity-data').add({
     data: {
       openid: wxContext.OPENID,
-      ...event
+      ...event,
+      uploadTime: db.serverDate()
     }
   }).then(res => {
     result = res
