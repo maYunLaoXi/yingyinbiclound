@@ -128,6 +128,7 @@ Page({
       res.forEach(item => {
         allNeedToAdd.push(item.fileID)
       })
+      this.imgSecCheck(allNeedToAdd)
       // 统一上传数据库
       this.cloudDbUpload({ title, article, picClass, isJoinDevelop, fileID: allNeedToAdd })
     }).catch(err => {
@@ -135,7 +136,7 @@ Page({
     })
   },
   // 上传
-  cloudDbUpload({ title, article, picClass, isJoinDevelop, fileID } = {}){    
+  cloudDbUpload({ title, article, picClass, isJoinDevelop, fileID } = {}){
     // 云调用
     wx.cloud.callFunction({
       name: 'class-edit-add',
@@ -166,6 +167,18 @@ Page({
     }).then(res => {
       console.log('上传成功', res)
       Toast.clear()
+    })
+  },
+  imgSecCheck(imgList) {
+    wx.cloud.callFunction({
+      name: 'img-sec-check',
+      data: {
+        fileID: imgList
+      }
+    }).then(res => {
+      debugger
+    }).catch(err => {
+      debugger
     })
   },
   /**
