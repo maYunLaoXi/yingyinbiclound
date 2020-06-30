@@ -2,7 +2,7 @@
 const cloud = require('wx-server-sdk')
 
 cloud.init()
-const db = cloud.database({ env: "development-zgtnu"})
+const db = cloud.database({ env: cloud.DYNAMIC_CURRENT_ENV})
 
 // 云函数入口函数
 exports.main = async (event, context) => {

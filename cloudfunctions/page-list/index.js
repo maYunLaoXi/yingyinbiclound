@@ -2,7 +2,7 @@
 const cloud = require('wx-server-sdk')
 
 cloud.init({
-  env: "development-zgtnu"
+  env: cloud.DYNAMIC_CURRENT_ENV
 })
 const wxContext = cloud.getWXContext()
 const db = cloud.database()

@@ -199,7 +199,7 @@ Page({
   },
   // 获取当前进行的晒相活动
   getNowActivity() {
-    const db = wx.cloud.database({env: "development-zgtnu"});
+    const db = wx.cloud.database({env: cloud.DYNAMIC_CURRENT_ENV});
     const _ = db.command
     db.collection('activity').where({
       open: true,
