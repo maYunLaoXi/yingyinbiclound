@@ -80,6 +80,8 @@ Page({
         logged: true,
         isUser:true,
       })
+      this.getImageList()
+      this.getActivityList()
       return
     }
     wx.getSetting({

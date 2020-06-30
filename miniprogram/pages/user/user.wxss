@@ -56,3 +56,43 @@ page,.wrap{
   padding-bottom: 40rpx;
   border-bottom: 1rpx solid lightgray;
 }
+
+/* 活动 */
+.yin-cell{
+  position: relative;
+  display: flex;
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 14px;
+  line-height: 24px;
+  color: #333;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.yin-cell::after{
+  content: " ";
+  position: absolute;
+  pointer-events: none;
+  box-sizing: border-box;
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  top: auto;
+  left: 15px;
+  right: 0;
+  bottom: 0;
+  -webkit-transform: scaleY(.5);
+  transform: scaleY(.5);
+  border-bottom: 1px solid #eee;
+}
+.yin-cell__title{
+  flex: 1;
+}
+.yin-cell__label{
+  margin-top: 3px;
+  font-size: 12px;
+  line-height: 18px;
+  color: #999;
+}
+.yin-content{
+  padding: 10px 15px;
+}

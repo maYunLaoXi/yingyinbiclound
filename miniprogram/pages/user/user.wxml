@@ -47,6 +47,32 @@
           <van-tab title="活动">
             <scroll-view style="height: {{contentHeight}}" scroll-y="true">
               <photos-comp image-list="{{activityList}}" />
+              <van-panel title="标题" desc="描述信息" status="状态">
+                <view>内容</view>
+              </van-panel>
+              <view>
+                <view class="yin-cell">
+                  <view class="yin-cell__title">
+                    活动
+                    <view class="yin-cell__label">不一样的活动</view>
+                  </view>
+                  <view class="van-cell__value panel-index--van-panel__header-value">进行中</view>
+                </view>
+                <view class="yin-content">
+                  <van-card
+                    num="2"
+                    tag="标签"
+                    desc="描述信息"
+                    title="商品标题"
+                    thumb="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL0msB8jbgywsOpnhwpBBiaibGriciam9qibUZpFe3zAibXcGAmMhstwOXLzcoxGHKtBkIJqCwfm66v1rzA/132"
+                  >
+                    <view slot="footer">
+                      <van-button size="mini">按钮</van-button>
+                      <van-button size="mini">按钮</van-button>
+                    </view>
+                  </van-card>
+                </view>
+              </view>
             </scroll-view>
           </van-tab>
         </van-tabs>
