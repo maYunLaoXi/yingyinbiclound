@@ -73,6 +73,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.cloud.callFunction({
+      name: 'activity-user-get',
+      data: {
+        page: 1,
+        pageSize: 100,
+      }
+    }).then(res => {
+      debugger
+    })
     // 获取用户信息
     if(app.globalData.userInfo){
       this.setData({

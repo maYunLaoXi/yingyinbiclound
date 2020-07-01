@@ -70,7 +70,6 @@ Page({
     query.select('#left').boundingClientRect()
     query.selectViewport().scrollOffset()
     query.exec(function (res) {
-      debugger
       arr[0] = res[0].height
     })
     const query2 = wx.createSelectorQuery()
@@ -79,7 +78,6 @@ Page({
     query2.exec(res => {
       arr[1] = res[0].height
     })
-    debugger
     return arr
   },
   onPageScroll: function(e) {
