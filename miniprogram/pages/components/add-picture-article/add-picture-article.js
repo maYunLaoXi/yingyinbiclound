@@ -240,15 +240,26 @@ Page({
       sourceType: ['album'], //从相册选择
       success: (res) => {
         const tempFilePaths = res.tempFilePaths
-
-        tempFilePaths.forEach((item, i) => {
-          this.reListData({
-            item: {
-              dragId: randomStr(),
-              images: item
-            },
-            type: 'add'
-          })
+        debugger
+        const size = res.tempFiles[0].size
+        const src = res.tempFiles[0].path
+        console.log(size)
+        wx.compressImage({
+          src,
+          quality: 60,
+          success: res => {
+            debugger
+            tempFilePaths.push(res.tempFilePath)
+            tempFilePaths.forEach((item, i) => {
+              this.reListData({
+                item: {
+                  dragId: randomStr(),
+                  images: item
+                },
+                type: 'add'
+              })
+            })
+          }
         })
       }
     });
