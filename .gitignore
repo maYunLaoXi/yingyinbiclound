@@ -2,3 +2,4 @@
 cloudfunctions/*/node_modules
 .DS_Store
 /miniprogram/account
+/cloudfunctions/account
