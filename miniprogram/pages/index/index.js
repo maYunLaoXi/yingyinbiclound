@@ -230,4 +230,12 @@ Page({
   onPullDownRefresh: function () {
     // debugger
   },
+  test(){
+    wx.cloud.callFunction({
+      name: 'qiniu-upload',
+      data: {}
+    }).then(res => {
+      debugger
+    })
+  }
 })

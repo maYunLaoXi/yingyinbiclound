@@ -68,7 +68,7 @@
 
 <view class="container">
 
-  
+  <button class="userinfo-nickname" bindtap="test">test</button>
   <!-- 用户 openid -->
   <view class="userinfo">
     <button 
