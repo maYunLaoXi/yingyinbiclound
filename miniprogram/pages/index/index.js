@@ -236,6 +236,8 @@ Page({
       data: {}
     }).then(res => {
       debugger
+    }).catch(err => {
+      debugger
     })
   }
 })
