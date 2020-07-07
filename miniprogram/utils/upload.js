@@ -1,5 +1,10 @@
+import { randomStr } from './tools'
+/**
+ * 云存储上传图片方法
+ * @param {Array} list drag组件的imageList { dragId: 图片唯一标识， images: 图片本地临时地址 }
+ * @param {String} path 云存储中的文件盘路径
+ */
 export const uploadToCloud = (list, path) => {
-  debugger
   if(!list || list.length === 0)return list
   const rootPath = path ? path + '/' : ''
   const promiseAll = []
@@ -20,4 +25,76 @@ export const uploadToCloud = (list, path) => {
       resolve(allFileID)
     }).catch(err => { reject(err) })
   })
+}
+/**
+ * 七牛上传图片组方法
+ * @param {Array, String} path drag组件的imageList { dragId: 图片唯一标识， images: 图片本地临时地址 } 或 图片本地临时地址
+ * @param {String} photoClass 云存储中的文件盘路径
+ * @param {String} dragId 当path是string类型时用到
+ * @param {String} imageView 设定返回值的url处理方式
+ * @param {Boolean}   isPublic 是否公开图片（会进行七牛增量审核）
+ */
+export const qinuiUpload = async ({ path, photoClass = 'other', dragId = 'dragId', imageView = '?imageView2/2/w/200/h/270', isPublic = true } = {}) => {
+  if(!path)return
+  const url = 'https://up-z2.qiniup.com' // 华南地址
+  const src = 'http://img.yingyinbi.com' // 云加速地址
+  const token = await getQinuiToken()
+  const all = []
+  let imgList = []
+
+  if(typeof path === 'string') {
+    path = [{
+      dragId,
+      images: path
+    }]
+  }
+  path.forEach(item => {
+    let key = `${isPublic ? 'public' : ''}/${photoClass}/${item.dragId + randomStr() + item.images.match(/\.[^.]+?$/)[0]}`
+
+    all.push(
+      wxUploadFile(item.images, url, key, token)
+    )
+  })
+  await Promise.all(all).then(res => {
+    res.forEach(item => {
+      let key = item.data.key
+      if(!key) return
+
+      imgList.push(src + '/' + key)
+    })
+  })
+  return Promise.resolve(imgList)
+}
+
+export const wxUploadFile = (filePath, url, key, token) => {
+  return new Promise((resolve, reject) => {
+    wx.uploadFile({
+      url,
+      filePath,
+      name: 'file',
+      formData: {
+        key,
+        token,
+      },
+      success: res => {
+        if(typeof res.data === 'string')res.data = JSON.parse(res.data)
+        resolve(res)
+      },
+      fail: err => {
+        reject(err)
+      }
+    })
+  })
+}
+
+/**
+ * 获取七牛uploadToken, 用于图片或文件上传
+ */
+export const getQinuiToken = async () => {
+  let token = await wx.cloud.callFunction({
+    name: 'qiniu-upload',
+    data: {}
+  })
+  debugger
+  return token.result.uptoken
 }

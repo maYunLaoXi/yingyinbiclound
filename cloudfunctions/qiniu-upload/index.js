@@ -1,7 +1,7 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init({ env: 'development-zgtnu'})
+cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV })
 
 const db = cloud.database()
 const qiniu = require('qiniu')
@@ -12,7 +12,6 @@ const qiniu = require('qiniu')
 exports.main = async (event, context) => {
   const key = await db.collection('account').doc('qiniukey').get()
   const { AccessKey, SecretKey } = key.data
-  debugger
   const mac = new qiniu.auth.digest.Mac(AccessKey, SecretKey)
   const bucket = 'yinyingbi'
   const options = {

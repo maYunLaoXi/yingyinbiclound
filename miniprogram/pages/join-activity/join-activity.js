@@ -1,6 +1,6 @@
 // miniprogram/pages/join-activity.js
 const app = getApp()
-import { uploadToCloud } from '../../utils/index'
+import { uploadToCloud, qinuiUpload } from '../../utils/index'
 import Toast from '/vant-weapp/toast/toast.js'
 Page({
   data: {
@@ -71,7 +71,11 @@ Page({
       return
     }
     this.showToast()
-    uploadToCloud(imgList, 'activity/' + actName).then(res => {
+    qinuiUpload({
+      path: imgList,
+      photoClass: 'activity' + actName,
+    }).then(res => {
+      debugger
       wx.cloud.callFunction({
         name: 'activity-join',
         data: {
@@ -84,7 +88,7 @@ Page({
           title,
           article,
           activity_id: _id,
-          check: false,
+          check: true,
         }
       }).then(res => {
         debugger
@@ -97,13 +101,19 @@ Page({
           }
         })
       })
-    }).catch(err => {
-      wx.showModal({
-        content: '发生了点意外，请稍后重试',
-        showCancel: false,
-      })
     })
+
+    // 如果没有私有云可使用些方法存在云存储
+    // uploadToCloud(imgList, 'activity/' + actName).then(res => {
+    
+    // }).catch(err => {
+    //   wx.showModal({
+    //     content: '发生了点意外，请稍后重试',
+    //     showCancel: false,
+    //   })
+    // })
   },
+
   // 上传提示
   showToast() {
     Toast.loading({

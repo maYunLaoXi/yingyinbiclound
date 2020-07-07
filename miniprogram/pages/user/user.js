@@ -1,7 +1,8 @@
 // miniprogram/pages/user/user.js
-const app = getApp();
-Page({
+import { matchQiniuUrl, imageView } from '../../utils/index'
+const app = getApp()
 
+Page({
   /**
    * 页面的初始数据
    */
@@ -145,10 +146,13 @@ Page({
         collection: 'activity-data'
       }
     }).then(res => {
-      debugger
+      const data = res.result.data
       const { activityList } = this.data
+      data.forEach(item => {
+        if(matchQiniuUrl(item.fileID)) item.fileID = imageView(item.fileID)
+      })
       this.setData({
-        activityList: activityList.concat(res.result.data)
+        activityList: activityList.concat(data)
       })
     })
   },

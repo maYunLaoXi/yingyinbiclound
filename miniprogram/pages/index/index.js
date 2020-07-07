@@ -1,4 +1,6 @@
 //index.js
+import { qinuiUpload } from '../../utils/index'
+
 const app = getApp()
 
 Page({
@@ -231,13 +233,19 @@ Page({
     // debugger
   },
   test(){
-    wx.cloud.callFunction({
-      name: 'qiniu-upload',
-      data: {}
-    }).then(res => {
-      debugger
-    }).catch(err => {
-      debugger
+    // wx.cloud.callFunction({
+    //   name: 'qiniu-upload',
+    //   data: {}
+    // }).then(res => {
+    //   debugger
+    // }).catch(err => {
+    //   debugger
+    // })
+    wx.chooseImage({
+      success: res => {
+        debugger
+        qinuiUpload({ path: res.tempFilePaths[0], photoClass: 'film' })
+      }
     })
   }
 })
