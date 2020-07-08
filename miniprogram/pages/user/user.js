@@ -146,6 +146,30 @@ Page({
         collection: 'activity-data'
       }
     }).then(res => {
+      let actD = [
+        {
+          name: '晒相活动',
+          open: true,
+          descriptionShort: '简介',
+          activityData: {
+            name:'',
+            actName: '',
+            title: '标题',
+            article: '第一次参加',
+            show: true,
+            photo: ['https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL0msB8jbgywsOpnhwpBBiaibGriciam9qibUZpFe3zAibXcGAmMhstwOXLzcoxGHKtBkIJqCwfm66v1rzA/132'],
+          },
+          showReceive: {
+            photo: ['https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL0msB8jbgywsOpnhwpBBiaibGriciam9qibUZpFe3zAibXcGAmMhstwOXLzcoxGHKtBkIJqCwfm66v1rzA/132'],
+            title:'好开心',
+            article: '真的好开心'
+          }
+        }
+      ]
+      this.setData({
+        activityList: actD
+      })
+      return
       const data = res.result.data
       const { activityList } = this.data
       data.forEach(item => {

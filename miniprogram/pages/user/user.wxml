@@ -47,23 +47,37 @@
           <van-tab title="活动">
             <scroll-view style="height: {{contentHeight}}" class="act-body" scroll-y="true">
               <!-- <photos-comp image-list="{{activityList}}" /> -->
-              <view class="act-card">
+              <view class="act-card" wx:for="{{activityList}}" wx:key="item.actName">
                 <view class="yin-cell">
                   <view class="yin-cell__title">
-                    活动
-                    <view class="yin-cell__label">不一样的活动</view>
+                    {{item.name}}
+                    <view class="yin-cell__label">{{item.descriptionShort}}</view>
                   </view>
-                  <view class="van-cell__value panel-index--van-panel__header-value">进行中</view>
+                  <view class="van-cell__value panel-index--van-panel__header-value">{{item.open ? '进行中' : '已结束'}}</view>
                 </view>
                 
                 <view class="yin-card">
                   <view class="yin-card-content">
                     <view class="yin-card__thumb">
-                      <image class="yin-card__img" src="https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL0msB8jbgywsOpnhwpBBiaibGriciam9qibUZpFe3zAibXcGAmMhstwOXLzcoxGHKtBkIJqCwfm66v1rzA/132" mode="aspectFit"></image>
+                      <image class="yin-card__img" src="{{item.activityData.photo[0]}}" mode="aspectFit"></image>
                     </view>
                     <view class="yin-card__content">
-                      <view class="yin-card__title">标题</view>
-                      <view class="yin-card__desc">内容</view>
+                      <view class="yin-card__title">{{item.activityData.title}}</view>
+                      <view class="yin-card__desc">{{item.activityData.article}}</view>
+                      <view class="text-gray text-sm">
+                        <text class="cuIcon-appreciatefill margin-lr-xs"></text>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+                <view  wx:if="{{item.showReceive}}" class="yin-card">
+                  <view class="yin-card-content">
+                    <view class="yin-card__thumb">
+                      <image class="yin-card__img" src="{{item.showReceive.photo[0]}}" mode="aspectFit"></image>
+                    </view>
+                    <view class="yin-card__content">
+                      <view class="yin-card__title">{{item.showReceive.title}}</view>
+                      <view class="yin-card__desc">{{item.showReceive.article}}</view>
                       <view class="text-gray text-sm">
                         <text class="cuIcon-appreciatefill margin-lr-xs"></text>
                       </view>

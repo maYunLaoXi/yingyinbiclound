@@ -46,12 +46,11 @@
 | version     |       | 期数           |                |
 | openid      |       | 参与者openid   |                |
 | show        |       | 是否可展示     |                |
-| receiveShow |       | 买家秀         |                |
 | address     |       | 接收地址       |                |
 | time        |       | 创建时间       |                |
 | photo       |       | 参与图片       |                |
 | article     |       | 内容（选填）   |                |
-| showReceive | Array | 活动接收的内容 | [{...}, {...}] |
+| showReceive | Object | 活动接收的内容 |                 |
 
 ### 活动“买家秀”`activity-show`
 
