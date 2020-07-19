@@ -23,7 +23,8 @@
     "pages/components/add-image-comp/add-image-comp",
     "pages/join-activity/join-activity",
     "pages/select-address/index",
-    "pages/address-edit-add/index"
+    "pages/address-edit-add/index",
+    "pages/image-show/image-show"
   ],
   "window": {
     "navigationStyle": "custom",

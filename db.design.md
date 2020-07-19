@@ -52,7 +52,7 @@
 | article     |       | 内容（选填）   |                |
 | showReceive | Object | 活动接收的内容 |                 |
 
-### 活动“买家秀”`activity-show`
+### 活动“买家秀”`showReceive`
 
 些处为`activity-data`的 showReceive 字段
 

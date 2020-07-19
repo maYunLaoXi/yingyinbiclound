@@ -1,0 +1,16 @@
+<!--pages/components/image-view/image-view.wxml-->
+<text>pages/components/image-view/image-view.wxml</text>
+<view>
+  <view class="images-row">
+    <image src="{{images[0].url}}" lazy-load />
+    <image src="{{images[0].url}}" lazy-load />
+    <image src="{{images[0].url}}" lazy-load />
+    <image src="{{images[0].url}}" lazy-load />
+    <image src="{{images[0].url}}" lazy-load />
+    <image src="{{images[0].url}}" lazy-load />
+    <image src="{{images[0].url}}" lazy-load />
+    <image src="{{images[0].url}}" lazy-load />
+    <image src="{{images[0].url}}" lazy-load />
+    <image src="{{images[0].url}}" lazy-load />
+  </view>
+</view>

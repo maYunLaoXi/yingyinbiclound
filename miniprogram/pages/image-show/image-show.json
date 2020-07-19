@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "image-view": "/pages/components/image-view/image-view"
+  }
+}
