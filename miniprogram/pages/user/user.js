@@ -71,7 +71,6 @@ Page({
     })
   },
   toImageShow(e) {
-    debugger
     const id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: '/pages/image-show/image-show?id=' + id,
