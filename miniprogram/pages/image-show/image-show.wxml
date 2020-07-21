@@ -1,0 +1,3 @@
+<!--miniprogram/pages/image-show/image-show.wxml-->
+<navigation-bar />
+<image-view images="{{data.photo}}"></image-view>

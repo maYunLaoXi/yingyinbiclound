@@ -75,7 +75,6 @@ Page({
       path: imgList,
       photoClass: 'activity' + actName,
     }).then(res => {
-      debugger
       wx.cloud.callFunction({
         name: 'activity-join',
         data: {
@@ -89,6 +88,7 @@ Page({
           article,
           activity_id: _id,
           check: true,
+          showReceive: []
         }
       }).then(res => {
         debugger

@@ -69,7 +69,7 @@ page,.wrap{
   background-color: #fff;
   box-sizing: border-box;
 }
-.yin-cell::after{
+.yin-cell::after, .yin-card-content::after{
   content: " ";
   position: absolute;
   pointer-events: none;
@@ -83,6 +83,10 @@ page,.wrap{
   -webkit-transform: scaleY(.5);
   transform: scaleY(.5);
   border-bottom: 1px solid #eee;
+}
+.yin-card-content::after{
+  left: 0;
+  bottom: -6px;
 }
 .yin-cell__title{
   flex: 1;
@@ -109,6 +113,7 @@ page,.wrap{
 }
 .yin-card-content{
   display: flex;
+  position: relative;
 }
 .yin-card__thumb {
   position: relative;

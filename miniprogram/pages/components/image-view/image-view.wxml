@@ -1,0 +1,6 @@
+<!-- 图片展示组版 -->
+<view>
+  <view class="images-row">
+    <image wx:for="{{images}}" src="{{item.url}}" lazy-load />
+  </view>
+</view>

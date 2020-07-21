@@ -70,19 +70,16 @@ Page({
       url: '/pages/components/add-picture-article/add-picture-article'
     })
   },
+  toImageShow(e) {
+    const id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '/pages/image-show/image-show?id=' + id,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.cloud.callFunction({
-      name: 'activity-user-get',
-      data: {
-        page: 1,
-        pageSize: 100,
-      }
-    }).then(res => {
-      debugger
-    })
     // 获取用户信息
     if(app.globalData.userInfo){
       this.setData({
@@ -139,46 +136,17 @@ Page({
   },
   getActivityList({ page = 1, pageSize = 20 } = {}) {
     wx.cloud.callFunction({
-      name: 'get-user-image',
+      name: 'activity-user-get',
       data: {
-        page,
-        pageSize,
-        collection: 'activity-data'
       }
     }).then(res => {
-      let actD = [
-        {
-          name: '晒相活动',
-          open: true,
-          descriptionShort: '简介',
-          activityData: {
-            name:'',
-            actName: '',
-            title: '标题',
-            article: '第一次参加',
-            show: true,
-            photo: ['https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL0msB8jbgywsOpnhwpBBiaibGriciam9qibUZpFe3zAibXcGAmMhstwOXLzcoxGHKtBkIJqCwfm66v1rzA/132'],
-          },
-          showReceive: {
-            photo: ['https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL0msB8jbgywsOpnhwpBBiaibGriciam9qibUZpFe3zAibXcGAmMhstwOXLzcoxGHKtBkIJqCwfm66v1rzA/132'],
-            title:'好开心',
-            article: '真的好开心'
-          }
-        }
-      ]
+      console.log('activity-user-get', res)
       this.setData({
-        activityList: actD
-      })
-      return
-      const data = res.result.data
-      const { activityList } = this.data
-      data.forEach(item => {
-        if(matchQiniuUrl(item.fileID)) item.fileID = imageView(item.fileID)
-      })
-      this.setData({
-        activityList: activityList.concat(data)
+        activityList: res.result.data
       })
     })
+  },
+  activityUserGet() {
   },
   moving(e) {
     if(e.detail.y === 0) {

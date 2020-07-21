@@ -8,16 +8,18 @@ const db = cloud.database()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  debugger
   const wxContext = cloud.getWXContext()
-  const { page = 1, pageSize = 16 } = event
+  const { page = 1, pageSize = 16, imageView = '' } = event
 
-  const activityData = await db.collection('activity-data')
-    .orderBy('uploadTime', 'desc') // 排序条件，对uploadTime字段进行desc(降序：越大越靠前)
-    .where({ openid: wxContext.OPENID }).get()
-  debugger
-  let result = await showDbSearch(filterActiById(activityData.data), wxContext.OPENID)
-
+  // 查询所有活动
+  const activities = await db.collection('activity').aggregate()
+    .lookup({
+      from: 'activity-data',
+      localField: '_id',
+      foreignField: 'activity_id',
+      as: 'list'
+    }).end()
+  const result =  handleList(activities.list, imageView)
   return {
     data: result
   }
@@ -25,35 +27,28 @@ exports.main = async (event, context) => {
 
 /**
  * 通过id将所参与过的活协分类
- * @param {*} list activityData数据
+ * @param {Array} list 联表查询的数据
+ * @param {String} imageView 七牛云图片URL的处理
  */
-function filterActiById(list) {
-  const jion = []
-  const idList = []
-  let actId
-
-  list.forEach(item => {
-    idList.push(item.activity_id)
-  })
-  actId = [...new Set(idList)]
-  actId.forEach(item => {
-    jion.push({
-      activity_id: item,
-      data: list.filter(ele => ele.activity_id === item)
-    })
-  })
-  console.log({jion})
-  return jion
-}
-
-async function showDbSearch(idList, openid) {
+function handleList(list, imageView) {
   debugger
-  idList.forEach(item => {
-    db.collection('activity-show')
-    .orderBy('uploadTime', 'desc')
-    .where({ openid, activity_id: item.activity_id }).get().then(res => {
-      debugger
-
+  if(!list || list.length === 0) return []
+  list.forEach(item => {
+    const newList = []
+    item.list.forEach(ele => {
+      const { activity_id, address, title, article, check, show, _id } = ele
+      newList.push({
+        activity_id,
+        _id,
+        article,
+        title,
+        show,
+        check,
+        address,
+        photo: ele.photo[0]
+      })
     })
+    item.list = newList
   })
+  return list
 }

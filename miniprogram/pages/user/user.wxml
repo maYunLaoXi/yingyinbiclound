@@ -45,9 +45,9 @@
             </scroll-view>
           </van-tab>
           <van-tab title="活动">
+          <button bindtap="activityUserGet">测试活动</button>
             <scroll-view style="height: {{contentHeight}}" class="act-body" scroll-y="true">
-              <!-- <photos-comp image-list="{{activityList}}" /> -->
-              <view class="act-card" wx:for="{{activityList}}" wx:key="item.actName">
+              <view class="act-card" wx:for="{{activityList}}" wx:key="actName">
                 <view class="yin-cell">
                   <view class="yin-cell__title">
                     {{item.name}}
@@ -56,21 +56,21 @@
                   <view class="van-cell__value panel-index--van-panel__header-value">{{item.open ? '进行中' : '已结束'}}</view>
                 </view>
                 
-                <view class="yin-card">
+                <view class="yin-card" wx:for="{{item.list}}" wx:for-item="listItem" wx:for-index="listIndex" wx:key="listItem._id">
                   <view class="yin-card-content">
                     <view class="yin-card__thumb">
-                      <image class="yin-card__img" src="{{item.activityData.photo[0]}}" mode="aspectFit"></image>
+                      <image class="yin-card__img" src="{{listItem.photo.url + '?imageView2/1/h/100'}}" mode="aspectFill" bindtap="toImageShow" data-id="{{listItem._id}}"></image>
                     </view>
                     <view class="yin-card__content">
-                      <view class="yin-card__title">{{item.activityData.title}}</view>
-                      <view class="yin-card__desc">{{item.activityData.article}}</view>
+                      <view class="yin-card__title">{{listItem.title}}</view>
+                      <view class="yin-card__desc">{{listItem.article}}</view>
                       <view class="text-gray text-sm">
                         <text class="cuIcon-appreciatefill margin-lr-xs"></text>
                       </view>
                     </view>
                   </view>
                 </view>
-                <view  wx:if="{{item.showReceive}}" class="yin-card">
+                <!-- <view  wx:if="{{item.showReceive}}" class="yin-card">
                   <view class="yin-card-content">
                     <view class="yin-card__thumb">
                       <image class="yin-card__img" src="{{item.showReceive.photo[0]}}" mode="aspectFit"></image>
@@ -83,7 +83,7 @@
                       </view>
                     </view>
                   </view>
-                </view>
+                </view> -->
               </view>
             </scroll-view>
           </van-tab>
