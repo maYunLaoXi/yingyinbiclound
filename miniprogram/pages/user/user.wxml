@@ -56,7 +56,7 @@
                   <view class="van-cell__value panel-index--van-panel__header-value">{{item.open ? '进行中' : '已结束'}}</view>
                 </view>
                 
-                <view class="yin-card" wx:for="{{item.list}}" wx:for-item="listItem" wx:for-index="listIndex" wx:key="listItem._id">
+                <view class="yin-card" wx:for="{{item.list}}" wx:for-item="listItem" wx:for-index="listIndex" wx:key="_id">
                   <view class="yin-card-content">
                     <view class="yin-card__thumb">
                       <image class="yin-card__img" src="{{listItem.photo.url + '?imageView2/1/h/100'}}" mode="aspectFill" bindtap="toImageShow" data-id="{{listItem._id}}"></image>

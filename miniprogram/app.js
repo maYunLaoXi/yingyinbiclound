@@ -15,8 +15,8 @@ App({
         traceUser: true,
       })
     }
-
-    this.globalData = {
+    this.initConst()
+    const globalData = {
       PhotographyClass: [
         {
           nameCh: '人像',
@@ -64,5 +64,25 @@ App({
         redirect: ''
       }
     }
+    let that = this
+    setGlobalDdata(that, globalData)
+  },
+  initConst(){
+    const that = this
+    wx.getSystemInfo({
+      success(res){
+        const systemInfo = {
+          screenWidth: res.screenWidth,
+          screenHeight: res.screenHeight,
+          windowWidth: res.windowWidth,
+          windowHeight: res.windowHeight,
+        }
+        setGlobalDdata(that, { systemInfo })
+      }
+    })
   }
 })
+
+function setGlobalDdata (that, data) {
+  that.globalData = Object.assign({}, that.globalData, data)
+}
