@@ -8,7 +8,5 @@
     "waterfall-com": "/pages/components/waterfall/waterfall",
     "photos-comp": "../components/photos/photos"
   },
-  "window": {
-    "enablePullDownRefresh": false
-  }
+  "enablePullDownRefresh": false
 }

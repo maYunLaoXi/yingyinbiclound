@@ -21,7 +21,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    imgArr: []
   },
   /**
    * 数据监听
@@ -29,10 +29,12 @@ Component({
   observers: {
     'images': function(images) {
       if(!images.length) return
-      debugger
       let imgArr = slice2sort(images, 2)
       this.setSize(imgArr)
       console.log(imgArr)
+      this.setData({
+        imgArr
+      })
     }
   },
   
@@ -43,31 +45,31 @@ Component({
   methods: {
     setSize(list) {
       const { systemInfo } = app.globalData
-      const windowWidth = systemInfo.windowWidth - 2
+      const windowWidth = systemInfo.windowWidth - 3
+      const { round } = Math
 
       list.forEach(item => {
-        let imgWidth = windowWidth / 2
-        let imgHeight = 4 / 3 * imgWidth
+        let imgWidth = windowWidth
+        let imgHeight = 3 / 4 * imgWidth
         const [img1, img2] = item
-
+        // debugger
         if(img2) {
           let allWidth = img1.width + img2.width
           
-          img1.imgWidth = imgWidth * img1.width / allWidth
-          img2.imgWidth = imgWidth * img2.width / allWidth
-          img1.imgHeight = img2.imgHeight = getImgHeight(img1,img2)
+          img1.imgWidth = round(imgWidth * img1.width / allWidth)
+          img2.imgWidth = round(imgWidth * img2.width / allWidth)
+          img1.imgHeight = img2.imgHeight = round(getImgHeight(img1,img2))
         }else {
-          img1.imgWidth = windowWidth
-          img1.imgHeight = windowWidth / img1.width / img.height
+          img1.imgWidth = round(windowWidth + 3)
+          if(img1.width > img1.height) 
+          img1.imgHeight = img1.width >= img1.height ? (windowWidth + 3) * 3 / 4 : (windowWidth + 3) * 4 / 3
         }
- 
       });
     }
   }
 })
 function getImgHeight(img1, img2) {
   let img = img1
-
   // 找宽度短的
   if(img1.imgWidth >= img2.width){
     img = img2
