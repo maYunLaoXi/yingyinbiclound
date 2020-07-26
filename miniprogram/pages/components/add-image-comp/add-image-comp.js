@@ -1,6 +1,6 @@
 // pages/components/add-image-comp/add-image-comp.js
 const app = getApp()
-import { randomStr } from '../../../utils/index'
+import { randomStr, compress } from '../../../utils/index'
 
 Component({
   options: {
@@ -104,8 +104,13 @@ Component({
         sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
         sourceType: ['album'], //从相册选择
         success: (res) => {
-          const tempFilePaths = res.tempFilePaths
-  
+          debugger
+          const {tempFilePaths, tempFiles} = res
+          tempFiles.forEach(item => {
+            compress(item).then(res => {
+              debugger
+            })
+          })
           tempFilePaths.forEach((item, i) => {
             this.reListData({
               item: {

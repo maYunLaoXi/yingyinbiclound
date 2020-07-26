@@ -68,7 +68,7 @@ export const qinuiUpload = async ({ path, photoClass = 'other', dragId = 'dragId
 
 export const wxUploadFile = (filePath, url, key, token) => {
   return new Promise((resolve, reject) => {
-    wx.uploadFile({
+    const progerss = wx.uploadFile({
       url,
       filePath,
       name: 'file',
@@ -83,6 +83,9 @@ export const wxUploadFile = (filePath, url, key, token) => {
       fail: err => {
         reject(err)
       }
+    })
+    progerss.onProgressUpdate(res => {
+      console.log(res)
     })
   })
 }

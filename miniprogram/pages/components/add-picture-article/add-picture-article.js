@@ -240,7 +240,7 @@ Page({
       sourceType: ['album'], //从相册选择
       success: (res) => {
         const tempFilePaths = res.tempFilePaths
-        debugger
+        // debugger
         const size = res.tempFiles[0].size
         const src = res.tempFiles[0].path
         console.log(size)
@@ -248,7 +248,7 @@ Page({
           src,
           quality: 60,
           success: res => {
-            debugger
+            // debugger
             tempFilePaths.push(res.tempFilePath)
             tempFilePaths.forEach((item, i) => {
               this.reListData({
