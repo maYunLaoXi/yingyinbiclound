@@ -45,7 +45,6 @@
             </scroll-view>
           </van-tab>
           <van-tab title="活动">
-          <button bindtap="activityUserGet">测试活动</button>
             <scroll-view style="height: {{contentHeight}}" class="act-body" scroll-y="true">
               <view class="act-card" wx:for="{{activityList}}" wx:key="actName">
                 <view class="yin-cell">

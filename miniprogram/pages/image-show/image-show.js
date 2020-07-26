@@ -1,11 +1,13 @@
 // miniprogram/pages/image-show/image-show.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    data: {}
+    data: {},
+    userInfo: {}
   },
 
   /**
@@ -14,6 +16,10 @@ Page({
   onLoad: function (options) {
     const { id } = options
     if(id) this.getImages(id)
+    const { imgShowUser } = app.globalData
+    this.setData({
+      userInfo: imgShowUser
+    })
   },
   /**
    * 获取图片数据
@@ -29,12 +35,6 @@ Page({
       this.setData({
         data: res.result.data
       })
-    })
-    return
-    const db = wx.cloud.database()
-    db.collection('activity-data').doc('2a0398605f14168300288f3d3de1cd38').get().then(res => {
-      debugger
-      console.log(res.data)
     })
   },
 

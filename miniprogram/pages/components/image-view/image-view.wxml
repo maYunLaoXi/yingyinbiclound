@@ -1,7 +1,7 @@
 <!-- 图片展示组版 -->
 <view>
   <view class="images-row" wx:for="{{imgArr}}" wx:key="index">
-    <image src="{{item[0].url}}" lazy-load style="height: {{item[0].imgHeight}}px; width: {{item[0].imgWidth}}px" mode="aspectFill" />
-    <image wx:if="{{item[1]}}" src="{{item[1].url}}" lazy-load style="height: {{item[0].imgHeight}}px; width: {{item[1].imgWidth}}px" mode="aspectFill" />
+    <image src="{{item[0].url}}" lazy-load style="height: {{item[0].imgHeight}}px; width: {{item[0].imgWidth}}px" mode="aspectFill" bind:tap="previewImg" data-src="{{item[0].url}}" />
+    <image wx:if="{{item[1]}}" src="{{item[1].url}}" lazy-load style="height: {{item[0].imgHeight}}px; width: {{item[1].imgWidth}}px" mode="aspectFill" bind:tap="previewImg" data-src="{{item[1].url}}" />
   </view>
 </view>

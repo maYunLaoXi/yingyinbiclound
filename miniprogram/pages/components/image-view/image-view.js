@@ -1,5 +1,5 @@
 // pages/components/image-view/image-view.js
-import { slice2sort } from '../../../utils/index'
+import { slice2sort, imageView } from '../../../utils/index'
 const app = getApp()
 
 Component({
@@ -29,6 +29,8 @@ Component({
   observers: {
     'images': function(images) {
       if(!images.length) return
+
+      images.forEach(item => item.url = item.url + '?imageView2/2/w/600')
       let imgArr = slice2sort(images, 2)
       this.setSize(imgArr)
       console.log(imgArr)
@@ -62,9 +64,19 @@ Component({
         }else {
           img1.imgWidth = round(windowWidth + 3)
           if(img1.width > img1.height) 
-          img1.imgHeight = img1.width >= img1.height ? (windowWidth + 3) * 3 / 4 : (windowWidth + 3) * 4 / 3
+          img1.imgHeight = img1.width >= img1.height ? (windowWidth + 3) * 9 / 16 : (windowWidth + 3) * 4 / 3
         }
       });
+    },
+    // 预览图片
+    previewImg(e) {
+      const { src: url } = e.currentTarget.dataset
+      const urls = []
+      this.data.images.forEach(item => urls.push(item.url))
+      wx.previewImage({
+        current: url, // 当前显示图片的http链接
+        urls, // 需要预览的图片http链接列表
+      })
     }
   }
 })

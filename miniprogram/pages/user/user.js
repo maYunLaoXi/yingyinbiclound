@@ -72,6 +72,7 @@ Page({
   },
   toImageShow(e) {
     const id = e.currentTarget.dataset.id
+    app.globalData.imgShowUser = app.globalData.userInfo
     wx.navigateTo({
       url: '/pages/image-show/image-show?id=' + id,
     })
@@ -146,15 +147,17 @@ Page({
       })
     })
   },
-  activityUserGet() {
-  },
   moving(e) {
-    if(e.detail.y === 0) {
+    console.log(e.detail.y)
+
+    if(e.detail.y <= 0) {
+      const { systemInfo } = app.globalData
+
       this.setData({
-        contentHeight: 'calc(100vh - 43px)'
+        contentHeight: systemInfo.windowHeight - 43  + 'px'
       })
     }
-    if(e.detail.y > 0 && this.data.contentHeight === 'calc(100vh - 43px)') {
+    if(e.detail.y > 0) {
       this.setData({
         contentHeight: 'auto'
       })

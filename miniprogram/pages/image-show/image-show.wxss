@@ -1,1 +1,31 @@
 /* miniprogram/pages/image-show/image-show.wxss */
+.user{
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #ffff;
+  margin-bottom: 2px;
+}
+.user-avatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+}
+.name{
+  margin-left: 3px;
+  font-size: 18px;
+}
+.text{
+  background-color: #ffff;
+  padding: 5px;
+  margin-bottom: 2px;
+}
+.title{
+  font-size: 18px;
+  color: #000000;
+}
+.article{
+  margin-top: 6px;
+  color: #7d7e80;
+}

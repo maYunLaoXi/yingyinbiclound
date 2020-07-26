@@ -1,3 +1,12 @@
 <!--miniprogram/pages/image-show/image-show.wxml-->
 <navigation-bar />
+<view class="user">
+  <image class="user-avatar" src="{{userInfo.avatarUrl}}" />
+  <text class="name">{{userInfo.nickName}}</text>
+</view>
+<view class="text">
+  <view class="title">{{data.title}}</view>
+  <view class="article">{{data.article}}</view>
+</view>
 <image-view images="{{data.photo}}"></image-view>
+<view style="height: 30px"></view>
