@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "navigation-bar": "/pages/components/navigation-bar/navigation-bar",
+    "add-image-comp": "/pages/components/add-image-comp/add-image-comp"
+  }
+}

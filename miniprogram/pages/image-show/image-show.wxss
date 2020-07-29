@@ -6,6 +6,7 @@
   align-items: center;
   background-color: #ffff;
   margin-bottom: 2px;
+  justify-content: space-between;
 }
 .user-avatar{
   width: 40px;

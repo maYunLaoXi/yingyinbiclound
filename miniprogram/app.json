@@ -24,7 +24,8 @@
     "pages/join-activity/join-activity",
     "pages/select-address/index",
     "pages/address-edit-add/index",
-    "pages/image-show/image-show"
+    "pages/image-show/image-show",
+    "pages/show-activity/show-activity"
   ],
   "window": {
     "navigationStyle": "custom",

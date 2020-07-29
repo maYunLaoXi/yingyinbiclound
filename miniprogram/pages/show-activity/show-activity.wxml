@@ -1,0 +1,22 @@
+<!--miniprogram/pages/show-activity/show-activity.wxml-->
+<navigation-bar />
+<view class="yin-card">
+  <view class="yin-card-content">
+    <view class="yin-card__thumb">
+      <image class="yin-card__img" src="{{options.url + '?imageView2/1/h/100'}}" mode="aspectFill" bindtap="toImageShow"></image>
+    </view>
+    <view class="yin-card__content">
+      <view class="yin-card__title">{{options.title}}</view>
+      <view class="yin-card__desc">{{options.article}}</view>
+    </view>
+  </view>
+</view>
+
+<add-image-comp class="mt-10" num="30" bind:list="getImageList" />
+<view class="cu-form-group">
+  <input placeholder="标题(可选)" value="{{title}}" bindblur="inputTitle"></input>
+</view>
+<view class="cu-form-group">
+  <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="articleInput" placeholder="正文(可选)"></textarea>
+</view>
+

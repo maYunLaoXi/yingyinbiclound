@@ -1,8 +1,11 @@
 <!--miniprogram/pages/image-show/image-show.wxml-->
 <navigation-bar />
 <view class="user">
-  <image class="user-avatar" src="{{userInfo.avatarUrl}}" />
-  <text class="name">{{userInfo.nickName}}</text>
+  <view class="flex-c-c">
+    <image class="user-avatar" src="{{userInfo.avatarUrl}}" />
+    <text class="name">{{userInfo.nickName}}</text>
+  </view>
+  <button class="cu-btn round line-red" bindtap="goShowActivity">发show</button>
 </view>
 <view class="text">
   <view class="title">{{data.title}}</view>

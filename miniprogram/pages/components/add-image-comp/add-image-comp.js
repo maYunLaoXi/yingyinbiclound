@@ -104,11 +104,19 @@ Component({
         sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
         sourceType: ['album'], //从相册选择
         success: (res) => {
-          debugger
           const {tempFilePaths, tempFiles} = res
           tempFiles.forEach(item => {
             compress(item).then(res => {
-              debugger
+              let imgInfo = {}
+              const { path, size } = res
+              wx.getImageInfo({
+                src: path,
+                success: res => {
+                  debugger
+                  const { path, height, width } = res
+                  imgInfo = { size, path, height, width }
+                }
+              })
             })
           })
           tempFilePaths.forEach((item, i) => {

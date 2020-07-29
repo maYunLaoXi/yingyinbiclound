@@ -1,0 +1,4 @@
+/* miniprogram/pages/show-activity/show-activity.wxss */
+.yin-card{
+  margin-top: 5px;
+}
