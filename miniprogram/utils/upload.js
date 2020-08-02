@@ -28,7 +28,7 @@ export const uploadToCloud = (list, path) => {
 }
 /**
  * 七牛上传图片组方法
- * @param {Array, String} path drag组件的imageList { dragId: 图片唯一标识， images: 图片本地临时地址 } 或 图片本地临时地址
+ * @param {Array, String} path drag组件的imageList { dragId: 图片唯一标识， images: 图片本地临时地址, width, height, size...} 或 图片本地临时地址
  * @param {String} photoClass 云存储中的文件盘路径
  * @param {String} dragId 当path是string类型时用到
  * @param {String} imageView 设定返回值的url处理方式
@@ -49,24 +49,32 @@ export const qinuiUpload = async ({ path, photoClass = 'other', dragId = 'dragId
     }]
   }
   path.forEach(item => {
-    let key = `${isPublic ? 'public' : ''}/${photoClass}/${item.dragId + randomStr() + item.images.match(/\.[^.]+?$/)[0]}`
-
+    let secondName = '.png'
+    let path = item.images
+    if(/\.(png|jpe?g|gif|svg)(\?.*)?$/.test(path)){
+      secondName = path.match(/\.[^.]+?$/)[0]
+    }else {
+      secondName = '.png'
+    }
+    let key = `${isPublic ? 'public' : ''}/${photoClass}/${item.dragId + randomStr() + secondName}`
+    debugger
     all.push(
-      wxUploadFile(item.images, url, key, token)
+      wxUploadFile(item, url, key, token)
     )
   })
   await Promise.all(all).then(res => {
     res.forEach(item => {
-      let key = item.data.key
-      if(!key) return
-
-      imgList.push(src + '/' + key)
+      item.images = src + '/' + item.key
+      delete item.key
+      imgList.push(item)
     })
   })
-  return Promise.resolve(imgList)
+  return imgList
 }
 
-export const wxUploadFile = (filePath, url, key, token) => {
+export const wxUploadFile = (imageObj, url, key, token) => {
+  const filePath = imageObj.images
+
   return new Promise((resolve, reject) => {
     const progerss = wx.uploadFile({
       url,
@@ -78,10 +86,11 @@ export const wxUploadFile = (filePath, url, key, token) => {
       },
       success: res => {
         if(typeof res.data === 'string')res.data = JSON.parse(res.data)
-        resolve(res)
+        imageObj.key = res.data.key
+        resolve(imageObj)
       },
       fail: err => {
-        reject(err)
+        resolve(imageObj)
       }
     })
     progerss.onProgressUpdate(res => {

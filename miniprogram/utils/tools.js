@@ -41,14 +41,13 @@ export const slice2sort = (arr, num) => {
   // 压缩图片
  export const compress = async (imgObj) => {
   const { path, size } = imgObj
-  console.log('begin:', size, path)
-  if(!path || !size) return undefined
+  if(!path || !size) return imgObj
+
   const maxSize = 1024 * 1024 * 5; // 5MB
-  if(size <= maxSize) return imgObj
-  let resObj = imgObj
+  if(size <= maxSize) return getImageInfo(imgObj)
+
   const compressObj = await doWxCompress(path, maxSize)
-  debugger
-  if(compressObj.size <= maxSize) return compressObj
+  if(compressObj.size <= maxSize) return getImageInfo(compressObj)
   else compress(compressObj)
 } 
 
@@ -57,9 +56,8 @@ function doWxCompress(path, maxSize) {
     // 注： 些函方法目前无法在微信开发者工具上正常使用， 可能会产生反回path后缀为undefined
     wx.compressImage({
       src: path, // 图片路径
-      quality: 80, // 压缩质量
+      quality: 50, // 压缩质量
       success: res => {
-        console.log('compress:', res.tempFilePath)
         imageInfoObj(res.tempFilePath, resolve)
       },
     })
@@ -75,5 +73,19 @@ export const imageInfoObj = (path, resolve) => {
       imgObj.size = res.size
       resolve && resolve(imgObj)
     }
+  })
+}
+
+function getImageInfo(imgObj) {
+  const { path, size } = imgObj
+  return new Promise((resolve, reject) => {
+    wx.getImageInfo({
+      src: path,
+      success: res => {
+        const { path, height, width, type } = res
+        resolve({ path, height, width, type, size })
+      },
+      fail: err => reject(err)
+    })
   })
 }

@@ -11,9 +11,20 @@ Component({
    * 组件的属性列表
    */
   properties: {
+    // 可以上传的图片最多张数
     num: {
       type: Number,
-      value: 50
+      value: 30
+    },
+    // wx.chooseImage的sizeType
+    sizeType: {
+      type: Array,
+      value: ['original', 'compressed']
+    },
+    // wx.chooseImage的sourceType
+    sourceType: {
+      type: Array,
+      value: ['album']
     }
   },
 
@@ -95,37 +106,30 @@ Component({
 
     // drag组件方法end
     wxChooseImage() {
-      const { listData, num } = this.data
+      const { listData, num, sizeType, sourceType } = this.data
       if(listData.length >= num)return
       let count = num - listData.length > 9 ? 9 : num -listData.length
 
       wx.chooseImage({
-        count, //默认9
-        sizeType: ['original', 'compressed'], //可以指定是原图还是压缩图，默认二者都有
-        sourceType: ['album'], //从相册选择
+        count, // 默认9
+        sizeType, // 可以指定是原图还是压缩图，默认二者都有
+        sourceType, // 默认从相册选择
         success: (res) => {
-          const {tempFilePaths, tempFiles} = res
+          const { tempFiles } = res
           tempFiles.forEach(item => {
             compress(item).then(res => {
-              let imgInfo = {}
-              const { path, size } = res
-              wx.getImageInfo({
-                src: path,
-                success: res => {
-                  debugger
-                  const { path, height, width } = res
-                  imgInfo = { size, path, height, width }
-                }
+              const { path, height, width, type, size } = res
+              this.reListData({
+                item: {
+                  dragId: randomStr(),
+                  images: path,
+                  height,
+                  width,
+                  type,
+                  size,
+                },
+                type: 'add'
               })
-            })
-          })
-          tempFilePaths.forEach((item, i) => {
-            this.reListData({
-              item: {
-                dragId: randomStr(),
-                images: item
-              },
-              type: 'add'
             })
           })
         }

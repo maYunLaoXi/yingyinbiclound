@@ -11,7 +11,7 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   const { page = 1, pageSize = 16, imageView = '' } = event
 
-  // 查询所有活动
+  // 查询所有活动 联表查询
   const activities = await db.collection('activity').aggregate()
     .lookup({
       from: 'activity-data',
@@ -36,7 +36,7 @@ function handleList(list, imageView) {
   list.forEach(item => {
     const newList = []
     item.list.forEach(ele => {
-      const { activity_id, address, title, article, check, show, _id } = ele
+      const { activity_id, address, title, article, check, show, _id, showReceive } = ele
       newList.push({
         activity_id,
         _id,
@@ -45,7 +45,8 @@ function handleList(list, imageView) {
         show,
         check,
         address,
-        photo: ele.photo[0]
+        photo: ele.photo[0],
+        showReceive,
       })
     })
     item.list = newList
