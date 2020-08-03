@@ -71,10 +71,10 @@ Page({
     })
   },
   toImageShow(e) {
-    const id = e.currentTarget.dataset.id
+    const { id, show = -1 } = e.currentTarget.dataset
     app.globalData.imgShowUser = app.globalData.userInfo
     wx.navigateTo({
-      url: '/pages/image-show/image-show?id=' + id,
+      url: `/pages/image-show/image-show?id=${id}&show=${show}`,
     })
   },
   /**

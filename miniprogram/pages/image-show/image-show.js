@@ -14,8 +14,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const { id } = options
-    if(id) this.getImages(id)
+    const { id, show } = options
+
+    if(id) this.getImages(id, Number(show))
     const { imgShowUser } = app.globalData
     this.setData({
       userInfo: imgShowUser
@@ -24,7 +25,7 @@ Page({
   /**
    * 获取图片数据
    */
-  getImages(_id) {
+  getImages(_id, show) {
     wx.cloud.callFunction({
       name: 'db-collection-id-get',
       data: {
@@ -32,8 +33,12 @@ Page({
         _id
       }
     }).then(res => {
+      let data = res.result.data
+      if(show !== -1){
+        data = res.result.data.showReceive[show]
+      }
       this.setData({
-        data: res.result.data
+        data: data
       })
     })
   },

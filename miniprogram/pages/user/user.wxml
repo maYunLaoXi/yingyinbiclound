@@ -46,6 +46,7 @@
           </van-tab>
           <van-tab title="活动">
             <scroll-view style="height: {{contentHeight}}" class="act-body" scroll-y="true">
+            <!--每期活动 -->
               <view class="act-card" wx:for="{{activityList}}" wx:key="actName">
                 <view class="yin-cell">
                   <view class="yin-cell__title">
@@ -54,20 +55,34 @@
                   </view>
                   <view class="van-cell__value panel-index--van-panel__header-value">{{item.open ? '进行中' : '已结束'}}</view>
                 </view>
-                
-                <view class="yin-card" wx:for="{{item.list}}" wx:for-item="listItem" wx:for-index="listIndex" wx:key="_id">
-                  <view class="yin-card-content">
-                    <view class="yin-card__thumb">
-                      <image class="yin-card__img" src="{{listItem.photo.url + '?imageView2/1/h/100'}}" mode="aspectFill" bindtap="toImageShow" data-id="{{listItem._id}}"></image>
-                    </view>
-                    <view class="yin-card__content">
-                      <view class="yin-card__title">{{listItem.title}}</view>
-                      <view class="yin-card__desc">{{listItem.article}}</view>
-                      <view class="text-gray text-sm">
-                        <text class="cuIcon-appreciatefill margin-lr-xs"></text>
+                <view class="act-container" wx:for="{{item.list}}" wx:for-item="listItem" wx:for-index="listIndex" wx:key="_id">
+                  <!-- 每期活动上传的作品 -->
+                  <view class="yin-card">
+                    <view class="yin-card-content">
+                      <view class="yin-card__thumb">
+                        <image class="yin-card__img" src="{{listItem.photo.url + '?imageView2/1/h/100'}}" mode="aspectFill" bindtap="toImageShow" data-id="{{listItem._id}}"></image>
+                      </view>
+                      <view class="yin-card__content">
+                        <view class="yin-card__title">{{listItem.title}}</view>
+                        <view class="yin-card__desc">{{listItem.article}}</view>
+                        <view class="text-gray text-sm">
+                          <text class="cuIcon-appreciatefill margin-lr-xs"></text>
+                        </view>
                       </view>
                     </view>
                   </view>
+                  <view class="yin-card yin-card-xs" wx:for="{{listItem.showReceive}}" wx:for-item="receiveItem" wx:for-index="receiveIndex" wx:key="receiveIndex">
+                    <view class="yin-card-content yin-card-content-xs">
+                      <view class="yin-card__thumb yin-card__thumb-xs">
+                        <image class="yin-card__img-xs" src="{{receiveItem.photo[0].url + '?imageView2/1/h/100'}}" mode="aspectFill" bindtap="toImageShow" data-id="{{listItem._id}}" data-show="{{receiveIndex}}"></image>
+                      </view>
+                      <view class="yin-card__content yin-card__content-xs">
+                        <view class="yin-card__title yin-card__title-xs">{{receiveItem.title}}</view>
+                        <view class="yin-card__desc yin-card__desc-xs">{{receiveItem.article}}</view>
+                      </view>
+                    </view>
+                  </view>
+                    
                 </view>
                 <!-- <view  wx:if="{{item.showReceive}}" class="yin-card">
                   <view class="yin-card-content">

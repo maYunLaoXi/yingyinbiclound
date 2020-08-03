@@ -64,8 +64,9 @@ export const qinuiUpload = async ({ path, photoClass = 'other', dragId = 'dragId
   })
   await Promise.all(all).then(res => {
     res.forEach(item => {
-      item.images = src + '/' + item.key
+      item.url = src + '/' + item.key
       delete item.key
+      delete item.images
       imgList.push(item)
     })
   })
