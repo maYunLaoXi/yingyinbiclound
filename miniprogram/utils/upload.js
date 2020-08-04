@@ -33,6 +33,7 @@ export const uploadToCloud = (list, path) => {
  * @param {String} dragId 当path是string类型时用到
  * @param {String} imageView 设定返回值的url处理方式
  * @param {Boolean}   isPublic 是否公开图片（会进行七牛增量审核）
+ * @returns {Object} { width, hieght, url, size}
  */
 export const qinuiUpload = async ({ path, photoClass = 'other', dragId = 'dragId', imageView = '?imageView2/2/w/200/h/270', isPublic = true } = {}) => {
   if(!path)return
@@ -57,7 +58,6 @@ export const qinuiUpload = async ({ path, photoClass = 'other', dragId = 'dragId
       secondName = '.png'
     }
     let key = `${isPublic ? 'public' : ''}/${photoClass}/${item.dragId + randomStr() + secondName}`
-    debugger
     all.push(
       wxUploadFile(item, url, key, token)
     )
@@ -108,6 +108,5 @@ export const getQinuiToken = async () => {
     name: 'qiniu-upload',
     data: {}
   })
-  debugger
   return token.result.uptoken
 }

@@ -71,11 +71,12 @@ Page({
     })
   },
   toImageShow(e) {
-    const { id, show = -1, hideShowBtn = false} = e.currentTarget.dataset
+    const { id, show, hideShowBtn, activityId = '' } = e.currentTarget.dataset
+    const collection = show ? 'activity-receive' : 'activity-data'
     
     app.globalData.imgShowUser = app.globalData.userInfo
     wx.navigateTo({
-      url: `/pages/image-show/image-show?id=${id}&show=${show}&hideShowBtn=${hideShowBtn}`,
+      url: `/pages/image-show/image-show?id=${id}&collection=${collection}&hideShowBtn=${hideShowBtn}&activity_id=${activityId}`,
     })
   },
   /**
@@ -89,7 +90,7 @@ Page({
         logged: true,
         isUser:true,
       })
-      this.getImageList()
+      // this.getImageList()
       this.getActivityList()
       return
     }
@@ -116,7 +117,7 @@ Page({
         debugger
       }
     })
-    this.getImageList()
+    // this.getImageList()
     this.getActivityList()
   },
   /**

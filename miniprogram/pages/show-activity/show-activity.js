@@ -11,7 +11,8 @@ Page({
     imageList: [],
     article: '',
     title: '',
-    isOpenShow: false
+    isOpenShow: false,
+    isHideUserInfo: false
   },
 
   /**
@@ -39,34 +40,47 @@ Page({
   },
   // switch 
   ifOpenShow(e) {
+    const name = e.currentTarget.dataset.isHideUserInfo ? 'isHideUserInfo' : 'isOpenShow'
     this.setData({
-      isOpenShow: e.detail.value
+      [name]: e.detail.value
     })
   },
   upload() {
-    const { options, imageList, title, article, isOpenShow } = this.data
+    const { options, imageList, title, article, isOpenShow, isHideUserInfo } = this.data
+    if(!title && !article && !imageList.length){
+
+      return
+    }
     qinuiUpload({
       path: imageList,
       photoClass: 'activity'
     }).then(res => {
       console.log(res)
+      const db = wx.cloud.database()
+
       res.forEach(item => {
         delete item.dragId
       })
-      wx.cloud.callFunction({
-        name: 'activity-update', 
+      db.collection('activity-receive').add({
+        // data 字段表示需新增的 JSON 数据
         data: {
-          _id: options._id,
-          data: {
-            showReceive: [{ photo: res, title, article, show: isOpenShow }]
-          },
-          method: 'unshift'
+          createTime: db.serverDate(), // 务服器产生时间
+          activity_id: options.activity_id, // 活动id
+          data_id: options._id, // 作品id
+          photo: res,
+          title,
+          article,
+          show:isOpenShow,
+          isHideUserInfo,
         }
-      }).then(res => {
-        debugger
-      }).catch(err => {
-        debugger
       })
+      .then(res => {
+        console.log(res)
+        wx.switchTab({
+          url: '/pages/user/user'
+        })
+      })
+      .catch(console.error)
     })
   }
 })

@@ -60,7 +60,7 @@
                   <view class="yin-card">
                     <view class="yin-card-content">
                       <view class="yin-card__thumb">
-                        <image class="yin-card__img" src="{{listItem.photo.url + '?imageView2/1/h/100'}}" mode="aspectFill" bindtap="toImageShow" data-id="{{listItem._id}}"></image>
+                        <image class="yin-card__img" src="{{listItem.photo.url + '?imageView2/1/h/100'}}" mode="aspectFill" bindtap="toImageShow" data-id="{{listItem._id}}" data-activity-id="{{listItem._id}}"></image>
                       </view>
                       <view class="yin-card__content">
                         <view class="yin-card__title">{{listItem.title}}</view>
@@ -74,7 +74,7 @@
                   <view class="yin-card yin-card-xs" wx:for="{{listItem.showData}}" wx:for-item="receiveItem" wx:for-index="receiveIndex" wx:key="receiveIndex">
                     <view class="yin-card-content yin-card-content-xs">
                       <view class="yin-card__thumb yin-card__thumb-xs">
-                        <image class="yin-card__img-xs" src="{{receiveItem.photo[0].url + '?imageView2/1/h/100'}}" mode="aspectFill" bindtap="toImageShow" data-id="{{listItem._id}}" data-show="{{receiveIndex}}" data-hide-show-btn></image>
+                        <image class="yin-card__img-xs" src="{{receiveItem.photo[0].url + '?imageView2/1/h/100'}}" mode="aspectFill" bindtap="toImageShow" data-id="{{receiveItem._id}}" data-show data-hide-show-btn></image>
                       </view>
                       <view class="yin-card__content yin-card__content-xs">
                         <view class="yin-card__title yin-card__title-xs">{{receiveItem.title}}</view>

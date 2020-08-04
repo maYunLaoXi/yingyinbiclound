@@ -135,6 +135,13 @@
 					"id": -1,
 					"name": "pages/show-activity/show-activity",
 					"pathName": "pages/show-activity/show-activity",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/image-show/image-show",
+					"pathName": "pages/image-show/image-show",
 					"scene": null
 				}
 			]
