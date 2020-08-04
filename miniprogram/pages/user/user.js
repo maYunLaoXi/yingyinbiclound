@@ -71,10 +71,11 @@ Page({
     })
   },
   toImageShow(e) {
-    const { id, show = -1 } = e.currentTarget.dataset
+    const { id, show = -1, hideShowBtn = false} = e.currentTarget.dataset
+    
     app.globalData.imgShowUser = app.globalData.userInfo
     wx.navigateTo({
-      url: `/pages/image-show/image-show?id=${id}&show=${show}`,
+      url: `/pages/image-show/image-show?id=${id}&show=${show}&hideShowBtn=${hideShowBtn}`,
     })
   },
   /**
@@ -148,7 +149,7 @@ Page({
     })
   },
   moving(e) {
-    console.log(e.detail.y)
+    // console.log(e.detail.y)
 
     if(e.detail.y <= 0) {
       const { systemInfo } = app.globalData

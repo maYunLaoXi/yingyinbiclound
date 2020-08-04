@@ -5,7 +5,7 @@
     <image class="user-avatar" src="{{userInfo.avatarUrl}}" />
     <text class="name">{{userInfo.nickName}}</text>
   </view>
-  <button class="cu-btn round line-red" bindtap="goShowActivity">发show</button>
+  <button wx:if="{{!hideShowBtn}}" class="cu-btn round line-red" bindtap="goShowActivity">发show</button>
 </view>
 <view class="text">
   <view class="title">{{data.title}}</view>

@@ -3,7 +3,7 @@
  */
 const cloud = require('wx-server-sdk')
 
-cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV })
+cloud.init({ env: 'development-zgtnu' })
 const db = cloud.database()
 
 // 云函数入口函数
@@ -18,7 +18,17 @@ exports.main = async (event, context) => {
       localField: '_id',
       foreignField: 'activity_id',
       as: 'list'
-    }).end()
+    })
+    .sort({
+      uploadTime: -1, // 降序(从大到小)
+    })
+    .lookup({ // 查第三个表，不知怎么加在上面的list里，记录在receiveData中再作处理
+      from: 'activity-receive',
+      localField: 'list._id',
+      foreignField: 'data_id',
+      as: 'receiveData'
+    })
+    .end()
   const result =  handleList(activities.list, imageView)
   return {
     data: result
@@ -31,12 +41,14 @@ exports.main = async (event, context) => {
  * @param {String} imageView 七牛云图片URL的处理
  */
 function handleList(list, imageView) {
-  debugger
   if(!list || list.length === 0) return []
   list.forEach(item => {
+    //  收到的show
+    const { receiveData } = item
     const newList = []
     item.list.forEach(ele => {
       const { activity_id, address, title, article, check, show, _id, showReceive } = ele
+      let showData = receiveData.filter(showItem => showItem.data_id === ele._id)
       newList.push({
         activity_id,
         _id,
@@ -47,9 +59,10 @@ function handleList(list, imageView) {
         address,
         photo: ele.photo[0],
         showReceive,
+        showData,
       })
     })
-    item.list = newList
+    item.list = newList.reverse()
   })
   return list
 }

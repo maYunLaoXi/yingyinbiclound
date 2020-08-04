@@ -7,19 +7,22 @@ Page({
    */
   data: {
     data: {},
-    userInfo: {}
+    userInfo: {},
+    hideShowBtn: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const { id, show } = options
-
+    const { id, show, hideShowBtn } = options
+    let btn = hideShowBtn !== 'false'
+    debugger
     if(id) this.getImages(id, Number(show))
     const { imgShowUser } = app.globalData
     this.setData({
-      userInfo: imgShowUser
+      userInfo: imgShowUser,
+      hideShowBtn: btn
     })
   },
   /**
@@ -35,7 +38,7 @@ Page({
     }).then(res => {
       let data = res.result.data
       if(show !== -1){
-        data = res.result.data.showReceive[show]
+        data = res.result.data.showData[show]
       }
       this.setData({
         data: data

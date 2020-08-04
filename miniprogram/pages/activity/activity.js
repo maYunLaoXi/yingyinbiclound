@@ -108,6 +108,7 @@ Page({
         }
       }
     }).then(res => {
+      debugger
       const {data, page, totalPage} = res.result;
       if(!data.length) return
       const newData =  []

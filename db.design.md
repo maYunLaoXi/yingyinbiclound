@@ -50,15 +50,16 @@
 | time        |       | 创建时间       |                |
 | photo       |       | 参与图片       |                |
 | article     |       | 内容（选填）   |                |
-| showReceive | Object | 活动接收的内容 |                 |
+| showReceive | Array | 活动接收的内容表里的相应_id |                 |
 
-### 活动“买家秀”`showReceive`
+### 活动“买家秀”`show-receive`
 
-些处为`activity-data`的 showReceive 字段
-
-| 字段    | 类型 | 中文                 | 例子 |
-| ------- | ---- | -------------------- | ---- |
-| article |      | 内容（选填）         |      |
-| show    |      | 是否可展示           |      |
-| photo   |      | 参与图片(可以直接拍) |      |
+| 字段        | 类型 | 中文                   | 例子 |
+| ----------- | ---- | ---------------------- | ---- |
+| article     |      | 内容（选填）           |      |
+| show        |      | 是否可展示             |      |
+| photo       |      | 参与图片(可以直接拍)   |      |
+| activity_id |      | 活动的id               |      |
+| data_id     |      | Activity-data 的_id    |      |
+| hideUser    |      | 展示是是否隐藏用户信息 |      |
 
