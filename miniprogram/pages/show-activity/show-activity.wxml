@@ -36,4 +36,4 @@
 <view class="padding flex flex-direction">
   <button class="cu-btn bg-red margin-tb-sm round lg" bind:tap="upload">提交</button>
 </view>
-<upload-toast></upload-toast>
+<upload-toast wx:if="{{uploading}}" total="{{total}}" progress="{{progress}}" ></upload-toast>

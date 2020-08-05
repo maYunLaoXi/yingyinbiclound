@@ -8,22 +8,31 @@
   display: flex;
   background-color: rgba(0, 0, 0, .3);
 }
-.wave {
-  margin: auto;
-  position: relative;
-  align-items: center;
-  height: 300px;
-  width: 40vw;
-  margin-top: 200px;
-  /* background-color: #ec6461; */
-  overflow: hidden;
-  display: flex;
-  border: 1px red solid;
+.wave-box{
   color: #ffff;
   font-size: 2em;
+  margin: auto;
+  height: 300px;
+  width: 40vw;
+  border: 1px red solid;
+  position: relative;
+  overflow: hidden;
+}
+.wave {
+  position: absolute;
+  align-items: center;
+  bottom: 0px;
+  width: 100%;
+  height: 84px;
+  overflow: hidden;
+  display: flex;
 }
 .text{
-  margin: auto;
+  width: 100%;
+  text-align: center;
+  top: 50%;
+  position: absolute;
+  z-index: 3;
 }
 .progerss{
   width: 100%;
@@ -31,6 +40,7 @@
   position: absolute;
   left: 0;
   bottom: 5px;
+  z-index: 3;
 }
 .before,
 .after {
@@ -43,15 +53,21 @@
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
-
+.color-bg{
+  height: 10px;
+  position: absolute;
+  bottom: 0%;
+  background-color: #ec6461;
+  width: 100%;
+}
 .before {
-  top: 32vh;
+  top: 88px;
   border-radius: 38%;
   animation-duration: 10s;
 }
 
 .after {
-  top: 28vh;
+  top: 63px;
   opacity: 0.5;
   border-radius: 44%;
   animation-duration: 10s;

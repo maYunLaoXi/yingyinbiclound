@@ -1,10 +1,13 @@
 <!--pages/components/upload-toast/upload-toast.wxml-->
 <!-- 上传提示组件 -->
 <view class="wrap">
-  <view class="wave">
-    <view class="before"></view>
-    <view class="after"></view>
+  <view class="wave-box">
+    <view class="wave" style="bottom: {{totalProgerss}}%">
+      <view class="before"></view>
+      <view class="after"></view>
+    </view>
     <view class="text">{{now}}/{{total}}</view>
-    <view class="progerss">{{progress}}%</view>
+    <view class="progerss">{{totalProgerss}}%</view>
+    <view class="color-bg" style="height: {{totalProgerss}}%"></view>
   </view>
 </view>

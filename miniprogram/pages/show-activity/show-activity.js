@@ -12,7 +12,11 @@ Page({
     article: '',
     title: '',
     isOpenShow: false,
-    isHideUserInfo: false
+    isHideUserInfo: false,
+    // upload提示 
+    uploading: 0,
+    progress: 0,
+    total: 0,
   },
 
   /**
@@ -48,14 +52,19 @@ Page({
   upload() {
     const { options, imageList, title, article, isOpenShow, isHideUserInfo } = this.data
     if(!title && !article && !imageList.length){
-
       return
     }
+    this.setData({
+      uploading: 1,
+      total: imageList.length,
+    })
     qinuiUpload({
       path: imageList,
-      photoClass: 'activity'
+      photoClass: 'activity',
+      progress: this.uploadProgerss
     }).then(res => {
       console.log(res)
+      this.uploading = 0
       const db = wx.cloud.database()
 
       res.forEach(item => {
@@ -81,6 +90,12 @@ Page({
         })
       })
       .catch(console.error)
+    })
+  },
+  uploadProgerss(progress) {
+    console.log(progress)
+    this.setData({
+      progress,
     })
   }
 })

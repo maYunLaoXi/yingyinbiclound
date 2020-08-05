@@ -35,7 +35,7 @@ export const uploadToCloud = (list, path) => {
  * @param {Boolean}   isPublic 是否公开图片（会进行七牛增量审核）
  * @returns {Object} { width, hieght, url, size}
  */
-export const qinuiUpload = async ({ path, photoClass = 'other', dragId = 'dragId', imageView = '?imageView2/2/w/200/h/270', isPublic = true } = {}) => {
+export const qinuiUpload = async ({ path, photoClass = 'other', dragId = 'dragId', imageView = '?imageView2/2/w/200/h/270', isPublic = true, progress: progerssCb } = {}) => {
   if(!path)return
   const url = 'https://up-z2.qiniup.com' // 华南地址
   const src = 'http://img.yingyinbi.com' // 云加速地址
@@ -59,7 +59,7 @@ export const qinuiUpload = async ({ path, photoClass = 'other', dragId = 'dragId
     }
     let key = `${isPublic ? 'public' : ''}/${photoClass}/${item.dragId + randomStr() + secondName}`
     all.push(
-      wxUploadFile(item, url, key, token)
+      wxUploadFile(item, url, key, token, progerssCb)
     )
   })
   await Promise.all(all).then(res => {
@@ -73,11 +73,11 @@ export const qinuiUpload = async ({ path, photoClass = 'other', dragId = 'dragId
   return imgList
 }
 
-export const wxUploadFile = (imageObj, url, key, token) => {
+export const wxUploadFile = (imageObj, url, key, token, progerssCb) => {
   const filePath = imageObj.images
 
   return new Promise((resolve, reject) => {
-    const progerss = wx.uploadFile({
+    const progress = wx.uploadFile({
       url,
       filePath,
       name: 'file',
@@ -94,8 +94,9 @@ export const wxUploadFile = (imageObj, url, key, token) => {
         resolve(imageObj)
       }
     })
-    progerss.onProgressUpdate(res => {
+    progress.onProgressUpdate(res => {
       console.log(res)
+      progerssCb && progerssCb(res.progress)
     })
   })
 }
