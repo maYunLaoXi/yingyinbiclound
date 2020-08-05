@@ -5,3 +5,12 @@
   flex-direction: row;
   justify-content: space-between;
 }
+.images-row:nth-child(2n) image:nth-child(1),  .images-row:nth-child(2n+1) image:nth-child(2){
+  /* background-color: rgb(190, 190, 190); */
+  background-color: rgba(230, 86, 109, .2);
+}
+.images-row:nth-child(2n+1) image:nth-child(1),  .images-row:nth-child(2n) image:nth-child(2){
+  /* background-color: rgb(130, 130, 130); */
+  background-color: rgba(234, 125, 123, .2);
+}
+/* rgb(191, 176, 129) */

@@ -1,0 +1,10 @@
+<!--pages/components/upload-toast/upload-toast.wxml-->
+<!-- 上传提示组件 -->
+<view class="wrap">
+  <view class="wave">
+    <view class="before"></view>
+    <view class="after"></view>
+    <view class="text">{{now}}/{{total}}</view>
+    <view class="progerss">{{progress}}%</view>
+  </view>
+</view>
