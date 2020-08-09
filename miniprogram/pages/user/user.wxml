@@ -41,7 +41,7 @@
         <van-tabs swipeable>
           <van-tab title="作品">
             <scroll-view style="height: {{contentHeight}}" scroll-y="true">
-              <photos-comp image-list="{{imageList}}" />
+              <photos-comp image-list="{{imageList}}" bind:cliImage="clickUserImage" />
             </scroll-view>
           </van-tab>
           <van-tab title="活动">
@@ -60,7 +60,7 @@
                   <view class="yin-card">
                     <view class="yin-card-content">
                       <view class="yin-card__thumb">
-                        <image class="yin-card__img" src="{{listItem.photo.url + '?imageView2/1/h/100'}}" mode="aspectFill" bindtap="toImageShow" data-id="{{listItem._id}}" data-activity-id="{{listItem._id}}"></image>
+                        <image class="yin-card__img" src="{{listItem.photo.url + '?imageView2/1/h/100'}}" mode="aspectFill" bindtap="toImageShow" data-item="{{listItem}}" data-id="{{listItem._id}}" data-activity-id="{{listItem._id}}"></image>
                       </view>
                       <view class="yin-card__content">
                         <view class="yin-card__title">{{listItem.title}}</view>

@@ -44,7 +44,7 @@ App({
         },
         {
           nameCh: '后期',
-          nameEn: 'afterShoot',
+          nameEn: 'aftershoot',
           page: ''
         },
         {

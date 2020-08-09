@@ -10,6 +10,10 @@ Page({
     title: '',
     article: '',
     isShow: false,
+    // upload提示 
+    uploading: 0,
+    progress: 0,
+    total: 0,
   },
   onLoad(){
     const { address } = app.globalData.userInfo
@@ -70,11 +74,48 @@ Page({
       })
       return
     }
-    this.showToast()
+
+    // this.showToast()
+    this.setData({
+      uploading: 1,
+      total: imgList.length
+    })
     qinuiUpload({
       path: imgList,
       photoClass: 'activity' + actName,
+      progress: this.uploadProgerss
     }).then(res => {
+      debugger
+      const db = wx.cloud.database()
+
+      db.collection('activity-data').add({
+        data: {
+          createTime: db.serverDate(),
+          name,
+          actName,
+          version,
+          show: isShow,
+          photo: res,
+          address,
+          title,
+          article,
+          activity_id: _id,
+          check: true,
+          start: []
+        }
+      }).then(res => {
+        debugger
+        wx.showModal({
+          content: '图片已快马送达作者手中，请留意接下来的小程序和公众号消息',
+          showCancel: false,
+          success (res) {
+            wx.navigateBack()
+          }
+        })
+
+      }).catch(err => console.log(err))
+      return
+
       wx.cloud.callFunction({
         name: 'activity-join',
         data: {
@@ -93,13 +134,6 @@ Page({
       }).then(res => {
         debugger
         Toast.clear()
-        wx.showModal({
-          content: '图片已快马送达作者手中，请留意接下来的小程序和公众号消息',
-          showCancel: false,
-          success (res) {
-            wx.navigateBack()
-          }
-        })
       })
     })
 
@@ -127,5 +161,12 @@ Page({
         });
       }
     });
+  },
+  // 七牛上传进度
+  uploadProgerss(progress) {
+    console.log(progress)
+    this.setData({
+      progress,
+    })
   }
 })

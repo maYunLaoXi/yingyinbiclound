@@ -29,3 +29,4 @@
   <button class="cu-btn bg-red margin-tb-sm round lg" bind:tap="upload">提交</button>
 </view>
 <van-toast id="van-toast" />
+<upload-toast wx:if="{{uploading}}" total="{{total}}" progress="{{progress}}" ></upload-toast>

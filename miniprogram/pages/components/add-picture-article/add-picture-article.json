@@ -2,6 +2,8 @@
   "usingComponents": {
     "navigation-bar": "../navigation-bar/navigation-bar",
     "drag-comp": "../../components/drag",
-    "van-toast": "vant-weapp/toast/index"
+    "van-toast": "vant-weapp/toast/index",
+    "add-image-comp": "/pages/components/add-image-comp/add-image-comp",
+    "upload-toast": "/pages/components/upload-toast/upload-toast"
   }
 }

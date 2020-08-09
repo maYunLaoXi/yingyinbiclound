@@ -67,9 +67,6 @@ Page({
       this.uploading = 0
       const db = wx.cloud.database()
 
-      res.forEach(item => {
-        delete item.dragId
-      })
       db.collection('activity-receive').add({
         // data 字段表示需新增的 JSON 数据
         data: {
@@ -80,6 +77,7 @@ Page({
           title,
           article,
           show:isOpenShow,
+          check: true,
           isHideUserInfo,
         }
       })

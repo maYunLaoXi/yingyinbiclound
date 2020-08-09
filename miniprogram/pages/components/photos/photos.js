@@ -27,6 +27,9 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    handleTapImg(e) {
+      const { item } = e.currentTarget.dataset
+      this.triggerEvent('cliImage', item)
+    }
   }
 })

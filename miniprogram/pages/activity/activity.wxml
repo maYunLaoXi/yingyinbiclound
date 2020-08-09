@@ -78,10 +78,10 @@
     </view>
   </view>
   <view style="display: {{1==TabCur ? 'block' : 'none'}}" class="bg-white">
-    <waterfall-com image-list="{{imageShow}}" />
+    <waterfall-com image-list="{{imageJoin}}" bindimg="toImageShowNav" name="activity-data" />
   </view>
   <view style="display: {{2==TabCur ? 'block' : 'none'}}">
-    <!-- <waterfall-com /> -->
+    <waterfall-com image-list="{{imageShow}}" bindimg="toImageShowNav" name="activity-show" />
   </view>
 </scroll-view>
 

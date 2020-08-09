@@ -25,6 +25,11 @@ Component({
     sourceType: {
       type: Array,
       value: ['album']
+    },
+    // 是否加载完页面后立即打开相册
+    onLoadChoose: {
+      type: Boolean,
+      value: false
     }
   },
 
@@ -54,7 +59,12 @@ Component({
   lifetimes: {
     ready() {
       this.drag = this.selectComponent('#drag');
-    }
+
+      if(this.data.onLoadChoose) {
+        this.wxChooseImage()
+      }
+    },
+
   },
   /**
    * 组件的方法列表

@@ -1,10 +1,14 @@
 // miniprogram/pages/component/portrait/portrait.js
+const app = getApp()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    className: '',
+    imageList: [],
     imageBox: [
       {
         position: 'left',
@@ -23,11 +27,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    debugger
+    this.setData({
+      className: options['class-name']
+    })
     this.getData()
   },
 
   getData(page = 1) {
-    const { nowPage, totalPage } = this.data
+    const { nowPage, totalPage, className = 'portrait' } = this.data
     if(nowPage === totalPage)return
     // 这是一个异步
     const heightArr = this.getHeighter()
@@ -35,12 +43,17 @@ Page({
     wx.cloud.callFunction({
       name: 'page-list',
       data: {
-        collection: 'photographyClass',
-        className: 'portrait',
+        collection: 'photography-class',
+        className,
         page: page,
         pageSize: 9
       }
     }).then(res => {
+      const { imageList } = this.data
+      this.setData({
+        imageList: imageList.concat(res.result.data)
+      })
+      return
       const [leftNum, rightNum] = heightArr
       const { result } = res
       const revResult = result.data
@@ -62,7 +75,14 @@ Page({
       })
     })
   },
-
+  // 点击查看图片
+  toImageShowNav(e) {
+    const { item, name } = e.detail
+    app.globalData.imageShowData = item
+    wx.navigateTo({
+      url: `/pages/image-show/image-show?from=${name}`
+    })
+  },
   getHeighter() {
     const arr = []
     //创建节点选择器

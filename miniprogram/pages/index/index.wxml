@@ -16,7 +16,8 @@
 </view> 
 
 <view class="main">
-  <view>
+  <class-swiper />
+  <!-- <view>
     <text class="main-title">标签</text>
     <swiper 
       display-multiple-items="3"
@@ -33,7 +34,7 @@
         </swiper-item>
       </block>
     </swiper>
-  </view>
+  </view> -->
 
   <view class="activity" bindtap="toActivity">
     <van-panel title="免费晒相4.0" desc="你的照片我来晒" status="进行中" >

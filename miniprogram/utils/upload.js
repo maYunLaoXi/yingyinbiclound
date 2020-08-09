@@ -35,7 +35,7 @@ export const uploadToCloud = (list, path) => {
  * @param {Boolean}   isPublic 是否公开图片（会进行七牛增量审核）
  * @returns {Object} { width, hieght, url, size}
  */
-export const qinuiUpload = async ({ path, photoClass = 'other', dragId = 'dragId', imageView = '?imageView2/2/w/200/h/270', isPublic = true, progress: progerssCb } = {}) => {
+export const qinuiUpload = async ({ path, photoClass = 'other', dragId = 'dragId', imageView = '?imageView2/2/w/200/h/270', isPublic = true, progress: progerssCb, removeDragId = true } = {}) => {
   if(!path)return
   const url = 'https://up-z2.qiniup.com' // 华南地址
   const src = 'http://img.yingyinbi.com' // 云加速地址
@@ -67,6 +67,7 @@ export const qinuiUpload = async ({ path, photoClass = 'other', dragId = 'dragId
       item.url = src + '/' + item.key
       delete item.key
       delete item.images
+      if(removeDragId) delete item.dragId
       imgList.push(item)
     })
   })

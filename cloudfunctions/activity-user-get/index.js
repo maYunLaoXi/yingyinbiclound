@@ -19,8 +19,20 @@ exports.main = async (event, context) => {
       foreignField: 'activity_id',
       as: 'list'
     })
+    .lookup({
+      from: 'photography-class',
+      localField: '_id',
+      foreignField: 'activity.activity_id',
+      as: 'listClass'
+    })
     .sort({
-      uploadTime: -1, // 降序(从大到小)
+      createTime: -1, // 降序(从大到小)
+    })
+    .lookup({
+      from: 'activity-receive',
+      localField: 'listClass._id',
+      foreignField: 'data_id',
+      as: 'listClassReceive'
     })
     .lookup({ // 查第三个表，不知怎么加在上面的list里，记录在receiveData中再作处理
       from: 'activity-receive',
@@ -30,6 +42,7 @@ exports.main = async (event, context) => {
     })
     .end()
   const result =  handleList(activities.list, imageView)
+
   return {
     data: result
   }
@@ -43,26 +56,35 @@ exports.main = async (event, context) => {
 function handleList(list, imageView) {
   if(!list || list.length === 0) return []
   list.forEach(item => {
-    //  收到的show
-    const { receiveData } = item
-    const newList = []
-    item.list.forEach(ele => {
-      const { activity_id, address, title, article, check, show, _id, showReceive } = ele
-      let showData = receiveData.filter(showItem => showItem.data_id === ele._id)
-      newList.push({
-        activity_id,
-        _id,
-        article,
-        title,
-        show,
-        check,
-        address,
-        photo: ele.photo[0],
-        showReceive,
-        showData,
-      })
-    })
+    const { list: listOrg, listClass, receiveData, listClassReceive } = item
+    let newList = [...mapData(listOrg, receiveData, false), ...mapData(listClass, listClassReceive, true)]
+    debugger
     item.list = newList.reverse()
+    delete item.listClass
+    delete item.receiveData
+    delete item.listClassReceive
+  })
+  return list
+}
+function mapData(data, receive, isClass) {
+  const list = []
+  data.forEach(item => {
+    const { title, article, check, show, _id } = item
+    const address = isClass ? item.activity.address : item.address
+    const activity_id = isClass ? item.activity.activity_id : item.activity_id
+    const showData = receive.filter(showItem => showItem.data_id === _id)
+    list.push({
+      _id,
+      article,
+      title,
+      show,
+      check,
+      photo: item.photo[0],
+      showData,
+      address,
+      activity_id,
+      fromPhotoClass: isClass,
+    })
   })
   return list
 }

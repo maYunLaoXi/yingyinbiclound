@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "navigation-bar": "../navigation-bar/navigation-bar",
-    "class-swiper": "../class-swiper/class-swiper"
+    "class-swiper": "../class-swiper/class-swiper",
+    "waterfall-com": "/pages/components/waterfall/waterfall"
   },
   "onReachBottomDistance": 300
 }

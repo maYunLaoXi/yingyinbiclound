@@ -9,8 +9,8 @@
       <block wx:for="{{class}}" wx:key="index">
         <swiper-item class="s-i2">
           <view class="s-w-2" style="background-image: url({{item.backgroundImg}})">
-            <view bindtap="TagNavigate" class="s-w-2-mask" data-tag-type="{{ item.page }}">
-              #{{item.text}}
+            <view bindtap="TagNavigate" class="s-w-2-mask" data-tag-type="{{ item.nameEn }}">
+              #{{item.nameCh}}
             </view> 
           </view>
         </swiper-item>

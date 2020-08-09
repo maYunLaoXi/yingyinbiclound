@@ -1,5 +1,5 @@
 // miniprogram/pages/user/user.js
-import { matchQiniuUrl, imageView } from '../../utils/index'
+import { matchQiniuUrl, imageView, qinuiUpload } from '../../utils/index'
 const app = getApp()
 
 Page({
@@ -52,11 +52,7 @@ Page({
         getInfo: true
       }
     }).then(res => {
-      const { data } = res.result;
-      app.globalData.userInfo = data.length
-      ? data[0]
-      : userInfo
-      console.log({globalData: app.globalData})
+      app.globalData.userInfo = res.result
     }).catch(err => {
       app.globalData.userInfo = userInfo
     })
@@ -71,8 +67,10 @@ Page({
     })
   },
   toImageShow(e) {
-    const { id, show, hideShowBtn, activityId = '' } = e.currentTarget.dataset
-    const collection = show ? 'activity-receive' : 'activity-data'
+    const { id, show, hideShowBtn, activityId = '', item } = e.currentTarget.dataset
+    let collection = show ? 'activity-receive' : 'activity-data'
+    // 此图片来自photography-class
+    if(item && item.fromPhotoClass) collection = 'photography-class'
     
     app.globalData.imgShowUser = app.globalData.userInfo
     wx.navigateTo({
@@ -117,7 +115,7 @@ Page({
         debugger
       }
     })
-    // this.getImageList()
+    this.getImageList()
     this.getActivityList()
   },
   /**
@@ -131,6 +129,7 @@ Page({
         pageSize
       }
     }).then(res => {
+      debugger
       const { imageList } = this.data
       this.setData({
         imageList: imageList.concat(res.result.data)
@@ -147,6 +146,19 @@ Page({
       this.setData({
         activityList: res.result.data
       })
+    })
+  },
+  // 点击用户作品
+  clickUserImage(e){
+    const item = e.detail
+    this.toImageShow({
+      currentTarget: {
+        dataset: {
+          id: item._id,
+          hideShowBtn: true,
+          item: { fromPhotoClass: true }
+        }
+      }
     })
   },
   moving(e) {

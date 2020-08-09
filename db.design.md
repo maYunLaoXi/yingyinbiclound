@@ -4,6 +4,8 @@
 
 ## 各集合
 
+命名规范： 小驼峰，如果是id，使用_ ,如`_id`，`active_id`
+
 ### 用户集合 `user_info`
 | 字段 | 类型 | 中文 | 例子 |
 | ---- | ---- | ---- | ---- |
@@ -19,6 +21,8 @@
 | wallImg | | 背景图片 | |
 | address | | 用户设定的地址 | |
 | message | |  | |
+| createTime | | | |
+| editTime | | | |
 
 ### 活动`activity`
 
@@ -51,6 +55,8 @@
 | photo       |       | 参与图片       |                |
 | article     |       | 内容（选填）   |                |
 | showReceive | Array | 活动接收的内容表里的相应_id |                 |
+| createTime |  |  | |
+| editTime |  |  | |
 
 ### 活动“买家秀”`show-receive`
 
@@ -62,4 +68,8 @@
 | activity_id |      | 活动的id               |      |
 | data_id     |      | Activity-data 的_id    |      |
 | hideUser    |      | 展示是是否隐藏用户信息 |      |
+| createTime  |      |                        |      |
+| editTime    |      |                        |      |
+| openid      |      |                        |      |
+| check       |      |                        |      |
 

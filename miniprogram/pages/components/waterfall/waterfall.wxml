@@ -8,14 +8,13 @@
         wx:for-index="i"
         wx:for-item="itemObj"
         wx:key="title"
-        bind:tap="showImage"
         data-item-obj="{{itemObj}}"
       >
         <view class="cu-card case">
           <view class="cu-item shadow">
-            <view class="image">
-              <image lazy-load src="{{itemObj.fileID[0]}}" mode="widthFix"></image>
-              <view class="cu-tag bg-black-5" wx:if="{{itemObj.fileID.length > 1}}">{{itemObj.fileID.length}}</view>
+            <view class="image" bind:tap="tapImage" data-item="{{itemObj}}">
+              <image lazy-load src="{{itemObj.photo[0].url + '?imageView2/2/w/600'}}" mode="widthFix"></image>
+              <view class="cu-tag bg-black-5" wx:if="{{itemObj.photo.length > 1}}">{{itemObj.photo.length}}</view>
             </view>
             <view class="cu-list menu-avatar">
               <text class="title">{{itemObj.title}}</text>

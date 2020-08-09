@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "van-panel": "vant-weapp/panel/index",
-    "van-button": "vant-weapp/button"
+    "van-button": "vant-weapp/button",
+    "class-swiper": "/pages/components/class-swiper/class-swiper"
   }
 }

@@ -5,6 +5,7 @@
     <navigation-bar navigation-bar-title-text="影音笔小程序"></navigation-bar>
     <class-swiper />
   </view>
+  <waterfall-com image-list="{{imageList}}" bindimg="toImageShowNav" name="photography-class" />
   <view class="img-wrap">
     <view wx:for="{{imageBox}}" wx:key="position" class="{{item.position}}" >
       <view class="box" id="{{item.position}}">

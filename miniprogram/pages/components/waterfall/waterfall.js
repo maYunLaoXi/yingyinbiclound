@@ -8,6 +8,11 @@ Component({
     // image数组，最好为单数
     imageList: {
       type: Array
+    },
+    // 组件名
+    name: {
+      type: String,
+      value: 'waterFallComp'
     }
   },
   data: {
@@ -98,5 +103,14 @@ Component({
       })
       return Promise.all([promise1, promise2])
     },
+    // 点击图片事件
+    tapImage(e) {
+      /**
+       * 组件间的事件通信 
+       * 第一个参数为 事件，第二个参数为 父组件中e.detail, 第三个参数为 触发事件的选项
+       * see https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/events.html
+       */ 
+      this.triggerEvent('img', { item: e.currentTarget.dataset.item , name: this.data.name})
+    }
   }
 })

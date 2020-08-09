@@ -1,6 +1,6 @@
 <!--pages/components/photos/photos.wxml-->
 <view class="wrap" style="height: {{height}}; overflow-y: scroll">
   <view wx:for="{{imageList}}" wx:key="_id">
-    <image mode="aspectFill" src="{{item.fileID}}"></image>
+    <image mode="aspectFill" src="{{item.photo.url + '?imageView2/2/w/600'}}" bind:tap="handleTapImg" data-item="{{item}}"></image>
   </view>
 </view>

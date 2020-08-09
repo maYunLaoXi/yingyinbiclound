@@ -11,9 +11,14 @@ Page({
     tempFilePaths:[],
     drawerImg1: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/activities/%E6%99%92%E7%9B%B84.0/IMG_0206mohu.jpg?sign=b779ad36004423e6b615052ecfc90b28&t=1572144936',
     TabCur: 0,
+    // imageJoin
+    imageJoin: [],
+    imageJoinPage: 1,
+    imageJoinTotalPage: NaN,
+    // imageShow
     imageShow: [],
     imageShowPage: 1,
-    imageShowTatalPage: NaN
+    imageShowTotalPage: NaN,
   },
 
   //立即参加 
@@ -83,6 +88,7 @@ Page({
         console.log('err', err)
       }
     })
+    this.getJoin()
     this.getShow()
   },
   init(){
@@ -90,12 +96,12 @@ Page({
   },
 
   /**
-   * 精选内容
+   * 精选内容(用户设定公开展示的内容)
    * @param {*} e 
    */
-  getShow({ page = 1, pageSize = 9 } = {}){
-    const { imageShowPage, imageShowTatalPage } = this.data
-    if(imageShowPage === imageShowTatalPage)return
+  getJoin({ page = 1, pageSize = 9 } = {}){
+    const { imageJoinPage, imageJoinTotalPage } = this.data
+    if(imageJoinPage === imageJoinTotalPage)return
     wx.cloud.callFunction({
       name: 'activity-get',
       data: {
@@ -108,21 +114,51 @@ Page({
         }
       }
     }).then(res => {
-      debugger
       const {data, page, totalPage} = res.result;
       if(!data.length) return
-      const newData =  []
-      data.forEach(item => {
-        newData.push({
-          fileID: item.photo,
-          ...item,
-        })
-      })
+
       this.setData({
-        imageShow: newData,
-        imageShowPage: page,
-        imageShowTatalPage: totalPage
+        imageJoin: data,
+        imageJoinPage: page,
+        imageJoinTotalPage: totalPage
       })
+    })
+  },
+  /**
+   *  show内空（买家秀）
+   */
+  getShow({page = 1, pageSize = 9 } = {}) {
+    const { imageShowPage, imageShowTotalPage } = this.data
+    if(imageShowPage === imageShowTotalPage) return
+    wx.cloud.callFunction({
+      name: 'activity-get',
+      data: {
+        collection: 'activity-receive',
+        page,
+        pageSize,
+        where: {
+          check: true,
+          show: true,
+        }
+      }
+    }).then(res => {
+      const { data, page, totalPage } = res.result
+      if(!data.length) return;
+
+      this.setData({
+        imageShow: data,
+        imageShowPage: page,
+        imageShowTotalPage: totalPage
+      })
+    })
+  },
+  // 点击查看图片
+  toImageShowNav(e) {
+    const { item, name } = e.detail
+    debugger
+    app.globalData.imageShowData = item
+    wx.navigateTo({
+      url: `/pages/image-show/image-show?from=${name}`
     })
   },
   /**
@@ -130,15 +166,15 @@ Page({
    */
   onPullDownRefresh: function () {
     this.setData({
-      imageShow: [],
-      imageShowPage: 1,
-      imageShowTatalPage: NaN,
+      imageJoin: [],
+      imageJoinPage: 1,
+      imageJoinTotalPage: NaN,
     })
     this.onLoad()
   },
   onReachBottom() {
     if(this.data.TabCur == 1) {
-      this.getShow({page: this.data.imageShowPage + 1})
+      this.getJoin({page: this.data.imageJoinPage + 1})
     }
   },
 // colorui
