@@ -1,6 +1,6 @@
 // miniprogram/pages/join-activity.js
 const app = getApp()
-import { uploadToCloud, qinuiUpload } from '../../utils/index'
+import { qinuiUpload, msgSecCheck, showToast } from '../../utils/index'
 import Toast from '/vant-weapp/toast/toast.js'
 Page({
   data: {
@@ -49,7 +49,7 @@ Page({
       url: '/pages/address-edit-add/index?redirect=join-activity'
     })
   },
-  upload(){
+  async upload(){
     const { imgList, address, title, article, isShow } = this.data
     const { name, actName, version, _id } = app.globalData.activity
     
@@ -74,67 +74,53 @@ Page({
       })
       return
     }
+    const db = wx.cloud.database()
 
-    // this.showToast()
     this.setData({
       uploading: 1,
       total: imgList.length
     })
-    qinuiUpload({
+    let pass = true, msg = ''
+    if(isShow) {
+      const msgRes = await msgSecCheck(title + article)
+      debugger
+      pass = msgRes.pass
+      msg = msgRes.msg ? msgRes.msg : ''
+    }
+    const uploadedList = await qinuiUpload({
       path: imgList,
       photoClass: 'activity' + actName,
       progress: this.uploadProgerss
-    }).then(res => {
-      debugger
-      const db = wx.cloud.database()
-
-      db.collection('activity-data').add({
-        data: {
-          createTime: db.serverDate(),
-          name,
-          actName,
-          version,
-          show: isShow,
-          photo: res,
-          address,
-          title,
-          article,
-          activity_id: _id,
-          check: true,
-          start: []
-        }
-      }).then(res => {
-        debugger
-        wx.showModal({
-          content: '图片已快马送达作者手中，请留意接下来的小程序和公众号消息',
-          showCancel: false,
-          success (res) {
-            wx.navigateBack()
-          }
-        })
-
-      }).catch(err => console.log(err))
-      return
-
-      wx.cloud.callFunction({
-        name: 'activity-join',
-        data: {
-          name,
-          actName,
-          version,
-          show: isShow,
-          photo: res,
-          address,
-          title,
-          article,
-          activity_id: _id,
-          check: true,
-          showReceive: []
-        }
-      }).then(res => {
-        debugger
-        Toast.clear()
-      })
+    })
+    debugger
+    const dbRes = await db.collection('activity-data').add({
+      data: {
+        createTime: db.serverDate(),
+        name,
+        actName,
+        version,
+        show: isShow,
+        photo: uploadedList,
+        address,
+        title,
+        article,
+        activity_id: _id,
+        check: true,
+        pass,
+        start: []
+      }
+    })
+    debugger
+    let tips = '图片已快马送达作者手中，请留意接下来的小程序和公众号消息'
+    if(isShow && !pass) {
+      tips = msg
+    }
+    wx.showModal({
+      content: tips,
+      showCancel: false,
+      success (res) {
+        wx.navigateBack()
+      }
     })
 
     // 如果没有私有云可使用些方法存在云存储

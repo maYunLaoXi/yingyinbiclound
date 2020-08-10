@@ -1,6 +1,6 @@
 // miniprogram/pages/components/add-picture-article/add-picture-article.js
 const app = getApp()
-import { qinuiUpload } from '../../../utils/index'
+import { qinuiUpload, msgSecCheck, showToast } from '../../../utils/index'
 import Toast from '/vant-weapp/toast/toast.js'
 Page({
   data: {
@@ -10,7 +10,8 @@ Page({
     article: '',
     PhotographyClass: [],
     picClass: null,
-    navigationBar: 'fasfdas',
+    navigationBar: '',
+    pass: false,
 
     // drag组件end
     
@@ -27,7 +28,7 @@ Page({
   getImageList(list) {
     this.setData({ imageList: list.detail })
   },
-  upload() {
+  upload() { 
     const { imageList, picClass } = this.data
     const promiseAll = []
     const classObj = picClass ? picClass : { nameEn: 'other'}
@@ -47,7 +48,7 @@ Page({
       progress: this.uploadProgress
     }).then(res => {
       debugger
-      this.cloudDbUpload({ photo: res, picClass })
+      this.cloudDbUpload({ photo: res, picClass: classObj })
     })
   },
   // 上传进度
@@ -58,9 +59,12 @@ Page({
     })
   },
   // 上传
-  cloudDbUpload({ photo, picClass }){
+  async cloudDbUpload({ photo, picClass }){
+    
     const { title, article, isJoinDevelop, address } = this.data
 
+    let result = await msgSecCheck(title + article)
+    const { pass, msg = '' } = result
     const db = wx.cloud.database()
 
     db.collection('photography-class').add({
@@ -83,31 +87,24 @@ Page({
         // 分享
         share: 0,
         // 审核
-        pass: false,
+        pass,
         // 评论
         // comment: [],  
       }
     }).then(res => {
-      console.log(res)
-      debugger
-      Toast.success({
-        message: '上传完成',
-        duration: 2000,
-        onClose: _ => {
-          wx.navigateBack()
-        }
-      });
+      this.setData({
+        uploading: 0
+      })
+      showToast(pass, msg)
     })
-    // 云调用
-
   },
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     console.log(app.globalData)
-    this.drag = this.selectComponent('#drag');
     this.setData({
       PhotographyClass: app.globalData.PhotographyClass
     })
@@ -147,7 +144,6 @@ Page({
   // switch 
   handleJoin(e) {
     const { userInfo } = app.globalData
-    console.log(userInfo)
     if(e.detail.value && userInfo.address && userInfo.address.length) {
       console.log(userInfo.address[0])
       this.setData({ 
@@ -158,21 +154,4 @@ Page({
       isJoinDevelop: e.detail.value
     })
   },
-  // 上传提示
-  showToast() {
-    Toast.loading({
-      mask: true,
-      message: '上传中...',
-      duration: 0,
-      onClose: _ => {
-        Toast.success({
-          message: '上传完成',
-          duration: 2000,
-          onClose: _ => {
-            wx.navigateBack()
-          }
-        });
-      }
-    });
-  }
 })

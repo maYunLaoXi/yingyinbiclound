@@ -1,5 +1,5 @@
 // miniprogram/pages/show-activity/show-activity.js
-import { qinuiUpload } from '../../utils/index'
+import { qinuiUpload, msgSecCheck, showToast } from '../../utils/index'
 
 Page({
 
@@ -49,45 +49,52 @@ Page({
       [name]: e.detail.value
     })
   },
-  upload() {
+  async upload() {
     const { options, imageList, title, article, isOpenShow, isHideUserInfo } = this.data
     if(!title && !article && !imageList.length){
       return
     }
+    let checkObj = { pass: false, msg: ''}
+
     this.setData({
       uploading: 1,
       total: imageList.length,
     })
-    qinuiUpload({
+    if(isOpenShow){
+      const result = await msgSecCheck(title + article)
+      checkObj.pass = result.pass
+      checkObj.msg = result.msg
+    }
+    const { pass, msg } = checkObj
+
+    const uploadRes = await qinuiUpload({
       path: imageList,
       photoClass: 'activity',
       progress: this.uploadProgerss
-    }).then(res => {
-      console.log(res)
-      this.uploading = 0
-      const db = wx.cloud.database()
+    })
+    this.uploading = 0
+    const db = wx.cloud.database()
 
-      db.collection('activity-receive').add({
-        // data 字段表示需新增的 JSON 数据
-        data: {
-          createTime: db.serverDate(), // 务服器产生时间
-          activity_id: options.activity_id, // 活动id
-          data_id: options._id, // 作品id
-          photo: res,
-          title,
-          article,
-          show:isOpenShow,
-          check: true,
-          isHideUserInfo,
-        }
+    const dbRes = await db.collection('activity-receive').add({
+      // data 字段表示需新增的 JSON 数据
+      data: {
+        createTime: db.serverDate(), // 务服器产生时间
+        activity_id: options.activity_id, // 活动id
+        data_id: options._id, // 作品id
+        photo: uploadRes,
+        title,
+        article,
+        show: isOpenShow,
+        check: true,
+        isHideUserInfo,
+        pass,
+        read: false
+      }
+    })
+    showToast(pass, msg, () => {
+      wx.switchTab({
+        url: '/pages/user/user'
       })
-      .then(res => {
-        console.log(res)
-        wx.switchTab({
-          url: '/pages/user/user'
-        })
-      })
-      .catch(console.error)
     })
   },
   uploadProgerss(progress) {
