@@ -88,7 +88,7 @@ Page({
         logged: true,
         isUser:true,
       })
-      // this.getImageList()
+      this.getImageList()
       this.getActivityList()
       return
     }
