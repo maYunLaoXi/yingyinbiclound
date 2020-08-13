@@ -1,8 +1,8 @@
 <!--miniprogram/pages/component/portrait/portrait.wxml-->
 <!-- 人像页 -->
+<navigation-bar back-tab="index"></navigation-bar>
 <view>
   <view class="fixed">
-    <navigation-bar navigation-bar-title-text="影音笔小程序"></navigation-bar>
     <class-swiper />
   </view>
   <waterfall-com image-list="{{imageList}}" bindimg="toImageShowNav" name="photography-class" />

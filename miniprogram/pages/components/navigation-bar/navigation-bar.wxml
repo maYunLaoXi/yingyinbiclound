@@ -2,9 +2,9 @@
 <view class="wrap">
   <view class="title ">
     <view class="text-1" bind:tap="back">
-      <text class="cuIcon-back lg text-gray"></text>
-      <text>{{left}}</text>
+      <van-icon name="arrow-left" size="16px" />
+      <text class="back-text">{{left}}</text>
     </view>
-    <view class="text-2">{{navigationBarTitleText}}</view>
+    <view class="text-2">{{titleText}}</view>
   </view>
 </view>

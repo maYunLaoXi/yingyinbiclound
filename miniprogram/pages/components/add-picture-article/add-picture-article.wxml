@@ -1,7 +1,7 @@
 <!--miniprogram/pages/components/add-picture-article/add-picture-article.wxml-->
 <!-- 图文新建页 -->
 <view>
-	<navigation-bar navigation-bar-title-text="发表图片"></navigation-bar>
+	<navigation-bar title-text="发表图片"></navigation-bar>
   <view class="cu-bar bg-white bd-t-g1 img">
 		<view class="action">
 			图片上传

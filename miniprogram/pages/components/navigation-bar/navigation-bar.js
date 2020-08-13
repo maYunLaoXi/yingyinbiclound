@@ -1,6 +1,6 @@
 Component({
   options: {
-    addGlobalClass: true,
+    // addGlobalClass: true,
   },
   properties: {
     // min: {
@@ -24,10 +24,14 @@ Component({
       type: String,
       value: '返回'
     },
-    navigationBarTitleText: {
+    titleText: {
       type: String,
       value: '影音笔'
     },
+    backTab: {
+      type: String,
+      value: ''
+    }
     // navigationBarBackgroundColor: "#ffffff",
     // navigationBarTextStyle: "black",
     // backgroundColor: "#F1F3F4",
@@ -36,7 +40,14 @@ Component({
   },
   methods: {
     back() {
-      wx.navigateBack()
+      const { backTab } = this.data
+      if(backTab) {
+        wx.switchTab({
+          url: `/pages/${backTab}/${backTab}`,
+        })
+      }else {
+        wx.navigateBack()
+      }
     }
   }
 })

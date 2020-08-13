@@ -1,8 +1,9 @@
 /* miniprogram/pages/components/navigation-bar/navigation-bar.wxss */
 .wrap{
-  height: 125rpx;
+  height: 58px;
   background: #FFFFFF;
   padding-top: 64rpx;
+  font-size: 16px;
 }
 .title{
   display: flex;
@@ -11,6 +12,12 @@
 .text-1{
   /* background: pink; */
   width: 150rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.back-text{
+  margin-bottom: 3px;
 }
 .text-2{
   /* background: red; */

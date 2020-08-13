@@ -27,7 +27,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    debugger
     this.setData({
       className: options['class-name']
     })
@@ -52,26 +51,6 @@ Page({
       const { imageList } = this.data
       this.setData({
         imageList: imageList.concat(res.result.data)
-      })
-      return
-      const [leftNum, rightNum] = heightArr
-      const { result } = res
-      const revResult = result.data
-      // 如果返回的是奇数条，那么left.lenght比right.length多一条
-      let left = revResult.filter((item, i) => i % 2 === 0)
-      let right = revResult.filter((item,i) => i % 2 === 1)
-      const { imagesLeft, imagesRight } = this.data
-      if(leftNum && rightNum){
-        if(leftNum >= rightNum){
-          // 左边长
-          [left, right] = [right, left]
-        }
-      }
-      this.setData({
-        nowPage: result.page,
-        totalPage: result.totalPage,
-        imagesLeft: imagesLeft.concat(left),
-        imagesRight: imagesRight.concat(right)
       })
     })
   },
