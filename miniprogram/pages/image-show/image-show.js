@@ -65,6 +65,7 @@ Page({
   },
   setViewFromClass() {
     const { imageShowData } = app.globalData
+    debugger
     this.setData({
       data: imageShowData,
       userInfo: imageShowData.userInfo

@@ -1,4 +1,4 @@
-// pages/components/waterfall/waterfall.js
+// 瀑布流组件
 Component({
   options: {
     // 是否会被全局样式影响

@@ -14,8 +14,14 @@ Page({
     // userProfile: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/users/feigle/IMG_0987.JPG?sign=76b26af236b150caa9b1b4aa14aa74da&t=1572185422',
     userProfile: 'http://img.yingyinbi.com/_DSC6367q-min-slice.jpg?imageView2/2/w/800',
     images: [],
+    // 用户作品
     imageList: [],
+    imageListPage: 0,
+    imageListTotalSize: 0,
+    imageListTotalPage: 0,
+    // 用户活动作品
     activityList: [],
+    activityListTotalSize: 0,
     contentHeight: 'auto'
   },
   // 点击获取用户信息 
@@ -126,9 +132,14 @@ Page({
         pageSize
       }
     }).then(res => {
-      const { imageList } = this.data
+      const { imageList, imageListPage } = this.data
+      const { data, page, pageSize, totalPage, totalSize } = res.result
+      if(imageListPage === page) return
       this.setData({
-        imageList: imageList.concat(res.result.data)
+        imageListPage: page,
+        imageListTotalSize: totalSize,
+        imageListTotalPage: totalPage,
+        imageList: imageList.concat(data)
       })
     })
   },
@@ -140,7 +151,8 @@ Page({
     }).then(res => {
       console.log('activity-user-get', res)
       this.setData({
-        activityList: res.result.data
+        activityList: res.result.data,
+        activityListTotalSize: res.result.data[0].list.length
       })
     })
   },
@@ -178,4 +190,10 @@ Page({
       })
     }
   },
+  imageListBottom(e) {
+    const { imageListTotalPage, imageListPage } = this.data
+    if(imageListPage === imageListTotalPage)return;
+    this.getImageList({page: imageListPage + 1})
+    debugger
+  }
 })

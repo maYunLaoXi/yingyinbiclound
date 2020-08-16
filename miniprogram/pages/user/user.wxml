@@ -25,11 +25,11 @@
         <view wx:if="{{logged}}" class="statistics-action">
           <view class="statistics">
             <view class="flex-column-center statistics-text">
-              <text class="fw-500">22</text>
+              <text class="fw-500">{{imageListTotalSize}}</text>
               <text>作品</text>
             </view>
             <view class="flex-column-center statistics-text">
-              <text class="fw-500">22</text>
+              <text class="fw-500">{{activityListTotalSize}}</text>
               <text>活动</text>
             </view>
             <view class="flex-column-center statistics-text">
@@ -49,7 +49,7 @@
         </view>
         <van-tabs swipeable>
           <van-tab title="作品">
-            <scroll-view style="height: {{contentHeight}}" scroll-y="true">
+            <scroll-view style="height: {{contentHeight}}" scroll-y="true" bindscrolltolower="imageListBottom" refresher-threshold="180">
               <photos-comp image-list="{{imageList}}" bind:cliImage="clickUserImage" />
             </scroll-view>
           </van-tab>
@@ -93,20 +93,6 @@
                   </view>
                     
                 </view>
-                <!-- <view  wx:if="{{item.showReceive}}" class="yin-card">
-                  <view class="yin-card-content">
-                    <view class="yin-card__thumb">
-                      <image class="yin-card__img" src="{{item.showReceive.photo[0]}}" mode="aspectFit"></image>
-                    </view>
-                    <view class="yin-card__content">
-                      <view class="yin-card__title">{{item.showReceive.title}}</view>
-                      <view class="yin-card__desc">{{item.showReceive.article}}</view>
-                      <view class="text-gray text-sm">
-                        <text class="cuIcon-appreciatefill margin-lr-xs"></text>
-                      </view>
-                    </view>
-                  </view>
-                </view> -->
               </view>
             </scroll-view>
           </van-tab>

@@ -1,0 +1,38 @@
+/* pages/components/nine-image/nine-image.wxss */
+.nine-wrap{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.nine-img{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+.nine-box{
+  width: 33%;
+  position: relative;
+  padding-bottom: 33%;
+  margin-top: .5%;
+}
+.nine-box:nth-child(2){
+  margin-left: 0.2%;
+  margin-right: 0.5%;
+}
+.yin-text-title, .yin-text-article{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.yin-text-title{
+  height: 22px;
+  -webkit-line-clamp: 1;
+}
+.yin-text-article{
+  font-size: 13px;
+  color: #999999;
+}

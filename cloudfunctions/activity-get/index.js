@@ -30,10 +30,10 @@ async function getUserInfo(data) {
   if(!data.length) return data
   const allArr = []
   data.forEach(item => {
-    let openid = item._openid || item.openid || ''
+    let _openid = item._openid || item.openid || ''
     allArr.push(new Promise((resolve, reject) => {
       db.collection('user').where({
-        openid
+        _openid
       }).get().then(res => {
         item.userInfo = res.data[0]
         resolve(res)

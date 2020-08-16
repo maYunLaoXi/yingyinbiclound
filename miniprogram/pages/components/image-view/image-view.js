@@ -33,7 +33,6 @@ Component({
       images.forEach(item => item.url = item.url + '?imageView2/2/w/600')
       let imgArr = slice2sort(images, 2)
       this.setSize(imgArr)
-      console.log(imgArr)
       this.setData({
         imgArr
       })

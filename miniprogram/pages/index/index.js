@@ -42,10 +42,15 @@ Page({
         text: '视频',
         backgroundImg: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/index/index-swiper2/yinyingbi-swiper-2-video.jpg?sign=2aa433c9c3efab58573977b5934588a3&t=1570182590',
       }
-    ]
+    ],
+    dynamicList: [],
+    dynamicListPage: 0,
+    dynamicListTotalPage: 0,
   },
 
   onLoad: function() {
+    this.getDynamic()
+    return
     if (!wx.cloud) {
       wx.redirectTo({
         url: '../chooseLib/chooseLib',
@@ -127,7 +132,23 @@ Page({
       console.log({globalData: app.globalData})
     })
   },
+  async getDynamic(page = 1) {
+    const { dynamicList } = this.data
 
+    const imageList = await wx.cloud.callFunction({
+      name: 'get-image-index',
+      data: {
+        page,
+        pageSize: 9,
+      }
+    })
+    const { data, page: resPage, totalPage } = imageList.result
+    this.setData({
+      dynamicList: [...dynamicList, ...data],
+      dynamicListPage: resPage,
+      dynamicListTotalPage: totalPage
+    })
+  },
   // 去活动页
   toActivity(){
     wx.switchTab({
@@ -140,6 +161,13 @@ Page({
     wx.navigateTo({
       url: '/pages/components/' + url + '/' + url
     })
+  },
+  // 触底事件
+  onReachBottom(){
+    debugger
+    const { dynamicListPage, dynamicListTotalPage } = this.data
+    if(dynamicListPage === dynamicListTotalPage) return;
+    this.getDynamic(dynamicListPage + 1)
   },
   show:function(){
     console.log(this.data.swiper)

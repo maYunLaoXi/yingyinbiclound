@@ -27,7 +27,8 @@
     "pages/image-show/image-show",
     "pages/show-activity/show-activity",
     "pages/user-info/user-info",
-    "pages/set-user-bg/set-user-bg"
+    "pages/set-user-bg/set-user-bg",
+    "pages/components/nine-image/nine-image"
   ],
   "window": {
     "navigationStyle": "custom",
