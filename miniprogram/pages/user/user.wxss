@@ -3,11 +3,6 @@ page,.wrap{
   width: 100%;
   height: 100%;
 }
-
-/* .wrap{
-  position: relative;
-  top: 0;
-} */
 .user-bg{
   position: fixed;
   top: 0;
@@ -22,14 +17,13 @@ page,.wrap{
   top: -144px;
   width: 100%;
   height: 120vh;
-  /* margin-top: 400px; */
-  /* height: 2px; */
 }
 .user-info{
   border-radius: 20px 20px 0 0;
   width: 100%;
   height: 205px;
   background: #ffff;
+  /* background-color: rgba(255,255,255,0.5); */
 }
 .user-content{
   background-color: #ffff;
@@ -42,21 +36,43 @@ page,.wrap{
   position: relative;
   top: -39rpx;
   left: 35rpx;
-
-}
-.main{
-  position: relative;
-  top: -29rpx;
+  text-align: center;
 }
 .nick-name{
-  margin-left: 50rpx;
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  bottom: -18rpx;
   font-weight: 500;
+  left: 0;
 }
-.user-detail{
-  padding-bottom: 40rpx;
-  border-bottom: 1rpx solid lightgray;
+.user-edit{
+  position: absolute;
+  right: 20px;
+  top: 30px;
 }
-
+.statistics-action{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 10px 10px;
+}
+.statistics{
+  display: flex;
+  flex-direction: row;
+}
+.statistics-text{
+  margin: 0 10px;
+  font-size: 12px;
+}
+.user-info-edit{
+  background-color: red;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+}
 /* 活动 */
 .yin-cell{
   position: relative;

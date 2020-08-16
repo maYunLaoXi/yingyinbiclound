@@ -71,10 +71,6 @@ Page({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
-              this.setData({
-                avatarUrl: res.userInfo.avatarUrl,
-                userInfo: res.userInfo
-              })
               this.getDbUserInfo(res.userInfo)
             }
           })
@@ -120,10 +116,14 @@ Page({
         getInfo: true
       }
     }).then(res => {
-      const { result } = res
+      let [result] = res.result.data
+      if(!result)result = userInfo;
+
       app.globalData.userInfo = result
-      ? result
-      : userInfo
+      this.setData({
+        avatarUrl: result.avatarUrl,
+        userInfo: result
+      })
       console.log({globalData: app.globalData})
     })
   },
@@ -146,7 +146,6 @@ Page({
   },
 
   onGetUserInfo: function(e) {
-    console.log('userInfo', e)
     if (!this.logged && e.detail.userInfo) {
       this.setData({
         logged: true,

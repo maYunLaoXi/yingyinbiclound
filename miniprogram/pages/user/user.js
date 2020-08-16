@@ -11,7 +11,8 @@ Page({
     // 是否为已有用户
     isUser: false,
     userInfo:{},
-    userProfile: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/users/feigle/IMG_0987.JPG?sign=76b26af236b150caa9b1b4aa14aa74da&t=1572185422',
+    // userProfile: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/users/feigle/IMG_0987.JPG?sign=76b26af236b150caa9b1b4aa14aa74da&t=1572185422',
+    userProfile: 'http://img.yingyinbi.com/_DSC6367q-min-slice.jpg?imageView2/2/w/800',
     images: [],
     imageList: [],
     activityList: [],
@@ -32,8 +33,6 @@ Page({
           info: e.detail.userInfo
         }
       }).then(res => {
-        console.log(res)
-        debugger
         app.globalData.userInfo = res.result
         if(app.globalData.router.redirect === 'activity'){
           wx.switchTab({
@@ -48,10 +47,10 @@ Page({
     wx.cloud.callFunction({
       name: 'user',
       data: {
-        userInfo,
-        getInfo: true
+        info: userInfo,
       }
     }).then(res => {
+      debugger
       app.globalData.userInfo = res.result
     }).catch(err => {
       app.globalData.userInfo = userInfo
@@ -127,7 +126,6 @@ Page({
         pageSize
       }
     }).then(res => {
-      debugger
       const { imageList } = this.data
       this.setData({
         imageList: imageList.concat(res.result.data)
@@ -144,6 +142,11 @@ Page({
       this.setData({
         activityList: res.result.data
       })
+    })
+  },
+  toUserEdit(){
+    wx.navigateTo({
+      url: '/pages/user-info/user-info',
     })
   },
   // 点击用户作品

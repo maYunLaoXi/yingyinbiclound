@@ -19,7 +19,14 @@
   justify-content: center;
   align-items: center;
 }
-
+.flex-column-center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.fw-500{
+  font-weight: 500;
+}
 .yin-card{
   position: relative;
   padding: 10px 15px;

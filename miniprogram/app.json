@@ -25,7 +25,9 @@
     "pages/select-address/index",
     "pages/address-edit-add/index",
     "pages/image-show/image-show",
-    "pages/show-activity/show-activity"
+    "pages/show-activity/show-activity",
+    "pages/user-info/user-info",
+    "pages/set-user-bg/set-user-bg"
   ],
   "window": {
     "navigationStyle": "custom",

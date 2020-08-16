@@ -1,0 +1,8 @@
+<navigation-bar class="nav-bar" title-text="{{navigationTitle}}"></navigation-bar>
+<view class="img-view">
+  <image mode="aspectFill" src="{{url}}"></image>
+  <view class="padding flex flex-direction btn">
+    <button class="cu-btn margin-tb-sm round lg bg-half" bind:tap="upload">提交</button>
+  </view>
+</view>
+<upload-toast wx:if="{{uploading}}" total="{{total}}" progress="{{progress}}" ></upload-toast>

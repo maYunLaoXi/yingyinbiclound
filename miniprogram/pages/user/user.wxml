@@ -18,16 +18,25 @@
           class="userinfo-avatar"
           style="background-image: url({{userInfo.avatarUrl}})"
         ></button>
+        <text class="nick-name">{{userInfo.nickName}}</text>
       </view>
-      <view class="main">
-        <view class="user-detail">
-          <text class="nick-name">{{userInfo.nickName}}</text>
-          <text class="discript"></text>
-        </view>
-      </view>
+      <view wx:if="{{logged}}" class="user-edit" bindtap="toUserEdit"><van-icon name="setting-o" size="20px" /></view>
       <view class="user-content">
-        <view wx:if="{{logged}}">
-          用户的信息，如参与活动，收藏的文章等
+        <view wx:if="{{logged}}" class="statistics-action">
+          <view class="statistics">
+            <view class="flex-column-center statistics-text">
+              <text class="fw-500">22</text>
+              <text>作品</text>
+            </view>
+            <view class="flex-column-center statistics-text">
+              <text class="fw-500">22</text>
+              <text>活动</text>
+            </view>
+            <view class="flex-column-center statistics-text">
+              <text class="fw-500">22</text>
+              <text>赞</text>
+            </view>
+          </view>
           <button class="cu-btn round line-red" bindtap="toAddPicArticle">发表图文</button>
         </view>
         <view class="login-box" wx:else>

@@ -40,6 +40,7 @@ Component({
   },
   methods: {
     back() {
+      this.triggerEvent('cliBack', {})
       const { backTab } = this.data
       if(backTab) {
         wx.switchTab({

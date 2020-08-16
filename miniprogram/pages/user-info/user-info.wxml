@@ -1,0 +1,27 @@
+<navigation-bar title-text="资料详情" bind:cliBack="setUserPageData"></navigation-bar>
+
+<view class="margin-top bg-w flex-row-ac">
+  <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
+  <text>{{userInfo.nickName}}</text>
+</view>
+
+<view class="cu-form-group margin-top">
+  <view class="title">背景海报<text class="tips">（{{profileTips}}）</text></view>
+  <view>
+  <view class="picker" bindtap="setUserBg">
+    {{profileTips2}}
+    <text class="cuIcon-right lg text-gray"></text>
+  </view>
+  </view>
+</view>
+<van-collapse class="margin-top" value="{{ isShowAddress }}" bind:change="showAddress">
+  <van-collapse-item name="address">
+    <view slot="title" class="ellipsis address-title">地址：{{address.name}} {{address.detail}}</view>
+    <view>
+      {{address.province + address.city + address.district + address.detail}}
+      {{address.name}}
+      <view>邮政编码：{{address.mailCode}}</view>
+      <button class="cu-btn bg-gray" bind:tap="addressEdit">{{address ? '修改' : '添加'}}</button>
+    </view>
+  </van-collapse-item>
+</van-collapse>
