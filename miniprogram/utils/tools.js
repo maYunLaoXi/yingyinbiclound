@@ -1,3 +1,4 @@
+const app = getApp()
 /**
  * 生成随机字符串
  */
@@ -88,4 +89,11 @@ function getImageInfo(imgObj) {
       fail: err => reject(err)
     })
   })
+}
+/**
+ * 用户是否已登录
+ */
+export const isLogin = () => {
+  const { userInfo } = app.globalData
+  return userInfo && Object.keys(userInfo).length
 }

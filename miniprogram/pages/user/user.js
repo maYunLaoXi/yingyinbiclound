@@ -35,6 +35,8 @@ Page({
         userInfo: res.result
       })
       app.globalData.userInfo = res.result
+      this.getImageList()
+      this.getActivityList()
       if(app.globalData.router.redirect === 'activity'){
         wx.switchTab({
           url: '/pages/activity/activity',

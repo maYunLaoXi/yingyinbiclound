@@ -1,5 +1,6 @@
 // pages/components/nine-image/nine-image.js
-import { readableTime } from '../../../utils/index'
+import { readableTime, isLogin } from '../../../utils/index'
+import Toast from '/vant-weapp/toast/toast.js'
 const app = getApp()
 Component({
   options: {
@@ -60,6 +61,11 @@ Component({
       })
     },
     async start(e) {
+      Toast('先去‘我的’页登录吧～')
+      if(!isLogin()) {
+        Toast.fail('失败文案');
+        return
+      }
       const { item, index } = e.currentTarget.dataset
       const { _id, start } = item
       const res = await wx.cloud.callFunction({

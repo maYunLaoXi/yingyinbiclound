@@ -18,33 +18,5 @@
 <view class="main">
   <class-swiper />
   <nine-image images="{{dynamicList}}"></nine-image>
-  <view class="activity margin-top" bindtap="toActivity">
-    <van-panel title="免费晒相4.0" desc="你的照片我来晒" status="进行中" >
-      <view class="act-img"></view>
-      <view class="act-footer">
-        <text class="act-footer-left f-l">立即参加</text>
-        <text class="act-footer-right f-r">></text>
-      </view>
-    </van-panel>
-  </view>
-
-  <view class="article margin-top">
-    <van-panel title="精选文章" desc="不更新的这几个月我在做什么">
-      <view class="act-img"></view>
-      <view class="act-footer">
-        <text class="act-footer-left f-l">点击阅读</text>
-        <text class="act-footer-right f-r">></text>
-      </view>
-    </van-panel>
-  </view>
-
-  <view class="camera margin-top">
-    <van-panel title="器材评测" desc="从胶片到数码，没有最好，只有合适">
-      <view class="act-img"></view>
-      <view class="act-footer">
-        <text class="act-footer-left f-l">点击阅读</text>
-        <text class="act-footer-right f-r">></text>
-      </view>
-    </van-panel>
-  </view>
 </view>
+

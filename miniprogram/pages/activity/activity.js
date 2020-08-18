@@ -66,7 +66,7 @@ Page({
           author,
           authorAvatar,
           endTime,
-          topImg,
+          poster: topImg,
           descriptionShort,
         } = data
         app.globalData.activity = data
@@ -80,7 +80,7 @@ Page({
           author,
           authorAvatar,
           beforeEnd,
-          topImg,
+          topImg: topImg ? topImg + '?imageView/2/w/800' : '',
           descriptionShort,
         })
       },

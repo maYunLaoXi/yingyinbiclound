@@ -39,3 +39,6 @@
 .icon{
   font-size: 16px;
 }
+.cu-list+.cu-list{
+  margin-top: 0;
+}

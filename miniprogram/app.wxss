@@ -101,7 +101,9 @@ button::after{
 .f-r{
   float: right;
 }
-
+.mt-2{
+  margin-top: 2px;
+}
 page {
   background: #f6f6f6;
   display: flex;
