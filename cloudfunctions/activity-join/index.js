@@ -19,7 +19,7 @@ exports.main = async (event, context) => {
   event.photo = images
   await db.collection('activity-data').add({
     data: {
-      openid: wxContext.OPENID,
+      _openid: wxContext.OPENID,
       ...event,
       uploadTime: db.serverDate()
     }

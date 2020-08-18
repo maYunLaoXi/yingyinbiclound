@@ -11,7 +11,7 @@ exports.main = async (data, context) => {
   const { info = {}, getInfo } = data
   const wxContext = cloud.getWXContext()
   let result = await getUserInfo(wxContext)
-  if(getInfo) return result
+  if(getInfo) return result.data[0]
 
   debugger
   if(result.data && result.data.length){
@@ -52,5 +52,5 @@ exports.main = async (data, context) => {
   return result
 }
 function getUserInfo(wxContext) {
-  return db.collection('user').where({ openid: wxContext.OPENID }).get()
+  return db.collection('user').where({ _openid: wxContext.OPENID }).get()
 }

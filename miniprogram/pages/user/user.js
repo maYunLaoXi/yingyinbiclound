@@ -25,41 +25,30 @@ Page({
     contentHeight: 'auto'
   },
   // 点击获取用户信息 
-  onGetUserInfo: function (e) {
-    if (!this.logged && e.detail.userInfo) {
+  onGetUserInfo: async function (e) {
+    if (e.detail.userInfo) {
+      const res = await this.getDbUserInfo(e.detail.userInfo)
+      debugger
       this.setData({
         logged: true,
         avatarUrl: e.detail.userInfo.avatarUrl,
-        userInfo: e.detail.userInfo
+        userInfo: res.result
       })
-      // 获取openid一起存在数据库
-      wx.cloud.callFunction({
-        name: 'user',
-        data: {
-          info: e.detail.userInfo
-        }
-      }).then(res => {
-        app.globalData.userInfo = res.result
-        if(app.globalData.router.redirect === 'activity'){
-          wx.switchTab({
-            url: '/pages/activity/activity',
-          })
-        }
-      })
+      app.globalData.userInfo = res.result
+      if(app.globalData.router.redirect === 'activity'){
+        wx.switchTab({
+          url: '/pages/activity/activity',
+        })
+      }
     }
   },
-  // 获取数据库的用户信息
+  // 更新并获取数据库的用户信息
   getDbUserInfo(userInfo){
-    wx.cloud.callFunction({
+    return wx.cloud.callFunction({
       name: 'user',
       data: {
         info: userInfo,
       }
-    }).then(res => {
-      debugger
-      app.globalData.userInfo = res.result
-    }).catch(err => {
-      app.globalData.userInfo = userInfo
     })
   },
   /**
@@ -95,31 +84,7 @@ Page({
       })
       this.getImageList()
       this.getActivityList()
-      return
     }
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              this.setData({
-                logged: true,
-                isUser: true,
-                avatarUrl: res.userInfo.avatarUrl,
-                userInfo: res.userInfo
-              })
-              this.getDbUserInfo(res.userInfo)
-              this.getImageList()
-              this.getActivityList()
-            }
-          })
-        }
-      },
-      fail: err => {
-        debugger
-      }
-    })
   },
   /**
    * 获取用户上传的作品

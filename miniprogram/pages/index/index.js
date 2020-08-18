@@ -1,5 +1,5 @@
 //index.js
-import { qinuiUpload } from '../../utils/index'
+import { qinuiUpload, tiemFromLast } from '../../utils/index'
 
 const app = getApp()
 
@@ -48,9 +48,7 @@ Page({
     dynamicListTotalPage: 0,
   },
 
-  onLoad: function() {
-    this.getDynamic()
-    return
+  onLoad: async function() {
     if (!wx.cloud) {
       wx.redirectTo({
         url: '../chooseLib/chooseLib',
@@ -59,32 +57,15 @@ Page({
     }
 
     // 操作tabbar的数字： 
-    wx.setTabBarBadge({
-      index: 2, //第几个
-      text: '6',  //显示的字
-    })
+    // wx.setTabBarBadge({
+    //   index: 2, //第几个
+    //   text: '6',  //显示的字
+    // })
 
     //清除tabbar数字
     // wx.removeTabBarBadge({
     //   index: 0,
     // })
-
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-          wx.getUserInfo({
-            success: res => {
-              this.getDbUserInfo(res.userInfo)
-            }
-          })
-        }
-      },
-      fail: err => {
-        debugger
-      }
-    });
 
     // 获取云数据，swiper的图片地址
     const db = wx.cloud.database();
@@ -103,33 +84,60 @@ Page({
         console.log('err',err)
       }
     })
-    // 获取openid
-    wx.cloud.callFunction({
-      name: 'login',
-      data: {},
-      success: res => {
-        app.globalData.openid = res.result.openid
-      }
+    // 获取用户信息
+    const userInfo = await this.wxGetSetting()
+    if(userInfo) {
+      await this.getDbUserInfo(userInfo)
+    }
+    this.getDynamic()
+    // // 获取openid
+    // wx.cloud.callFunction({
+    //   name: 'login',
+    //   data: {},
+    //   success: res => {
+    //     app.globalData.openid = res.result.openid
+    //   }
+    // })
+  },
+  wxGetSetting() {
+    return new Promise((resolve, reject) => {
+      wx.getSetting({
+        success: res => {
+          if (res.authSetting['scope.userInfo']) {
+            // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+            wx.getUserInfo({
+                success: res => resolve(res.userInfo)
+            })
+          }
+        },
+        fail: err => resolve('')
+      });
     })
   },
 
   // 获取数据库的用户信息
   getDbUserInfo(userInfo){
-    wx.cloud.callFunction({
-      name: 'user',
-      data: {
-        getInfo: true
-      }
-    }).then(res => {
-      let [result] = res.result.data
-      if(!result)result = userInfo;
-
-      app.globalData.userInfo = result
-      this.setData({
-        avatarUrl: result.avatarUrl,
-        userInfo: result
+    const getInfo =  tiemFromLast('updateUserInfo') < 10 
+    return new Promise(resolve => {
+      wx.cloud.callFunction({
+        name: 'user',
+        data: {
+          info: userInfo,
+          getInfo
+        }
+      }).then(res => {
+        let result = res.result
+        if(!result)result = userInfo;
+        
+        app.globalData.userInfo = result
+        this.setData({
+          avatarUrl: result.avatarUrl,
+          userInfo: result
+        })
+        resolve(res)
+      }).catch(err => {
+        resolve(err)
       })
-      console.log({globalData: app.globalData})
     })
   },
   async getDynamic(page = 1) {

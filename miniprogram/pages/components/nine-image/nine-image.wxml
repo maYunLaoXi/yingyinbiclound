@@ -15,10 +15,9 @@
       </view>
       <view class="margin-top-sm flex justify-between">
         <view class="text-gray text-df">{{item.createTime}}</view>
-        <view>
-          <text class="cuIcon-{{item.hasStart ? 'appreciatefill' : 'appreciate'}} text-gray" bind:tap="start" data-item="{{item}}"></text>
+        <view  class="icon">
+          <text class="cuIcon-{{item.hasStart ? 'appreciatefill text-red' : 'appreciate  text-gray'}}" bind:tap="start" data-item="{{item}}" data-index="{{index}}"></text>
           {{item.start.length}}
-          <text class="cuIcon-appreciatefill text-red"></text>
         </view>
       </view>
     </view>

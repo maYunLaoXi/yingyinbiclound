@@ -1,4 +1,5 @@
 // pages/components/nine-image/nine-image.js
+import { readableTime } from '../../../utils/index'
 const app = getApp()
 Component({
   options: {
@@ -37,7 +38,9 @@ Component({
       }
       const { imageList } = this.data
       images.forEach(item => {
+        this.setHasStart(item)
         item.photoView = item.photo.slice(0,3)
+        this.setTime(item)
       })
       this.setData({ imageList: [...imageList, ...images]})
     }
@@ -57,8 +60,7 @@ Component({
       })
     },
     async start(e) {
-      debugger
-      const { item } = e.currentTarget.dataset
+      const { item, index } = e.currentTarget.dataset
       const { _id, start } = item
       const res = await wx.cloud.callFunction({
         name: 'start',
@@ -67,9 +69,25 @@ Component({
           start,
         }
       })
-      debugger
       const { stats, start: resStart } = res.result
-      if(stats.updated === 1) item.start = resStart
+      if(stats.updated === 1) {
+        item.start = resStart
+        const { imageList } = this.data
+        imageList[index] = {...item, hasStart: true }
+        this.setData({ imageList })
+      }
+    },
+    setHasStart(item){
+      const { userInfo } = app.globalData
+      if(userInfo && userInfo._openid) {
+        const {start} = item
+        if(start.includes(userInfo._openid))item.hasStart = true;
+      }
+    },
+    setTime(item) {
+      const { createTime } = item
+      if(!createTime)return
+      item.createTime = readableTime(createTime)
     },
     toImageShow(e) {
       const { show } = e.currentTarget.dataset
