@@ -1,0 +1,9 @@
+  <!-- 加载提示 -->
+  <view class="dot-box">
+    <view class="dot-view">
+      <text class="dot"></text>
+      <text class="dot"></text>
+      <text class="dot"></text>
+      <text class="dot"></text>
+    </view>
+  </view>

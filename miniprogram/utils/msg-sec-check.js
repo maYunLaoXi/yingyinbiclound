@@ -10,7 +10,6 @@ export const msgSecCheck = (msg) => {
         msg
       }
     }).then(res => {
-      debugger
       if(res.result.errCode === 0)resolve({ pass: true, ...res })
       else resolve({ pass: false, msg: '你的内容需要作者审核', ...res})
     }).catch(err => {

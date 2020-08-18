@@ -18,5 +18,7 @@
 <view class="main">
   <class-swiper />
   <nine-image images="{{dynamicList}}"></nine-image>
+  <yin-dot wx:if="{{dot}}" />
 </view>
 
+<van-toast id="van-toast" />

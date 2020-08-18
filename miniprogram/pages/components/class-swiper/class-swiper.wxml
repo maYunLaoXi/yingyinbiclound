@@ -5,12 +5,13 @@
       display-multiple-items="3"
       next-margin="30rpx"
       class="s-2"
+      current="{{current}}"
     >
       <block wx:for="{{class}}" wx:key="index">
         <swiper-item class="s-i2">
           <view class="s-w-2" style="background-image: url({{item.backgroundImg}})">
-            <view bindtap="TagNavigate" class="s-w-2-mask" data-tag-type="{{ item.nameEn }}">
-              #{{item.nameCh}}
+            <view bindtap="TagNavigate" class="s-w-2-mask" data-tag-type="{{ item.nameEn }}" data-index="{{index}}">
+              <text class="{{classSwiperCurrent === index ? 'yin-red-1' : ''}}">#</text>{{item.nameCh}}
             </view> 
           </view>
         </swiper-item>

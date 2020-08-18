@@ -13,6 +13,10 @@ Component({
     name: {
       type: String,
       value: 'waterFallComp'
+    },
+    dot: {
+      type: [Number, Boolean],
+      value: false
     }
   },
   data: {
@@ -57,6 +61,7 @@ Component({
           imagesLeft: [],
           imagesRight: []
         })
+        return
       }
       const [leftNum, rightNum] = await this.getHeighter();
       // 如果返回的是奇数条，那么left.lenght比right.length多一

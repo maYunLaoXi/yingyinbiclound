@@ -43,15 +43,18 @@ Component({
         page: 'aftershoot'
       },
       {
-        nameCh: '视频',
+        nameCh: '其它',
         backgroundImg: 'https://7969-yingyingbi-omlzp-1259664929.tcb.qcloud.la/images/index/index-swiper2/yinyingbi-swiper-2-video.jpg?sign=2aa433c9c3efab58573977b5934588a3&t=1570182590',
-        page: 'video'
+        page: 'other'
       }
-    ]
+    ],
+    current: 0,
+    classSwiperCurrent: 0
   },
   lifetimes: {
     ready() {
-      const { PhotographyClass } = app.globalData 
+      const { PhotographyClass, classSwiperCurrent = 0 } = app.globalData 
+      const current = classSwiperCurrent <= 4 ? classSwiperCurrent : 4
       const { class: dataClass } = this.data
 
       PhotographyClass.forEach(item => {
@@ -62,13 +65,16 @@ Component({
         })
       });
       this.setData({
-        class: dataClass
+        class: dataClass,
+        current,
+        classSwiperCurrent,
       })
     }
   },
   methods: {
     TagNavigate(e) {
-      const url = e.currentTarget.dataset.tagType
+      const { index = 0, tagType: url } =  e.currentTarget.dataset
+      app.globalData.classSwiperCurrent = index
       wx.navigateTo({
         url: `/pages/components/portrait/portrait?class-name=${url}`
       })

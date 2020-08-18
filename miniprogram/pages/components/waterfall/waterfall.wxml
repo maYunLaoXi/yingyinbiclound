@@ -34,3 +34,4 @@
     </view>
   </view>
 </view>
+<yin-dot wx:if="{{dot}}" />

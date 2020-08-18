@@ -9,18 +9,9 @@ Page({
   data: {
     className: '',
     imageList: [],
-    imageBox: [
-      {
-        position: 'left',
-      },
-      {
-        position: 'right',
-      },
-    ],
-    imagesLeft: [],
-    imagesRight: [],
     nowPage: NaN,
     totalPage: NaN,
+    dot: false
   },
 
   /**
@@ -36,8 +27,7 @@ Page({
   getData(page = 1) {
     const { nowPage, totalPage, className = 'portrait' } = this.data
     if(nowPage === totalPage)return
-    // 这是一个异步
-    const heightArr = this.getHeighter()
+    this.setData({ dot: true })
     
     wx.cloud.callFunction({
       name: 'page-list',
@@ -49,10 +39,24 @@ Page({
       }
     }).then(res => {
       const { imageList } = this.data
+      const { data, page, totalPage } = res.result
       this.setData({
-        imageList: imageList.concat(res.result.data)
+        imageList: imageList.concat(data),
+        nowPage: page,
+        totalPage,
+        dot: false
       })
     })
+  },
+  // 刷新重置
+  init(){
+    this.setData({
+      imageList: [],
+      nowPage: NaN,
+      totalPage: NaN,
+      dot: false,
+    })
+    this.getData(1)
   },
   // 点击查看图片
   toImageShowNav(e) {
@@ -61,26 +65,6 @@ Page({
     wx.navigateTo({
       url: `/pages/image-show/image-show?from=${name}`
     })
-  },
-  getHeighter() {
-    const arr = []
-    //创建节点选择器
-    const query = wx.createSelectorQuery()
-    query.select('#left').boundingClientRect()
-    query.selectViewport().scrollOffset()
-    query.exec(function (res) {
-      arr[0] = res[0].height
-    })
-    const query2 = wx.createSelectorQuery()
-    query2.select('#right').boundingClientRect()
-    query2.selectViewport().scrollOffset()
-    query2.exec(res => {
-      arr[1] = res[0].height
-    })
-    return arr
-  },
-  onPageScroll: function(e) {
-    // 页面滚动时执行
   },
   /**
    * 页面上拉触底事件的处理函数
@@ -139,6 +123,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    this.init()
   },
 
   /**

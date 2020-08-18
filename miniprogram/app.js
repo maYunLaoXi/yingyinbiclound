@@ -47,14 +47,14 @@ App({
           nameEn: 'aftershoot',
           page: ''
         },
-        {
-          nameCh: '视频',
-          nameEn: 'video',
-          page: ''
-        },
+        // {
+        //   nameCh: '视频',
+        //   nameEn: 'video',
+        //   page: ''
+        // },
         {
           nameCh: '其它',
-          nameEn: 'others',
+          nameEn: 'other',
           page: ''
         },
       ], 

@@ -1,27 +1,24 @@
-<view >
-  <view class="cu-list menu-avatar comment solids-top mt-2" wx:for="{{imageList}}" wx:key="_id">
-    <view class="cu-item">
-      <view class="cu-avatar round" style="background-image:url({{item.userInfo.avatarUrl}});"></view>
-      <view class="content">
-        <view class="text-grey">{{item.userInfo.nickName}}</view>
-        <view class="yin-text-title text-black text-content text-df" bind:tap="toImageShow" data-show="{{item}}">
-          {{item.title}}
+<view class="cu-list menu-avatar comment solids-top mt-2" wx:for="{{imageList}}" wx:key="_id">
+  <view class="cu-item">
+    <view class="cu-avatar round" style="background-image:url({{item.userInfo.avatarUrl}});"></view>
+    <view class="content">
+      <view class="text-grey">{{item.userInfo.nickName}}</view>
+      <view class="yin-text-title text-black text-content text-df" bind:tap="toImageShow" data-show="{{item}}">
+        {{item.title}}
+      </view>
+      <view class="yin-text-article text-grey text-content" bind:tap="toImageShow" data-show="{{item}}">{{item.article}}</view>
+      <view class="nine-wrap radius margin-top-sm  text-sm">
+        <view class="nine-box" wx:for="{{item.photoView}}" wx:for-item="photoItem" wx:key="url">
+          <image class="nine-img" mode="aspectFill" src="{{photoItem.url + '?imageView/2/w/80'}}" bind:tap="previewImg" data-item="{{item.photoView}}" data-url="{{photoItem.url}}"></image>
         </view>
-        <view class="yin-text-article text-grey text-content" bind:tap="toImageShow" data-show="{{item}}">{{item.article}}</view>
-        <view class="nine-wrap radius margin-top-sm  text-sm">
-          <view class="nine-box" wx:for="{{item.photoView}}" wx:for-item="photoItem" wx:key="url">
-            <image class="nine-img" mode="aspectFill" src="{{photoItem.url + '?imageView/2/w/80'}}" bind:tap="previewImg" data-item="{{item.photoView}}" data-url="{{photoItem.url}}"></image>
-          </view>
-        </view>
-        <view class="margin-top-sm flex justify-between">
-          <view class="text-gray text-df">{{item.createTime}}</view>
-          <view  class="icon">
-            <text class="cuIcon-{{item.hasStart ? 'appreciatefill text-red' : 'appreciate  text-gray'}}" bind:tap="start" data-item="{{item}}" data-index="{{index}}"></text>
-            {{item.start.length}}
-          </view>
+      </view>
+      <view class="margin-top-sm flex justify-between">
+        <view class="text-gray yin-fs-13">{{item.createTime}}</view>
+        <view  class="icon">
+          <text class="cuIcon-{{item.hasStart ? 'appreciatefill text-red' : 'appreciate  text-gray'}}" bind:tap="start" data-item="{{item}}" data-index="{{index}}"></text>
+          {{item.start.length}}
         </view>
       </view>
     </view>
   </view>
-  <van-toast id="van-toast" />
 </view>

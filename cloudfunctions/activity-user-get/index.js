@@ -5,7 +5,7 @@ const cloud = require('wx-server-sdk')
 
 cloud.init({ env: 'development-zgtnu' })
 const db = cloud.database()
-
+const $ = db.command.aggregate
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
@@ -19,28 +19,40 @@ exports.main = async (event, context) => {
       foreignField: 'activity_id',
       as: 'list'
     })
-    .lookup({
-      from: 'photography-class',
-      localField: '_id',
-      foreignField: 'activity.activity_id',
-      as: 'listClass'
-    })
-    .sort({
-      createTime: -1, // 降序(从大到小)
-    })
-    .lookup({
-      from: 'activity-receive',
-      localField: 'listClass._id',
-      foreignField: 'data_id',
-      as: 'listClassReceive'
-    })
-    .lookup({ // 查第三个表，不知怎么加在上面的list里，记录在receiveData中再作处理
-      from: 'activity-receive',
-      localField: 'list._id',
-      foreignField: 'data_id',
-      as: 'receiveData'
+    .match({
+      'list._openid': $.eq(wxContext.OPENID)
     })
     .end()
+      // .addFields({
+      //   ddddd: $.filter({
+      //     input: '$list',
+      //     as: 'item',
+      //     cond: $.eq(['$$item._openid', wxContext.OPENID])
+      //   })
+      // })
+    debugger
+    // .lookup({
+    //   from: 'photography-class',
+    //   localField: '_id',
+    //   foreignField: 'activity.activity_id',
+    //   as: 'listClass'
+    // })
+    // .sort({
+    //   createTime: -1, // 降序(从大到小)
+    // })
+    // .lookup({
+    //   from: 'activity-receive',
+    //   localField: 'listClass._id',
+    //   foreignField: 'data_id',
+    //   as: 'listClassReceive'
+    // })
+    // .lookup({ // 查第三个表，不知怎么加在上面的list里，记录在receiveData中再作处理
+    //   from: 'activity-receive',
+    //   localField: 'list._id',
+    //   foreignField: 'data_id',
+    //   as: 'receiveData'
+    // })
+    // .end()
   const result =  handleList(activities.list, imageView)
 
   return {

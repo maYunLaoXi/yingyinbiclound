@@ -28,7 +28,13 @@ Component({
   
   observers: {
     'images': function(images) {
-      if(!images && !images.length)return
+      if(!images) return
+      if(images && !images.length){
+        this.setData({
+          imageList: []
+        })
+        return
+      }
       if(!this.data.userInfo) {
         const { userInfo } = app.globalData
         if(userInfo) {
@@ -61,9 +67,8 @@ Component({
       })
     },
     async start(e) {
-      Toast('先去‘我的’页登录吧～')
       if(!isLogin()) {
-        Toast.fail('失败文案');
+        Toast('登录才可点赞哦～')
         return
       }
       const { item, index } = e.currentTarget.dataset

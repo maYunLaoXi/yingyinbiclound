@@ -56,7 +56,7 @@
   background-repeat: no-repeat;
 }
 .sw1{
-  height: 600rpx;
+  height: 400rpx;
 }
 .sw2{
   height: 145rpx;

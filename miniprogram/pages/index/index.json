@@ -2,7 +2,9 @@
   "usingComponents": {
     "van-panel": "vant-weapp/panel/index",
     "van-button": "vant-weapp/button",
+    "van-toast": "vant-weapp/toast/index",
     "class-swiper": "/pages/components/class-swiper/class-swiper",
-    "nine-image": "/pages/components/nine-image/nine-image"
+    "nine-image": "/pages/components/nine-image/nine-image",
+    "yin-dot": "/pages/components/dot/dot"
   }
 }

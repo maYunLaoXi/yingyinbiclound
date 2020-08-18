@@ -246,3 +246,16 @@ page {
   flex-direction: row;
   justify-content: space-around;
 }
+
+/* // font-size */
+.yin-fs-13{
+  font-size: 13px;
+}
+.yin-fs-14{
+  font-size: 14px;
+}
+
+/* color */
+.yin-red-1{
+  color: #e12649;
+}

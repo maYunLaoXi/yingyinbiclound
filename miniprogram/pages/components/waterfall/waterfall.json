@@ -1,4 +1,6 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "yin-dot": "/pages/components/dot/dot"
+  }
 }

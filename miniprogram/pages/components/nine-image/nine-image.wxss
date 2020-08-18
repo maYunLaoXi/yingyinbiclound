@@ -31,6 +31,7 @@
 .yin-text-title{
   height: 22px;
   -webkit-line-clamp: 1;
+  font-size: 14px;
 }
 .yin-text-article{
   font-size: 13px;

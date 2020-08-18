@@ -1,0 +1,54 @@
+.dot-box{
+  text-align: center;
+  margin-top: 15px;
+}
+.dot-view{    
+  display: inline-block;
+  position: relative;
+  font-size: 20px;
+  width: 1.5em;
+  height: 1.5em;
+  transform: rotate(45deg);
+  animation: antRotate 1.2s linear infinite;
+}
+.dot {
+  position: absolute;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-color: #e12649;
+  border-radius: 100%;
+  transform: scale(.75);
+  transform-origin: 50% 50%;
+  opacity: .3;
+  animation: antSpinMove 1s linear infinite alternate;
+}
+.dot:first-child{
+  top: 0;
+  left: 0;
+}
+.dot:nth-child(2) {
+  top: 0;
+  right: 0;
+  animation-delay: .4s;
+}
+.dot:nth-child(3){
+  right: 0;
+  bottom: 0;
+  animation-delay: .8s;
+}
+.dot:nth-child(4){
+  bottom: 0;
+  left: 0;
+  animation-delay: 1.2s;
+}
+@keyframes antSpinMove {
+  to {
+    opacity: 1
+  }
+}
+@keyframes antRotate {
+  to {
+    transform: rotate(405deg)
+  }
+}
