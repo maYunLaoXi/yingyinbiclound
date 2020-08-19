@@ -47,7 +47,6 @@ Page({
       photoClass: classObj.nameEn,
       progress: this.uploadProgress
     }).then(res => {
-      debugger
       this.cloudDbUpload({ photo: res, picClass: classObj })
     })
   },
@@ -95,10 +94,17 @@ Page({
       this.setData({
         uploading: 0
       })
-      showToast(pass, msg)
+      showToast(pass, msg, this.initUser)
     })
   },
-
+  initUser() {
+    try{
+      const pages =  getCurrentPages()
+      const userPage =  pages[pages.length - 2]
+      if(userPage.init) userPage.init()
+    }catch(err) {}
+    wx.navigateBack()
+  },
 
   /**
    * 生命周期函数--监听页面加载

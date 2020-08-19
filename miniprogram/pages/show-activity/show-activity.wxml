@@ -12,7 +12,7 @@
   </view>
 </view>
 
-<add-image-comp class="mt-10" num="30" bind:list="getImageList" />
+<add-image-comp class="mt-10" num="30" source-type="{{['album', 'camera']}}" bind:list="getImageList" />
 <view class="cu-form-group">
   <input placeholder="标题(可选)" value="{{title}}" bindblur="inputTitle"></input>
 </view>

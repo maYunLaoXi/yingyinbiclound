@@ -71,8 +71,10 @@ Component({
         Toast('登录才可点赞哦～')
         return
       }
+
       const { item, index } = e.currentTarget.dataset
       const { _id, start } = item
+
       const res = await wx.cloud.callFunction({
         name: 'start',
         data: {
@@ -81,10 +83,11 @@ Component({
         }
       })
       const { stats, start: resStart } = res.result
+      const { imageList } = this.data
+
       if(stats.updated === 1) {
         item.start = resStart
-        const { imageList } = this.data
-        imageList[index] = {...item, hasStart: true }
+        imageList[index] = {...item, hasStart: !item.hasStart }
         this.setData({ imageList })
       }
     },

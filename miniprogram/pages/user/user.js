@@ -88,6 +88,22 @@ Page({
       this.getActivityList()
     }
   },
+  init(){
+    this.clearDate()
+    this.getImageList()
+    this.getActivityList()
+  },
+  clearDate() {
+    this.setData({
+      imageList: [],
+      imageListPage: 0,
+      imageListTotalSize: 0,
+      imageListTotalPage: 0,
+      activityList: [],
+      activityListTotalSize: 0,
+      contentHeight: 'auto'
+    })
+  },
   /**
    * 获取用户上传的作品
    */

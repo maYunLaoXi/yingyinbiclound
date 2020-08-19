@@ -6,57 +6,60 @@ const cloud = require('wx-server-sdk')
 cloud.init({ env: 'development-zgtnu' })
 const db = cloud.database()
 const $ = db.command.aggregate
+const _ = db.command
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
+  const userOpenid = wxContext.OPENID
   const { page = 1, pageSize = 16, imageView = '' } = event
 
   // 查询所有活动 联表查询
   const activities = await db.collection('activity').aggregate()
     .lookup({
       from: 'activity-data',
-      localField: '_id',
-      foreignField: 'activity_id',
+      let: {
+        act_id: '$_id',
+        userOpenid,
+      },
+      pipeline: $.pipeline()
+        .match(_.expr($.and([
+          $.eq(['$activity_id', '$$act_id']),
+          $.eq(['$_openid', '$$userOpenid'])
+        ])))
+        .done(),
       as: 'list'
     })
-    .match({
-      'list._openid': $.eq(wxContext.OPENID)
+    .lookup({ // 用户作品可能有用于参于活动的
+      from: 'photography-class',
+      let: {
+        act_id: '$_id',
+        userOpenid,
+      },
+      pipeline: $.pipeline()
+        .match(_.expr($.and([
+          $.eq(['$activity.activity_id', '$$act_id']),
+          $.eq(['$_openid', '$$userOpenid'])
+        ])))
+        .done(),
+      as: 'listClass'
+    })
+    .lookup({ // 关联用户作品中的回收
+      from: 'activity-receive',
+      localField: 'listClass._id',
+      foreignField: 'data_id',
+      as: 'listClassReceive'
+    })
+    .lookup({ // 关联活动直接上传的回收，不知怎么加在上面的list里，记录在receiveData中再作处理
+      from: 'activity-receive',
+      localField: 'list._id',
+      foreignField: 'data_id',
+      as: 'receiveData'
     })
     .end()
-      // .addFields({
-      //   ddddd: $.filter({
-      //     input: '$list',
-      //     as: 'item',
-      //     cond: $.eq(['$$item._openid', wxContext.OPENID])
-      //   })
-      // })
-    debugger
-    // .lookup({
-    //   from: 'photography-class',
-    //   localField: '_id',
-    //   foreignField: 'activity.activity_id',
-    //   as: 'listClass'
-    // })
-    // .sort({
-    //   createTime: -1, // 降序(从大到小)
-    // })
-    // .lookup({
-    //   from: 'activity-receive',
-    //   localField: 'listClass._id',
-    //   foreignField: 'data_id',
-    //   as: 'listClassReceive'
-    // })
-    // .lookup({ // 查第三个表，不知怎么加在上面的list里，记录在receiveData中再作处理
-    //   from: 'activity-receive',
-    //   localField: 'list._id',
-    //   foreignField: 'data_id',
-    //   as: 'receiveData'
-    // })
-    // .end()
   const result =  handleList(activities.list, imageView)
-
+  const res = isEmpty(result) ? [] : result
   return {
-    data: result
+    data: res
   }
 }
 
@@ -70,7 +73,7 @@ function handleList(list, imageView) {
   list.forEach(item => {
     const { list: listOrg, listClass, receiveData, listClassReceive } = item
     let newList = [...mapData(listOrg, receiveData, false), ...mapData(listClass, listClassReceive, true)]
-    debugger
+
     item.list = newList.reverse()
     delete item.listClass
     delete item.receiveData
@@ -99,4 +102,13 @@ function mapData(data, receive, isClass) {
     })
   })
   return list
+}
+
+function isEmpty(result) {
+  if(!result.length) return 0
+  const empty = []
+  result.forEach(item => {
+    if(!item.list)empty.push(1)
+  })
+  return empty.length === result.length
 }

@@ -24,6 +24,7 @@ Component({
   },
   observers: {
     'progress': function(e) {
+      console.log('progress',e)
       if(this.data.total === 1){
         this.setData({
           totalProgerss: e
@@ -33,8 +34,8 @@ Component({
       if(e===100){
         let now = this.data.now
         this.setData({
-          now: ++now,
-          totalProgerss: Math.round( ++now / this.data.total * 100)
+          now: now + 1,
+          totalProgerss: Math.round( (now + 1) / this.data.total * 100)
         })
       }
     }
