@@ -24,7 +24,10 @@
                   <text class="user-name">{{itemObj.userInfo.nickName}}</text>
                 </view>
                 <view class="text-gray text-sm">
-                  <text class="cuIcon-appreciatefill margin-lr-xs"></text> {{itemObj.start}}
+                  <text class="cuIcon-{{itemObj.hasStart ? 'appreciatefill text-red' : 'appreciate  text-gray'}} margin-lr-xs" 
+                    bind:tap="tabStart" data-obj="{{itemObj}}"
+                    data-position="{{item.position}}"
+                    data-i="{{i}}"></text> {{itemObj.start.length}}
                 </view>
               </view>
             </view>

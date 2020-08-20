@@ -1,3 +1,4 @@
+const app = getApp()
 // 瀑布流组件
 Component({
   options: {
@@ -12,7 +13,7 @@ Component({
     // 组件名
     name: {
       type: String,
-      value: 'waterFallComp'
+      value: ''
     },
     dot: {
       type: [Number, Boolean],
@@ -63,6 +64,7 @@ Component({
         })
         return
       }
+      this.setStart(list)
       const [leftNum, rightNum] = await this.getHeighter();
       // 如果返回的是奇数条，那么left.lenght比right.length多一
       let left = list.filter((item, i) => i % 2 === 0)
@@ -116,6 +118,43 @@ Component({
        * see https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/events.html
        */ 
       this.triggerEvent('img', { item: e.currentTarget.dataset.item , name: this.data.name})
+    },
+    setStart(list) {
+      list.forEach(item => {
+        const { start = [] } = item
+        if(!start.length){
+          item.hasStart = false
+          return
+        }
+        const { _openid } = app.globalData.userInfo
+        item.hasStart = start.includes(_openid)
+      });
+    },
+    async tabStart(e) {
+      const { obj, i, position } = e.currentTarget.dataset
+      const list = position === 'left' ? 'imagesLeft' : 'imagesRight'
+      const { name, [list]: imageList } = this.data
+      const res = await wx.cloud.callFunction({
+        name: 'start',
+        data: {
+          collection: name,
+          _id: obj._id,
+          start: obj.start
+        }
+      })
+      const { stats, start: resStart } = res.result
+      const { _openid } = app.globalData.userInfo
+
+      if(stats.updated === 1) {
+        imageList[i] = {
+          ...obj,
+          start: resStart,
+          hasStart: resStart.includes(_openid)
+        }
+        this.setData({
+          [list]: imageList
+        })
+      }
     }
   }
 })

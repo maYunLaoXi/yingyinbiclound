@@ -3,7 +3,7 @@
  */
 const cloud = require('wx-server-sdk')
 
-cloud.init({ env: 'development-zgtnu' })
+cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV })
 const db = cloud.database()
 const $ = db.command.aggregate
 const _ = db.command
@@ -84,12 +84,13 @@ function handleList(list, imageView) {
 function mapData(data, receive, isClass) {
   const list = []
   data.forEach(item => {
-    const { title, article, check, show, _id } = item
+    const { title, article, check, show, _id, start } = item
     const address = isClass ? item.activity.address : item.address
     const activity_id = isClass ? item.activity.activity_id : item.activity_id
     const showData = receive.filter(showItem => showItem.data_id === _id)
     list.push({
       _id,
+      start,
       article,
       title,
       show,

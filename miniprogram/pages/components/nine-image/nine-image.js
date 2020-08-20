@@ -106,8 +106,9 @@ Component({
     toImageShow(e) {
       const { show } = e.currentTarget.dataset
       app.globalData.imageShowData = show
+      const from  = 'photography-class'
       wx.navigateTo({
-        url: '/pages/image-show/image-show?from=photography-class',
+        url: `/pages/image-show/image-show?from=${from}&collection=${from}`,
       })
     }
   }

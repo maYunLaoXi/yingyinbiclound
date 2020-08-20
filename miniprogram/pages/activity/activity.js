@@ -15,10 +15,12 @@ Page({
     imageJoin: [],
     imageJoinPage: 1,
     imageJoinTotalPage: NaN,
+    dotJion: true,
     // imageShow
     imageShow: [],
     imageShowPage: 1,
     imageShowTotalPage: NaN,
+    dotShow: true
   },
 
   //立即参加 
@@ -102,6 +104,7 @@ Page({
   getJoin({ page = 1, pageSize = 9 } = {}){
     const { imageJoinPage, imageJoinTotalPage } = this.data
     if(imageJoinPage === imageJoinTotalPage)return
+    this.setData({ dotJion: true })
     wx.cloud.callFunction({
       name: 'activity-get',
       data: {
@@ -120,7 +123,8 @@ Page({
       this.setData({
         imageJoin: data,
         imageJoinPage: page,
-        imageJoinTotalPage: totalPage
+        imageJoinTotalPage: totalPage,
+        dotJion: false
       })
     })
   },
@@ -130,6 +134,7 @@ Page({
   getShow({page = 1, pageSize = 9 } = {}) {
     const { imageShowPage, imageShowTotalPage } = this.data
     if(imageShowPage === imageShowTotalPage) return
+    this.setData({ dotShow: true })
     wx.cloud.callFunction({
       name: 'activity-get',
       data: {
@@ -148,7 +153,8 @@ Page({
       this.setData({
         imageShow: data,
         imageShowPage: page,
-        imageShowTotalPage: totalPage
+        imageShowTotalPage: totalPage,
+        dotShow: false
       })
     })
   },
@@ -158,7 +164,7 @@ Page({
     debugger
     app.globalData.imageShowData = item
     wx.navigateTo({
-      url: `/pages/image-show/image-show?from=${name}`
+      url: `/pages/image-show/image-show?from=${name}&collection=${name}`
     })
   },
   /**

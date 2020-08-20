@@ -158,16 +158,17 @@ Page({
     })
   },
   moving(e) {
-    // console.log(e.detail.y)
-
+    console.log(e.detail.y)
     if(e.detail.y <= 0) {
       const { systemInfo } = app.globalData
-
+      const { contentHeight } = this.data
+      let setHeight = systemInfo.windowHeight - 43 + 'px'
+      if(contentHeight === setHeight) return;
       this.setData({
-        contentHeight: systemInfo.windowHeight - 43  + 'px'
+        contentHeight: setHeight
       })
     }
-    if(e.detail.y > 0) {
+    if(e.detail.y > 300) {
       this.setData({
         contentHeight: 'auto'
       })
