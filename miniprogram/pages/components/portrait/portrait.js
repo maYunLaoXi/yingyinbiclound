@@ -63,7 +63,7 @@ Page({
     const { item, name } = e.detail
     app.globalData.imageShowData = item
     wx.navigateTo({
-      url: `/pages/image-show/image-show?from=${name}`
+      url: `/pages/image-show/image-show?from=${name}&collection=${name}`
     })
   },
   /**

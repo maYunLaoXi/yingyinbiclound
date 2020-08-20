@@ -40,7 +40,7 @@ async function getUserInfo(data) {
   data.forEach(item => {
     allArr.push(new Promise((resolve, reject) => {
       db.collection('user').where({
-        openid: item._openid
+        _openid: item._openid
       }).get().then(res => {
         item.userInfo = res.data[0]
         resolve(res)
