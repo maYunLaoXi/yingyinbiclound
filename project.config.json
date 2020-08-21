@@ -149,6 +149,13 @@
 					"id": -1,
 					"name": "pages/user-info/user-info",
 					"pathName": "pages/user-info/user-info",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/activity/activity",
+					"pathName": "pages/activity/activity",
 					"scene": null
 				}
 			]

@@ -5,7 +5,11 @@
     <image class="user-avatar" src="{{userInfo.avatarUrl}}" />
     <text class="name">{{userInfo.nickName}}</text>
   </view>
-  <button wx:if="{{!hideShowBtn}}" class="cu-btn round line-red" bindtap="goShowActivity">发show</button>
+  <view>
+    <text class="cuIcon-{{hasStart ? 'appreciatefill text-red' : 'appreciate  text-gray'}} start" bind:tap="tabStart"></text>
+    <text class="text-gray mr-5">{{start.length}}</text>
+    <button wx:if="{{!hideShowBtn}}"  class="cu-btn round line-red" bindtap="goShowActivity">发show</button>
+  </view>
 </view>
 <view class="text">
   <view class="title">{{data.title}}</view>

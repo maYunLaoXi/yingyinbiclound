@@ -32,10 +32,6 @@
               <text class="fw-500">{{activityListTotalSize}}</text>
               <text>活动</text>
             </view>
-            <view class="flex-column-center statistics-text">
-              <text class="fw-500">22</text>
-              <text>赞</text>
-            </view>
           </view>
           <button class="cu-btn round line-red" bindtap="toAddPicArticle">发表图文</button>
         </view>
@@ -74,8 +70,8 @@
                       <view class="yin-card__content">
                         <view class="yin-card__title">{{listItem.title}}</view>
                         <view class="yin-card__desc">{{listItem.article}}</view>
-                        <view class="text-gray text-sm">
-                          <text class="cuIcon-appreciatefill margin-lr-xs"></text>
+                        <view class="text-gray text-sm yin-start">
+                          <text class="cuIcon-appreciatefill margin-lr-xs">{{listItem.start ? listItem.start.length : ''}}</text>
                         </view>
                       </view>
                     </view>

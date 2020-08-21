@@ -30,3 +30,9 @@
   margin-top: 6px;
   color: #7d7e80;
 }
+.start{
+  font-size: 17px;
+}
+.mr-5{
+  margin-right: 5px;
+}

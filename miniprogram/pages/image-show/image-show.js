@@ -8,7 +8,10 @@ Page({
   data: {
     data: {},
     userInfo: {},
-    hideShowBtn: true
+    hideShowBtn: true,
+    start: null,
+    hasStart: false,
+    collection: '',
   },
 
   /**
@@ -16,16 +19,18 @@ Page({
    */
   onLoad: function (options) {
     const { id, collection, hideShowBtn, from = '' } = options
+    if(!collection) return
+    this.setData({ collection })
     let btn = hideShowBtn !== 'undefined'
     if(from === 'activity-data') {
       // 来自活动页的waterfall
       this.setViewFromData(app.globalData.imageShowData)
-    }else if(from === 'activity-show') {
+    }else if(from === 'activity-receive') {
       // 来自活动页的waterfall
       this.setViewFromData(app.globalData.imageShowData)
       return
     }else if( from === 'photography-class') {
-      this.setViewFromClass()
+      this.setViewFromClass(from)
     }else {
       if(id && collection) this.getImages(id, collection)
       const { imgShowUser } = app.globalData
@@ -48,12 +53,14 @@ Page({
       }
     }).then(res => {
       let data = res.result.data
+      this.viewStart(data)
       this.setData({
         data: data
       })
     })
   },
   setViewFromData(data, hideShowBtn = true) {   
+    this.viewStart(data)
     this.setData({
       data: data,
       userInfo: data.userInfo,
@@ -65,7 +72,7 @@ Page({
   },
   setViewFromClass() {
     const { imageShowData } = app.globalData
-    debugger
+    this.viewStart(imageShowData)
     this.setData({
       data: imageShowData,
       userInfo: imageShowData.userInfo
@@ -83,7 +90,38 @@ Page({
       url: `/pages/show-activity/show-activity?_id=${_id}&title=${title}&article=${article}&url=${photo[0].url}&activity_id=${activity_id}`,
     })
   },
+  viewStart(data) {
+    const { start } = data
+    if(!start)return
+    try{
+      const { _openid } = app.globalData.userInfo
+      const hasStart = start.includes(_openid)
+      this.setData({
+        start,
+        hasStart
+      })
+    }catch(err) {}
+  },
+  async tabStart(e) {
+    const { collection, data, start = [] } = this.data
+    const { _id } = data 
+    if(!collection || !_id) return
 
+    const res = await wx.cloud.callFunction({
+      name: 'start',
+      data: {
+        _id,
+        collection,
+        start,
+      }
+    })
+    const { stats, start: resStart } = res.result
+
+    if(stats.updated === 1) {
+      this.viewStart({ start: resStart})
+    }
+
+  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */

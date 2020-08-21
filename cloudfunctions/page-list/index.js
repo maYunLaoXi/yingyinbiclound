@@ -2,8 +2,7 @@
 const cloud = require('wx-server-sdk')
 
 cloud.init({
-  // env: cloud.DYNAMIC_CURRENT_ENV
-  env: 'development-zgtnu'
+  env: cloud.DYNAMIC_CURRENT_ENV
 })
 const wxContext = cloud.getWXContext()
 const db = cloud.database()
@@ -41,7 +40,7 @@ async function getUserInfo(data) {
   data.forEach(item => {
     allArr.push(new Promise((resolve, reject) => {
       db.collection('user').where({
-        openid: item._openid
+        _openid: item._openid
       }).get().then(res => {
         item.userInfo = res.data[0]
         resolve(res)

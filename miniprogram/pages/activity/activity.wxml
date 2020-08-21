@@ -15,7 +15,7 @@
       <view class="detial-right">
         <image class="auth-profile" src="{{authorAvatar}}" mode="aspectFill"></image>
         <text class="auth-name">{{author}}</text>
-        <text class="follow-text">+关注</text>
+        <text class="follow-text" bindtap="showModal" data-target="Image">+关注</text>
       </view>  
     </view>
     <view class="description">
@@ -79,9 +79,11 @@
   </view>
   <view style="display: {{1==TabCur ? 'block' : 'none'}}" class="bg-white">
     <waterfall-com image-list="{{imageJoin}}" bindimg="toImageShowNav" name="activity-data" />
+    <yin-dot wx:if="{{dotJoin}}" />
   </view>
   <view style="display: {{2==TabCur ? 'block' : 'none'}}">
-    <waterfall-com image-list="{{imageShow}}" bindimg="toImageShowNav" name="activity-show" />
+    <waterfall-com image-list="{{imageShow}}" bindimg="toImageShowNav" name="activity-receive" />
+    <yin-dot wx:if="{{dotShow}}" />
   </view>
 </scroll-view>
 

@@ -14,7 +14,7 @@ page,.wrap{
   width: 100%;
 }
 .user-box{
-  top: -144px;
+  top: -114px;
   width: 100%;
   height: 120vh;
 }
@@ -124,4 +124,16 @@ page,.wrap{
 }
 .act-card{
   margin-top: 10px;
+}
+.yin-start{
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+}
+.yin-card__desc{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
