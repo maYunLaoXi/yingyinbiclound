@@ -46,7 +46,7 @@ Component({
   methods: {
     setSize(list) {
       const { systemInfo } = app.globalData
-      const windowWidth = systemInfo.windowWidth - 3
+      const windowWidth = systemInfo.windowWidth - 1
       const { round } = Math
 
       list.forEach(item => {

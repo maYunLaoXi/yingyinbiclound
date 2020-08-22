@@ -148,8 +148,6 @@ Page({
       }
     }).then(res => {
       const { data, page, totalPage } = res.result
-      if(!data.length) return;
-
       this.setData({
         imageShow: data,
         imageShowPage: page,

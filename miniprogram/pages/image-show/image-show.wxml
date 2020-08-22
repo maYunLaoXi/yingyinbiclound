@@ -7,7 +7,7 @@
   </view>
   <view>
     <text class="cuIcon-{{hasStart ? 'appreciatefill text-red' : 'appreciate  text-gray'}} start" bind:tap="tabStart"></text>
-    <text class="text-gray mr-5">{{start.length}}</text>
+    <text class="text-gray mr-5">{{data.start.length}}</text>
     <button wx:if="{{!hideShowBtn}}"  class="cu-btn round line-red" bindtap="goShowActivity">发show</button>
   </view>
 </view>

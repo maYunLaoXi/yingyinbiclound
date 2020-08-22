@@ -1,6 +1,6 @@
 /* pages/components/image-view/image-view.wxss */
 .images-row{
-  margin-top: 3px;
+  margin-top: 1px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

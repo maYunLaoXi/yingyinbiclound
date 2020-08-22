@@ -29,12 +29,6 @@ Component({
   observers: {
     'images': function(images) {
       if(!images) return
-      if(images && !images.length){
-        this.setData({
-          imageList: []
-        })
-        return
-      }
       if(!this.data.userInfo) {
         const { userInfo } = app.globalData
         if(userInfo) {
@@ -43,13 +37,12 @@ Component({
           })
         }
       }
-      const { imageList } = this.data
       images.forEach(item => {
         this.setHasStart(item)
         item.photoView = item.photo.slice(0,3)
         this.setTime(item)
       })
-      this.setData({ imageList: [...imageList, ...images]})
+      this.setData({ imageList: [...images]})
     }
   },
 

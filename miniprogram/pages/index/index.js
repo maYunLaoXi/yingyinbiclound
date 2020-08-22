@@ -72,6 +72,7 @@ Page({
     db.collection('index-data').where({ open: true }).get({
       success:(res) => {
         const { swiper } = res.data[0]
+        console.log({swiper})
         this.setData({
           swiper: swiper,
         })
@@ -187,7 +188,7 @@ Page({
     this.setData({
       dynamicList: [],
       dynamicListPage: 0,
-      dynamicListTotalPage: 1,
+      dynamicListTotalPage: 0,
       dot: true
     })
     this.getDynamic(1)
