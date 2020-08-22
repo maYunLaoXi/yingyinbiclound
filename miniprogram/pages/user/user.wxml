@@ -46,7 +46,7 @@
         <van-tabs swipeable>
           <van-tab title="作品">
             <scroll-view style="height: {{contentHeight}}" scroll-y="true" bindscrolltolower="imageListBottom" refresher-threshold="180">
-              <photos-comp image-list="{{imageList}}" bind:cliImage="clickUserImage" />
+              <photos-comp image-list="{{imageList}}" collection="photography-class" bind:cliImage="clickUserImage" bind:removeImg="removeImg" />
             </scroll-view>
           </van-tab>
           <van-tab title="活动">
@@ -65,21 +65,39 @@
                   <view class="yin-card">
                     <view class="yin-card-content">
                       <view class="yin-card__thumb">
-                        <image class="yin-card__img" src="{{listItem.photo.url + '?imageView2/1/h/100'}}" mode="aspectFill" bindtap="toImageShow" data-item="{{listItem}}" data-id="{{listItem._id}}" data-activity-id="{{listItem._id}}"></image>
+                        <image class="yin-card__img" src="{{listItem.photo.url + '?imageView2/1/h/100'}}" mode="aspectFill" 
+                          bindtap="toImageShow"  
+                          bindlongpress="edit" 
+                          data-item="{{listItem}}"
+                          data-index1="{{index}}"
+                          data-index2="{{listIndex}}" 
+                          data-id="{{listItem._id}}" 
+                          data-activity-id="{{listItem._id}}"
+                        ></image>
                       </view>
                       <view class="yin-card__content">
                         <view class="yin-card__title">{{listItem.title}}</view>
                         <view class="yin-card__desc">{{listItem.article}}</view>
                         <view class="text-gray text-sm yin-start">
-                          <text class="cuIcon-appreciatefill margin-lr-xs">{{listItem.start ? listItem.start.length : ''}}</text>
+                          <text class="cuIcon-like margin-lr-xs">  {{listItem.start ? listItem.start.length : ''}}</text>
                         </view>
                       </view>
                     </view>
                   </view>
-                  <view class="yin-card yin-card-xs" wx:for="{{listItem.showData}}" wx:for-item="receiveItem" wx:for-index="receiveIndex" wx:key="receiveIndex">
+                  <!-- 买家show -->
+                  <view class="yin-card yin-card-xs" wx:for="{{listItem.showData}}" wx:for-item="receiveItem" wx:for-index="receiveIndex" wx:key="_id">
                     <view class="yin-card-content yin-card-content-xs">
                       <view class="yin-card__thumb yin-card__thumb-xs">
-                        <image class="yin-card__img-xs" src="{{receiveItem.photo[0].url + '?imageView2/1/h/100'}}" mode="aspectFill" bindtap="toImageShow" data-id="{{receiveItem._id}}" data-show data-hide-show-btn></image>
+                        <image class="yin-card__img-xs" src="{{receiveItem.photo[0].url + '?imageView2/1/h/100'}}" mode="aspectFill" 
+                          bindtap="toImageShow" 
+                          bindlongpress="edit"
+                          data-index1="{{index}}"
+                          data-index2="{{listIndex}}"
+                          data-index3="{{receiveIndex}}"
+                          data-id="{{receiveItem._id}}" 
+                          data-show 
+                          data-hide-show-btn
+                        ></image>
                       </view>
                       <view class="yin-card__content yin-card__content-xs">
                         <view class="yin-card__title yin-card__title-xs">{{receiveItem.title}}</view>

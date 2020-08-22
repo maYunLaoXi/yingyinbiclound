@@ -176,7 +176,7 @@ Page({
       imageJoinPage: 1,
       imageJoinTotalPage: NaN,
     })
-    this.onLoad()
+    this.onLoad()    
   },
   onReachBottom() {
     if(this.data.TabCur == 1) {

@@ -36,7 +36,7 @@
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "影音笔",
     "backgroundColor": "#F1F3F4",
-    "backgroundTextStyle": "light",
+    "backgroundTextStyle": "dark",
     "enablePullDownRefresh": true
   },
   "sitemapLocation": "sitemap.json",

@@ -75,6 +75,7 @@ App({
           screenHeight: res.screenHeight,
           windowWidth: res.windowWidth,
           windowHeight: res.windowHeight,
+          platform: res.platform,
         }
         setGlobalDdata(that, { systemInfo })
       }

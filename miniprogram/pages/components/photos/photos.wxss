@@ -14,4 +14,17 @@ image{
   width: 32vw;
   height: 32vw;
   vertical-align: bottom;
+  position: relative;
+}
+.start{
+  position: absolute;
+  bottom: 3px;
+  right: 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #ffff;
+}
+.start-text{
+  margin-left: 3px;
 }

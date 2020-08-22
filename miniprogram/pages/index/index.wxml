@@ -8,8 +8,8 @@
     class="sw1"
   >
       <block wx:for="{{swiper}}"  wx:key="index">
-        <swiper-item>
-          <view class="s-v1" style="background-image: url({{item}})"></view>
+        <swiper-item bind:tap="cliImage" data-item="{{item}}">
+          <view class="s-v1" style="background-image: url({{item.poster}})"></view>
         </swiper-item>
       </block>
   </swiper>

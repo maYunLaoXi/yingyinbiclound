@@ -38,7 +38,8 @@ exports.main = async (event, context) => {
       pipeline: $.pipeline()
         .match(_.expr($.and([
           $.eq(['$activity.activity_id', '$$act_id']),
-          $.eq(['$_openid', '$$userOpenid'])
+          $.eq(['$_openid', '$$userOpenid']),
+          '$activity.isJoinDevelop'
         ])))
         .done(),
       as: 'listClass'
