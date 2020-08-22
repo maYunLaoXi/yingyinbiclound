@@ -157,7 +157,6 @@ Page({
     })
   },
   moving(e) {
-    console.log(e.detail.y)
     if(e.detail.y <= 0) {
       const { systemInfo } = app.globalData
       const { contentHeight } = this.data

@@ -28,17 +28,17 @@
   <scroll-view scroll-x class="bg-white nav text-center">
     <view class="nav2" >
       <view class="cu-item {{0==TabCur?'text-black cur':''}}" bindtap="tabSelect" data-id="0">
-        <text class="cuIcon-camerafill"></text> 参与方式
+        <text class="cuIcon-picfill"></text> 参与方式
       </view>
     </view>
     <view class="nav2" >
       <view class="cu-item {{1==TabCur?'text-black cur':''}}" bindtap="tabSelect" data-id="1">
-        <text class="cuIcon-upstagefill"></text> 活动精选
+        <text class="cuIcon-wefill"></text> 活动精选
       </view>
     </view>
     <view class="nav2" >
       <view class="cu-item {{2==TabCur?'text-black cur':''}}" bindtap="tabSelect" data-id="2">
-        <text class="cuIcon-upstagefill"></text> 往期晒图
+        <text class="cuIcon-camerafill"></text> 往期晒图
       </view>
     </view>
   </scroll-view>
@@ -152,3 +152,4 @@
     </view>
   </view>
 </view>
+<van-toast id="van-toast" />

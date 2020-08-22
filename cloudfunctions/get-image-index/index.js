@@ -15,43 +15,36 @@ exports.main = async (event, context) => {
   const totalSizeRes = await db.collection('photography-class').where(where).count()
   const totalSize = totalSizeRes.total
   const totalPage = Math.ceil(totalSize / pageSize)
-  const result = await db.collection('photography-class')
-  .orderBy('createTime', 'desc')
-  .where(where)
+
+  const res = await db.collection('photography-class')
+  .aggregate() 
+  .match(where)
+  .sort({
+    createTime: -1
+  })
   .skip((page - 1) * pageSize)
   .limit(pageSize)
-  .get()
-  // .aggregate()
-  // .lookup({
-  //   from: 'user',
-  //   localField: '_openid',
-  //   foreignField: '_openid',
-  //   as: 'userInfo'
-  // })
-  // .end()
-  await getUserInfo(result.data)
+  .lookup({
+    from: 'user',
+    localField: '_openid',
+    foreignField: '_openid',
+    as: 'userInfo'
+  })
+  .end()
+  const { list } = res
+  setUserInfo(list)
+
   return {
-    data: result.data,
+    data: list,
     page,
     pageSize,
     totalPage
   }
 }
-async function getUserInfo(data) {
-  if(!data.length) return data
-  const allArr = []
-  data.forEach(item => {
-    let _openid = item._openid || item.openid || ''
-    allArr.push(new Promise((resolve, reject) => {
-      db.collection('user').where({
-        _openid
-      }).get().then(res => {
-        const [info] = res.data
-        const { _id, avatarUrl, nickName, _openid } = info
-        item.userInfo = { _id, avatarUrl, nickName, _openid }
-        resolve(res)
-      })
-    }))
-  })
-  return Promise.all(allArr)
+function setUserInfo(list) {
+  if(!list || !list.length) return;
+  list.forEach(item => {
+    const { userInfo = [{}]} = item
+    item.userInfo = userInfo[0]
+  });
 }

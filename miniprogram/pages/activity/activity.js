@@ -15,7 +15,7 @@ Page({
     imageJoin: [],
     imageJoinPage: 1,
     imageJoinTotalPage: NaN,
-    dotJion: true,
+    dotJoin: true,
     // imageShow
     imageShow: [],
     imageShowPage: 1,
@@ -104,7 +104,7 @@ Page({
   getJoin({ page = 1, pageSize = 9 } = {}){
     const { imageJoinPage, imageJoinTotalPage } = this.data
     if(imageJoinPage === imageJoinTotalPage)return
-    this.setData({ dotJion: true })
+    this.setData({ dotJoin: true })
     wx.cloud.callFunction({
       name: 'activity-get',
       data: {
@@ -124,7 +124,7 @@ Page({
         imageJoin: data,
         imageJoinPage: page,
         imageJoinTotalPage: totalPage,
-        dotJion: false
+        dotJoin: false
       })
     })
   },
@@ -175,6 +175,9 @@ Page({
       imageJoin: [],
       imageJoinPage: 1,
       imageJoinTotalPage: NaN,
+      imageShow: [],
+      imageShowPage: 1,
+      imageShowTotalPage: NaN,
     })
     this.onLoad()    
   },

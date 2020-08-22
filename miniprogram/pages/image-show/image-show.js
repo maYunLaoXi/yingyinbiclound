@@ -1,5 +1,7 @@
 // miniprogram/pages/image-show/image-show.js
 const app = getApp()
+import { isLogin } from '../../utils/index'
+import Toast from '/vant-weapp/toast/toast.js'
 Page({
 
   /**
@@ -103,7 +105,12 @@ Page({
     }catch(err) {}
   },
   async tabStart(e) {
-    const { collection, data, start = [] } = this.data
+    if(!isLogin()) {
+      Toast('登录才可点赞哦～')
+      return
+    }
+    let { collection, data, start } = this.data
+    if(!start) start = []
     const { _id } = data 
     if(!collection || !_id) return
 

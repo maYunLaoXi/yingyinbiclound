@@ -83,7 +83,6 @@ Page({
     let pass = true, msg = ''
     if(isShow) {
       const msgRes = await msgSecCheck(title + article)
-      debugger
       pass = msgRes.pass
       msg = msgRes.msg ? msgRes.msg : ''
     }
@@ -92,7 +91,6 @@ Page({
       photoClass: 'activity' + actName,
       progress: this.uploadProgerss
     })
-    debugger
     const dbRes = await db.collection('activity-data').add({
       data: {
         createTime: db.serverDate(),
