@@ -66,5 +66,10 @@
   },
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于设定收件地址"
+    }
   }
 }

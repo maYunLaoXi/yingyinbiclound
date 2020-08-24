@@ -1,6 +1,6 @@
 // miniprogram/pages/image-show/image-show.js
 const app = getApp()
-import { isLogin } from '../../utils/index'
+import { isLogin, setStart } from '../../utils/index'
 import Toast from '/vant-weapp/toast/toast.js'
 Page({
 
@@ -113,21 +113,19 @@ Page({
     if(!start) start = []
     const { _id } = data 
     if(!collection || !_id) return
-
-    const res = await wx.cloud.callFunction({
+    const newItem = setStart(data.start, data)
+    this.setData({
+      data: newItem,
+      hasStart: newItem.hasStart
+    })
+    wx.cloud.callFunction({
       name: 'start',
       data: {
         _id,
         collection,
-        start,
+        start: data.start
       }
     })
-    const { stats, start: resStart } = res.result
-
-    if(stats.updated === 1) {
-      this.viewStart({ start: resStart})
-    }
-
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作

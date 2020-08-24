@@ -1,5 +1,5 @@
 // pages/components/nine-image/nine-image.js
-import { readableTime, isLogin } from '../../../utils/index'
+import { readableTime, isLogin, getPage, setStart } from '../../../utils/index'
 import Toast from '/vant-weapp/toast/toast.js'
 const app = getApp()
 Component({
@@ -15,6 +15,10 @@ Component({
       type: Array,
       value: []
     },
+    imagesKey: {
+      type: String,
+      default: ''
+    }
   },
   /**
    * 组件的初始数据
@@ -64,9 +68,14 @@ Component({
         Toast('登录才可点赞哦～')
         return
       }
+      const page = getPage(-1)
 
       const { item, index } = e.currentTarget.dataset
       const { _id, start } = item
+      const { imageList, imagesKey } = this.data
+      const newItem = setStart(start, item)
+      imageList[index] = newItem
+      page.setData({ [imagesKey]:imageList })
 
       const res = await wx.cloud.callFunction({
         name: 'start',
@@ -75,8 +84,8 @@ Component({
           start,
         }
       })
+      return
       const { stats, start: resStart } = res.result
-      const { imageList } = this.data
 
       if(stats.updated === 1) {
         item.start = resStart
@@ -94,7 +103,7 @@ Component({
     setTime(item) {
       const { createTime } = item
       if(!createTime)return
-      item.createTime = readableTime(createTime)
+      item.readableTime = readableTime(createTime)
     },
     toImageShow(e) {
       const { show } = e.currentTarget.dataset

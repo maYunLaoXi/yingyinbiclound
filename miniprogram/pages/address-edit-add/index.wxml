@@ -12,7 +12,7 @@
         {{ region }}
       </view>
     </picker>
-		<text class="cuIcon-locationfill text-gray" bind:tap="getLocation"></text>
+		<text class="map-icon cuIcon-locationfill text-gray" bind:tap="getLocation"></text>
 	</view>
   <view class="cu-form-group">
 		<view class="title">详细地址</view>

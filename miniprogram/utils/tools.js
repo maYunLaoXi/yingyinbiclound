@@ -97,3 +97,51 @@ export const isLogin = () => {
   const { userInfo } = app.globalData
   return userInfo && Object.keys(userInfo).length
 }
+/**
+ * 返回页面栈的某页
+ */
+export const getPage = (num = -1) => {
+  const pages = getCurrentPages()
+  return pages[pages.length - Math.abs(num)]
+}
+/**
+ * 获取用户openid
+ */
+export const getOpenid = () => {
+  if(!isLogin())return '';
+  return app.globalData.userInfo._openid
+}
+/**
+ * setStart
+ */
+export const setStart = (start, item) => {
+  let receiveStart,receiveItem;
+  if(!item){
+    receiveStart = item.start
+    receiveItem = start
+  }else{
+    receiveStart = start ? start : []
+    receiveItem = item
+  }
+  const _openid = getOpenid()
+  const [newStart, hasStart] = toggleElement(receiveStart, _openid)
+  return {...receiveItem, start: newStart, hasStart}
+}
+/**
+ * 数组有就删，没有就加，反回结果数组及里面是否有
+ * @param {*} arr 
+ * @param {*} ele 
+ */
+export const toggleElement = (arr = [], ele) => {
+  const index = arr.findIndex(value => {
+    return value === ele
+  })
+  const has = index !== -1
+  const resArr = [...arr]
+  if(!has){
+    resArr.push(ele)
+  }else{
+    resArr.splice(index, 1)
+  }
+  return [resArr, !has]
+}

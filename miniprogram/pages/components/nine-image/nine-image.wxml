@@ -13,7 +13,7 @@
         </view>
       </view>
       <view class="margin-top-sm flex justify-between">
-        <view class="text-gray yin-fs-13">{{item.createTime}}</view>
+        <view class="text-gray yin-fs-13">{{item.readableTime}}</view>
         <view  class="icon" bind:tap="start" data-item="{{item}}" data-index="{{index}}">
           <text class="cuIcon-{{item.hasStart ? 'appreciatefill text-red' : 'appreciate  text-gray'}}"></text>
           {{item.start.length}}

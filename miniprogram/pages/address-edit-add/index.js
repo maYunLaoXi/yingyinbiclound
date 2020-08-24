@@ -3,7 +3,10 @@ const QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js')
 import { lbsKey as key } from '../../account/lbs.qq'
 import Dialog from '/vant-weapp/dialog/dialog.js'
 
-let qqmapsdk;
+// let qqmapsdk;
+const qqmapsdk = new QQMapWX({
+  key,
+})
 const app = getApp()
 Page({
 
@@ -23,9 +26,9 @@ Page({
       name: address.name,
       region: `${address.province} ${address.city} ${address.district}`
     })
-    qqmapsdk = new QQMapWX({
-      key,
-    })
+    // qqmapsdk = new QQMapWX({
+    //   key,
+    // })
   },
   bindRegionChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -41,10 +44,25 @@ Page({
     })
   },
   getLocation(){
-    console.log('nock-location')
+    wx.getSetting({
+      success: res => {
+        if (!res.authSetting['scope.userLocation']) {
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success: () => {
+              this.chooseLocation()
+            },
+          })
+        }else{
+          this.chooseLocation()
+        }
+      }
+    })
+    return
+  },
+  chooseLocation() {
     wx.chooseLocation({
       success: (res) => {
-        console.log(res)
         qqmapsdk.geocoder({
           address: res.address + res.name,
           success: res2 => {

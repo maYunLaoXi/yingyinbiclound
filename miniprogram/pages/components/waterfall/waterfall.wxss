@@ -20,8 +20,8 @@
   border-radius: 10rpx;
 }
 .cu-avatar.lg {
-	width: 30rpx;
-	height: 30rpx;
+	width: 33rpx;
+	height: 33rpx;
 	font-size: 1em;
 }
 .cu-list.menu-avatar>.cu-item{
@@ -40,7 +40,7 @@
   -webkit-box-orient: vertical;
 }
 .user-name{
-  font-size: 20rpx;
+  font-size: 25rpx;
   display: inline-block;
   height: 30rpx;
   line-height: 30rpx;
@@ -61,4 +61,7 @@
 .bg-black-5{
   background-color: rgba(0,0,0,.7);
   color: var(--white);
+}
+.start-icon{
+  font-size: 26rpx;
 }

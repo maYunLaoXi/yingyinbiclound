@@ -1,1 +1,4 @@
 /* miniprogram/pages/address-edit-add/index.wxss */
+.map-icon{
+  font-size: 46px;
+}
