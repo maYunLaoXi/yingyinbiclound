@@ -41,6 +41,7 @@ Page({
     })
   },
   getLocation(){
+    console.log('nock-location')
     wx.chooseLocation({
       success: (res) => {
         console.log(res)
@@ -64,6 +65,9 @@ Page({
           fail: err => {
           }
         })
+      },
+      fail: err => {
+        console.log(err)
       }
     })
   },
