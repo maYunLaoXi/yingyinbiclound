@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "image-view": "/pages/components/image-view/image-view",
-    "navigation-bar": "/pages/components/navigation-bar/navigation-bar"
+    "navigation-bar": "/pages/components/navigation-bar/navigation-bar",
+    "van-toast": "vant-weapp/toast/index"
   }
 }

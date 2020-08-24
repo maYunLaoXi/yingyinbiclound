@@ -11,20 +11,36 @@ exports.main = async (event, context) => {
   const totalSizeRes = await db.collection(collection).where(where).count()
   const totalSize = totalSizeRes.total
   const totalPage = Math.ceil(totalSize / pageSize)
-  const all = await db.collection(collection).where(where)
-  .orderBy('createTime', 'desc') // 排序条件，对uploadTime字段进行desc(降序：越大越靠前)
+  
+  const all = await db.collection(collection)
+  .aggregate()
+  .match(where)
+  .sort({ createTime: -1 })
   .skip((page -1) * pageSize)
   .limit(pageSize)
-  .get()
-  await getUserInfo(all.data)
-
+  .lookup({
+    from: 'user',
+    localField: '_openid',
+    foreignField: '_openid',
+    as: 'userInfo'
+  })
+  .end()
+  const { list } = all
+  setUserInfo(list)
   return {
-    data: all.data,
+    data: list,
     page,
     pageSize,
     totalSize,
     totalPage,
   }
+}
+function setUserInfo(list) {
+  if(!list || !list.length) return;
+  list.forEach(item => {
+    const { userInfo = [{}]} = item
+    item.userInfo = userInfo[0]
+  });
 }
 async function getUserInfo(data) {
   if(!data.length) return data

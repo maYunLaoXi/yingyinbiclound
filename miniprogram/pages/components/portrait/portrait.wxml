@@ -7,3 +7,4 @@
   </view>
   <waterfall-com image-list="{{imageList}}" dot="{{dot}}" bindimg="toImageShowNav" name="photography-class" />
 </view>
+<van-toast id="van-toast" />

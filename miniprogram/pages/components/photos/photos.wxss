@@ -4,14 +4,27 @@
 }
 .wrap>view{
   display: inline-block;
-  margin-top: 1vw;
+  margin-top: .4vw;
   position: relative;
 }
 .wrap>view:nth-child(3n),.wrap>view:nth-child(3n+2){
-  margin-left: 1vw;
+  margin-left: .4vw;
 }
 image{
-  width: 32vw;
-  height: 32vw;
+  width: 32.4vw;
+  height: 32.4vw;
   vertical-align: bottom;
+  position: relative;
+}
+.start{
+  position: absolute;
+  bottom: 3px;
+  right: 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #ffff;
+}
+.start-text{
+  margin-left: 3px;
 }

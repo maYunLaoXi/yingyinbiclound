@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "van-button": "vant-weapp/button",
+    "van-toast": "vant-weapp/toast/index",
     "waterfall-com": "/pages/components/waterfall/waterfall",
     "yin-dot": "/pages/components/dot/dot"
   }

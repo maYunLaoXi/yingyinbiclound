@@ -1,4 +1,6 @@
 const app = getApp()
+import { isLogin } from '../../../utils/index'
+import Toast from '/vant-weapp/toast/toast.js'
 // 瀑布流组件
 Component({
   options: {
@@ -126,11 +128,19 @@ Component({
           item.hasStart = false
           return
         }
-        const { _openid } = app.globalData.userInfo
-        item.hasStart = start.includes(_openid)
+        if(isLogin()){
+          const { _openid } = app.globalData.userInfo
+          item.hasStart = start.includes(_openid)
+        }else {
+          item.hasStart = false
+        }
       });
     },
     async tabStart(e) {
+      if(!isLogin()) {
+        Toast('登录才可点赞哦～')
+        return
+      }
       const { obj, i, position } = e.currentTarget.dataset
       const list = position === 'left' ? 'imagesLeft' : 'imagesRight'
       const { name, [list]: imageList } = this.data

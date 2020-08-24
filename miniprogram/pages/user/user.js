@@ -28,7 +28,6 @@ Page({
   onGetUserInfo: async function (e) {
     if (e.detail.userInfo) {
       const res = await this.getDbUserInfo(e.detail.userInfo)
-      debugger
       this.setData({
         logged: true,
         avatarUrl: e.detail.userInfo.avatarUrl,
@@ -158,11 +157,10 @@ Page({
     })
   },
   moving(e) {
-    console.log(e.detail.y)
     if(e.detail.y <= 0) {
       const { systemInfo } = app.globalData
       const { contentHeight } = this.data
-      let setHeight = systemInfo.windowHeight - 43 + 'px'
+      let setHeight = systemInfo.windowHeight - 40 + 'px'
       if(contentHeight === setHeight) return;
       this.setData({
         contentHeight: setHeight
@@ -178,6 +176,75 @@ Page({
     const { imageListTotalPage, imageListPage } = this.data
     if(imageListPage === imageListTotalPage)return;
     this.getImageList({page: imageListPage + 1})
-    debugger
+  },
+  // 删除视图图作品
+  removeImg(e) {
+    const { _id, index } = e.detail
+    if(!index)return;
+
+    const { imageList } = this.data
+    imageList.splice(index, 1)
+    this.setData({ imageList })
+  }, 
+  // 删除作品show
+  edit(e) {
+    const { systemInfo } = app.globalData
+    if (systemInfo.platform !== "devtools") wx.vibrateShort();
+    wx.showModal({
+      title: '注意',
+      content: '长按为删除操作，活动作品关联的show也会删除，数据不可恢复！确定删除？',
+      success: res => {
+        if (res.confirm) {
+          this.realEdit(e)
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
+  realEdit(e) {
+    // show 和 id 来自买家show(activiey-data) ; fromPhotoClass为true表示来自photography-class，false来自activity-receive
+    const { item = {}, show, id, index1, index2, index3 } = e.currentTarget.dataset
+  
+    const { fromPhotoClass, _id } = item
+    if(id && show) {
+      this.delDbData('activity-receive', id, { index1, index2, index3 })
+    }else if(fromPhotoClass === false && _id){
+      this.delDbData('activity-data', _id, { index1, index2, index3 })
+    }else if(fromPhotoClass === true && _id){
+      this.updateDbData('photography-class', _id, { index1, index2, index3 })
+    }
+  },
+  async delDbData(collection, _id, index){
+    const db = wx.cloud.database()
+    const res = await db.collection(collection).doc(_id).remove()
+    if(res.stats.removed === 1) {
+      this.setListView(index)
+    }
+  },
+  async updateDbData(collection, _id, index) {
+    const db = wx.cloud.database()
+    const res = await db.collection(collection).doc(_id).update({
+      data: { 
+        activity: {
+          isJoinDevelop: false
+        }
+      }
+    })
+    if(res.stats.updated === 1) {
+      this.setListView(index)
+    }
+  },
+  // 更新activity视图
+  setListView(index) {
+    const { index1, index2, index3 } = index
+
+    const { activityList } = this.data
+      if(!index3) {
+        activityList[index1].list.splice(index2, 1)
+      }else{
+        activityList[index1].list[index2].showData.splice(index3, 1)
+      }
+      this.setData({ activityList })
   }
 })

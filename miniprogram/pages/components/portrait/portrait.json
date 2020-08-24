@@ -2,7 +2,8 @@
   "usingComponents": {
     "navigation-bar": "../navigation-bar/navigation-bar",
     "class-swiper": "../class-swiper/class-swiper",
-    "waterfall-com": "/pages/components/waterfall/waterfall"
+    "waterfall-com": "/pages/components/waterfall/waterfall",
+    "van-toast": "vant-weapp/toast/index"
   },
   "onReachBottomDistance": 300
 }

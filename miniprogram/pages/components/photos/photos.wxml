@@ -1,6 +1,7 @@
 <!--pages/components/photos/photos.wxml-->
 <view class="wrap" style="height: {{height}}; overflow-y: scroll">
   <view wx:for="{{imageList}}" wx:key="_id">
-    <image mode="aspectFill" src="{{item.photo.url + '?imageView2/2/w/600'}}" bind:tap="handleTapImg" data-item="{{item}}"></image>
+    <image mode="aspectFill" src="{{item.photo.url + '?imageView2/2/w/600'}}" bind:tap="handleTapImg" bindlongpress="edit" data-item="{{item}}" data-index="{{index}}"></image>
+    <view class="start" ><van-icon name="like" color="#ffff" /><text class="start-text">{{item.start.length}}</text></view>
   </view>
 </view>

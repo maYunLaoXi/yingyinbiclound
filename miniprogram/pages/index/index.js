@@ -69,15 +69,12 @@ Page({
 
     // 获取云数据，swiper的图片地址
     const db = wx.cloud.database();
-    db.collection('index-data').doc("fd9fa871-d12a-4c78-bb4d-a376c7b4e004").get({
+    db.collection('index-data').where({ open: true }).get({
       success:(res) => {
-        console.log('clound',res);
-        const arr = [];
-        for(var i in res.data.swiper){
-          arr.push(res.data.swiper[i])
-        }
+        const { swiper } = res.data[0]
+        console.log({swiper})
         this.setData({
-          swiper: arr,
+          swiper: swiper,
         })
       },
       error:function(err){
@@ -166,6 +163,14 @@ Page({
       url: '/pages/components/' + url + '/' + url
     })
   },
+  // 点击swiper
+  cliImage(e) {
+    const { item } = e.currentTarget.dataset
+    app.globalData.imgShowUser = item.userInfo
+    wx.navigateTo({
+      url: `/pages/image-show/image-show?id=${item._id}&collection=${item.collection}`,
+    })
+  },
   // 触底事件
   onReachBottom(){
     const { dynamicListPage, dynamicListTotalPage } = this.data
@@ -183,7 +188,7 @@ Page({
     this.setData({
       dynamicList: [],
       dynamicListPage: 0,
-      dynamicListTotalPage: 1,
+      dynamicListTotalPage: 0,
       dot: true
     })
     this.getDynamic(1)
