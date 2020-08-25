@@ -156,7 +156,14 @@
 					"id": -1,
 					"name": "pages/activity/activity",
 					"pathName": "pages/activity/activity",
+					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "1011",
+					"pathName": "pages/index/index",
+					"scene": 1011
 				}
 			]
 		}

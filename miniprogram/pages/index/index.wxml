@@ -14,7 +14,7 @@
       </block>
   </swiper>
 </view> 
-
+<official-account></official-account>
 <view class="main">
   <class-swiper />
   <nine-image images="{{dynamicList}}" images-key="dynamicList"></nine-image>
