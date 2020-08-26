@@ -1,6 +1,6 @@
 // miniprogram/pages/components/add-picture-article/add-picture-article.js
 const app = getApp()
-import { qinuiUpload, msgSecCheck, showToast } from '../../../utils/index'
+import { qinuiUpload, msgSecCheck, showToast, uploadModal } from '../../../utils/index'
 import Toast from '/vant-weapp/toast/toast.js'
 Page({
   data: {
@@ -28,7 +28,7 @@ Page({
   getImageList(list) {
     this.setData({ imageList: list.detail })
   },
-  upload() { 
+  async upload() { 
     const { imageList, picClass } = this.data
     const promiseAll = []
     const classObj = picClass ? picClass : { nameEn: 'other'}
@@ -37,6 +37,7 @@ Page({
       Toast('你还没有选择图片')
       return
     }
+    await uploadModal('提交的图片用于与作者交流，最终将由管理员处置')
     // 进度提示
     this.setData({
       uploading: 1,
@@ -63,7 +64,8 @@ Page({
     const { title, article, isJoinDevelop, address } = this.data
 
     let result = await msgSecCheck(title + article)
-    const { pass, msg = '' } = result
+    // const { pass, msg = '' } = result
+    const pass = false, msg = '';
     const db = wx.cloud.database()
 
     db.collection('photography-class').add({
@@ -78,7 +80,7 @@ Page({
           activity_id: isJoinDevelop ? this.data.activity._id : '',
           address
         },
-        check: true,
+        check: false,
         // 点赞 [点过的openid]
         start: [],
         // 收藏 
@@ -94,7 +96,7 @@ Page({
       this.setData({
         uploading: 0
       })
-      showToast(pass, msg, this.initUser)
+      showToast(true, msg, this.initUser)
     })
   },
   initUser() {

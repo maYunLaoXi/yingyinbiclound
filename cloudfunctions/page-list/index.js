@@ -11,7 +11,7 @@ const _ = db.command
 // 云函数入口函数
 exports.main = async ({ collection, pageSize = 10, page = 1, className }, context) => {
   debugger
-  const where = { class: className }
+  const where = { class: className, check: true, pass: true }
   const totalSizeRes = await db.collection(collection).where(where).count()
   const totalSize = totalSizeRes.total
   const totalPage = Math.ceil(totalSize / pageSize)

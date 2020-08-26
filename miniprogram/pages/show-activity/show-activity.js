@@ -1,5 +1,5 @@
 // miniprogram/pages/show-activity/show-activity.js
-import { qinuiUpload, msgSecCheck, showToast } from '../../utils/index'
+import { qinuiUpload, msgSecCheck, showToast, uploadModal } from '../../utils/index'
 
 Page({
 
@@ -54,17 +54,18 @@ Page({
     if(!title && !article && !imageList.length){
       return
     }
+    await uploadModal('提交的图片用于与作者交流，最终将由管理员处置')
     let checkObj = { pass: false, msg: ''}
 
     this.setData({
       uploading: 1,
       total: imageList.length,
     })
-    if(isOpenShow){
-      const result = await msgSecCheck(title + article)
-      checkObj.pass = result.pass
-      checkObj.msg = result.msg
-    }
+    // if(isOpenShow){
+    //   const result = await msgSecCheck(title + article)
+    //   checkObj.pass = result.pass
+    //   checkObj.msg = result.msg
+    // }
     const { pass, msg } = checkObj
 
     const uploadRes = await qinuiUpload({
@@ -75,7 +76,7 @@ Page({
     this.uploading = 0
     const db = wx.cloud.database()
 
-    const dbRes = await db.collection('activity-receive').add({
+    await db.collection('activity-receive').add({
       // data 字段表示需新增的 JSON 数据
       data: {
         createTime: db.serverDate(), // 务服器产生时间
@@ -85,13 +86,13 @@ Page({
         title,
         article,
         show: isOpenShow,
-        check: true,
+        check: false,
         isHideUserInfo,
         pass,
         read: false
       }
     })
-    showToast(pass, msg, () => {
+    showToast(true, msg, () => {
       wx.switchTab({
         url: '/pages/user/user'
       })

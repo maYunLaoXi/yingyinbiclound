@@ -113,7 +113,7 @@ Page({
         pageSize,
         where: {
           check: true,
-          show: true
+          show: true,
         }
       }
     }).then(res => {

@@ -112,3 +112,17 @@ export const getQinuiToken = async () => {
   })
   return token.result.uptoken
 }
+
+export const uploadModal = (msg) => {
+  let tips = msg ? msg : '图片提交给管理员用于扩印，最终将由管理员处置'
+  return new Promise(resolve => {
+    wx.showModal({
+      title: '提示',
+      content: tips,
+      showCancel: false,
+      success (res) { 
+        resolve(res)
+      }
+    })
+  })
+}

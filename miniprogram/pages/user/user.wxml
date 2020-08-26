@@ -33,7 +33,7 @@
               <text>活动</text>
             </view>
           </view>
-          <button class="cu-btn round line-red" bindtap="toAddPicArticle">发表图文</button>
+          <button class="cu-btn round line-red" bindtap="toAddPicArticle">上传作品</button>
         </view>
         <view class="login-box" wx:else>
           <button

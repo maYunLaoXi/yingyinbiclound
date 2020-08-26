@@ -1,6 +1,6 @@
 // miniprogram/pages/join-activity.js
 const app = getApp()
-import { qinuiUpload, msgSecCheck, showToast } from '../../utils/index'
+import { qinuiUpload, msgSecCheck, uploadModal } from '../../utils/index'
 import Toast from '/vant-weapp/toast/toast.js'
 Page({
   data: {
@@ -74,24 +74,26 @@ Page({
       })
       return
     }
+    await uploadModal()
+
     const db = wx.cloud.database()
 
     this.setData({
       uploading: 1,
       total: imgList.length
     })
-    let pass = true, msg = ''
-    if(isShow) {
-      const msgRes = await msgSecCheck(title + article)
-      pass = msgRes.pass
-      msg = msgRes.msg ? msgRes.msg : ''
-    }
+    let pass = false, msg = ''
+    // if(isShow) {
+    //   const msgRes = await msgSecCheck(title + article)
+    //   pass = msgRes.pass
+    //   msg = msgRes.msg ? msgRes.msg : ''
+    // }
     const uploadedList = await qinuiUpload({
       path: imgList,
       photoClass: 'activity' + actName,
       progress: this.uploadProgerss
     })
-    const dbRes = await db.collection('activity-data').add({
+    await db.collection('activity-data').add({
       data: {
         createTime: db.serverDate(),
         name,
@@ -103,16 +105,16 @@ Page({
         title,
         article,
         activity_id: _id,
-        check: true,
+        check: false,
         pass,
         start: []
       }
     })
     debugger
     let tips = '图片已快马送达作者手中，请留意接下来的小程序和公众号消息'
-    if(isShow && !pass) {
-      tips = msg
-    }
+    // if(isShow && !pass) {
+    //   tips = msg
+    // }
     wx.showModal({
       content: tips,
       showCancel: false,
