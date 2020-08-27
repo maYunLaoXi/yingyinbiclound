@@ -114,6 +114,7 @@ Page({
         where: {
           check: true,
           show: true,
+          pass: true,
         }
       }
     }).then(res => {
@@ -144,6 +145,7 @@ Page({
         where: {
           check: true,
           show: true,
+          pass: true,
         }
       }
     }).then(res => {

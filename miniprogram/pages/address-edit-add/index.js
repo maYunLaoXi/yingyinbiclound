@@ -30,6 +30,19 @@ Page({
     //   key,
     // })
   },
+  onReady() {
+    wx.showModal({
+      title: '提示',
+      content: '地址仅用于回寄作品，不会用于其他用途',
+      success (res) {
+        if (res.confirm) {
+        } else if (res.cancel) {
+          wx.navigateBack()
+          console.log('用户点击取消')
+        }
+      }
+    })
+  },
   bindRegionChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     const value = e.detail.value
