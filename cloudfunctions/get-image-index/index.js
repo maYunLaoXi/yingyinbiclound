@@ -6,12 +6,8 @@ const db = cloud.database()
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  const { page, pageSize = 10 } = event
-  const where = {
-    pass: true,
-    check: true,
-  }
-  
+  const { page, pageSize = 10, where = { pass: true, check: true } } = event
+
   const totalSizeRes = await db.collection('photography-class').where(where).count()
   const totalSize = totalSizeRes.total
   const totalPage = Math.ceil(totalSize / pageSize)
@@ -38,7 +34,8 @@ exports.main = async (event, context) => {
     data: list,
     page,
     pageSize,
-    totalPage
+    totalPage,
+    totalSize
   }
 }
 function setUserInfo(list) {
