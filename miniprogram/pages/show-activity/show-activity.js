@@ -54,7 +54,7 @@ Page({
     if(!title && !article && !imageList.length){
       return
     }
-    await uploadModal('提交的图片用于与作者交流，最终将由管理员处置')
+    // await uploadModal('提交的图片用于与作者交流，最终将由管理员处置')
     let checkObj = { pass: false, msg: ''}
 
     this.setData({

@@ -37,7 +37,7 @@ Page({
       Toast('你还没有选择图片')
       return
     }
-    await uploadModal('提交的图片用于与作者交流，最终将由管理员处置')
+    // await uploadModal('提交的图片用于与作者交流，最终将由管理员处置')
     // 进度提示
     this.setData({
       uploading: 1,

@@ -184,13 +184,14 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: async function () {
     this.setData({
       dynamicList: [],
       dynamicListPage: 0,
       dynamicListTotalPage: 0,
       dot: true
     })
-    this.getDynamic(1)
+    await this.getDynamic(1)
+    wx.stopPullDownRefresh()
   },
 })

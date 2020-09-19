@@ -90,8 +90,10 @@ Page({
         console.log('err', err)
       }
     })
-    this.getJoin()
-    this.getShow()
+    return new Promise(resolve => {
+      this.getShow()
+      this.getJoin().then(res => resolve(res))
+    })
   },
   init(){
 
@@ -101,11 +103,11 @@ Page({
    * 精选内容(用户设定公开展示的内容)
    * @param {*} e 
    */
-  getJoin({ page = 1, pageSize = 9 } = {}){
+  async getJoin({ page = 1, pageSize = 9 } = {}){
     const { imageJoinPage, imageJoinTotalPage } = this.data
     if(imageJoinPage === imageJoinTotalPage)return
     this.setData({ dotJoin: true })
-    wx.cloud.callFunction({
+    const res = await wx.cloud.callFunction({
       name: 'activity-get',
       data: {
         collection: 'activity-data',
@@ -117,26 +119,26 @@ Page({
           pass: true,
         }
       }
-    }).then(res => {
-      const {data, page, totalPage} = res.result;
-      if(!data.length) return
-
-      this.setData({
-        imageJoin: data,
-        imageJoinPage: page,
-        imageJoinTotalPage: totalPage,
-        dotJoin: false
-      })
     })
+    const {data, page: resPage, totalPage: resTotalPage} = res.result;
+    if(!data.length) return
+
+    this.setData({
+      imageJoin: data,
+      imageJoinPage: resPage,
+      imageJoinTotalPage: resTotalPage,
+      dotJoin: false
+    })
+    return true
   },
   /**
    *  show内空（买家秀）
    */
-  getShow({page = 1, pageSize = 9 } = {}) {
+  async getShow({page = 1, pageSize = 9 } = {}) {
     const { imageShowPage, imageShowTotalPage } = this.data
     if(imageShowPage === imageShowTotalPage) return
     this.setData({ dotShow: true })
-    wx.cloud.callFunction({
+    const res = await wx.cloud.callFunction({
       name: 'activity-get',
       data: {
         collection: 'activity-receive',
@@ -148,14 +150,13 @@ Page({
           pass: true,
         }
       }
-    }).then(res => {
-      const { data, page, totalPage } = res.result
-      this.setData({
-        imageShow: data,
-        imageShowPage: page,
-        imageShowTotalPage: totalPage,
-        dotShow: false
-      })
+    })
+    const { data, page: resPage, totalPage: resTotalPage } = res.result
+    this.setData({
+      imageShow: data,
+      imageShowPage: resPage,
+      imageShowTotalPage: resTotalPage,
+      dotShow: false
     })
   },
   // 点击查看图片
@@ -170,7 +171,7 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: async function () {
     this.setData({
       imageJoin: [],
       imageJoinPage: 1,
@@ -179,7 +180,8 @@ Page({
       imageShowPage: 1,
       imageShowTotalPage: NaN,
     })
-    this.onLoad()    
+    await this.onLoad()    
+    wx.stopPullDownRefresh()
   },
   onReachBottom() {
     if(this.data.TabCur == 1) {

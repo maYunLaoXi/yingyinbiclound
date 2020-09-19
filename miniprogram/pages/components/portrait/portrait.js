@@ -24,12 +24,12 @@ Page({
     this.getData()
   },
 
-  getData(page = 1) {
+  async getData(page = 1) {
     const { nowPage, totalPage, className = 'portrait' } = this.data
     if(nowPage === totalPage)return
     this.setData({ dot: true })
     
-    wx.cloud.callFunction({
+    const res = await wx.cloud.callFunction({
       name: 'page-list',
       data: {
         collection: 'photography-class',
@@ -37,15 +37,14 @@ Page({
         page: page,
         pageSize: 9
       }
-    }).then(res => {
-      const { imageList } = this.data
-      const { data, page, totalPage } = res.result
-      this.setData({
-        imageList: imageList.concat(data),
-        nowPage: page,
-        totalPage,
-        dot: false
-      })
+    })
+    const { imageList } = this.data
+    const { data, page: resPage, totalPage: resTotalPage } = res.result
+    this.setData({
+      imageList: imageList.concat(data),
+      nowPage: resPage,
+      totalPage: resTotalPage,
+      dot: false
     })
   },
   // 刷新重置
@@ -122,8 +121,9 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-    this.init()
+  onPullDownRefresh: async function () {
+    await this.init()
+    wx.stopPullDownRefresh()
   },
 
   /**

@@ -74,7 +74,7 @@ Page({
       })
       return
     }
-    await uploadModal()
+    // await uploadModal()
 
     const db = wx.cloud.database()
 
@@ -110,7 +110,6 @@ Page({
         start: []
       }
     })
-    debugger
     let tips = '图片已快马送达作者手中，请留意接下来的小程序和公众号消息'
     // if(isShow && !pass) {
     //   tips = msg
