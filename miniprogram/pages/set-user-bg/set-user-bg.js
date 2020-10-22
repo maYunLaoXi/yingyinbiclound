@@ -29,7 +29,6 @@ Page({
       uploading: 1
     })
     const res = await qinuiUpload({ path: url, progress: this.uploadProgress  })
-    debugger
     const dbUserInfo = await wx.cloud.callFunction({
       name: 'user',
       data: {
