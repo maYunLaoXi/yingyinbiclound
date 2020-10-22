@@ -26,6 +26,15 @@
 
 
 
+技术：
+
+* 云数据库的操作
+* 瀑布流组件
+* 类朋友圈组件
+* CDN图片速度的优化
+
+
+
 由于审核时发现个人类小程未开放用户自行发布内容，所以已将用户上传的 图片改为由后台审核，后台发布。配套的后台管理界面见[yingyinbiclound-console](https://github.com/maYunLaoXi/yingyinbiclound-console)。
 
 后期可能会加入的功能： 
