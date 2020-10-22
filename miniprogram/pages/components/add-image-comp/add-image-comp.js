@@ -61,7 +61,7 @@ Component({
       this.drag = this.selectComponent('#drag');
 
       if(this.data.onLoadChoose) {
-        this.wxChooseImage()
+        setTimeout(() => this.wxChooseImage(), 80)
       }
     },
 
