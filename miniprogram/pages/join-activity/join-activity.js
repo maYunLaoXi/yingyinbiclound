@@ -122,7 +122,7 @@ Page({
       }
     })
 
-    // 如果没有私有云可使用些方法存在云存储
+    // 如果没有私有云可使用此方法存在云存储
     // uploadToCloud(imgList, 'activity/' + actName).then(res => {
     
     // }).catch(err => {

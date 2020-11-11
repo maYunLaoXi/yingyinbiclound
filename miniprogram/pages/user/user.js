@@ -114,6 +114,7 @@ Page({
         pageSize
       }
     }).then(res => {
+      console.log(res)
       const { imageList, imageListPage } = this.data
       const { data, page, pageSize, totalPage, totalSize } = res.result
       if(imageListPage === page) return
@@ -131,11 +132,31 @@ Page({
       data: {
       }
     }).then(res => {
-      console.log('activity-user-get', res)
-      this.setData({
-        activityList: res.result.data,
-        activityListTotalSize: res.result.data[0].list.length
+      const { data } = res.result
+      data.forEach(item => {
+        this.checkIfChecked(item.list)
       })
+      this.setData({
+        activityList: data,
+        activityListTotalSize: data[0].list.length
+      })
+    })
+  },
+  // 图片是否已查验
+  checkIfChecked(list) {
+    if(!list || !Array.isArray(list)) return
+    list.forEach(item => {
+      if(!item.check){
+        let photo = item.photo
+        if(!Array.isArray(photo)) photo = [photo]
+        this.setTipImg(photo)
+      }
+    })
+  },
+  setTipImg(list) {
+    const def = 'http://img.yingyinbi.com/DSC06782qG.jpg'
+    list.forEach(item => {
+      item.url = def
     })
   },
   toUserEdit(){
