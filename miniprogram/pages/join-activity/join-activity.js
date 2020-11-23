@@ -93,6 +93,8 @@ Page({
       photoClass: 'activity' + actName,
       progress: this.uploadProgerss
     })
+    const { pass: textPass } = await msgSecCheck(title + article)
+
     await db.collection('activity-data').add({
       data: {
         createTime: db.serverDate(),
@@ -107,6 +109,7 @@ Page({
         activity_id: _id,
         check: false,
         pass,
+        textPass,
         start: []
       }
     })
@@ -132,7 +135,6 @@ Page({
     //   })
     // })
   },
-
   // 上传提示
   showToast() {
     Toast.loading({

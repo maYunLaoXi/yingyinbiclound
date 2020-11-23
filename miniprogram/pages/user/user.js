@@ -146,15 +146,19 @@ Page({
   checkIfChecked(list) {
     if(!list || !Array.isArray(list)) return
     list.forEach(item => {
+      let photo = item.photo
+      if(!Array.isArray(photo)) photo = [photo]
       if(!item.check){
-        let photo = item.photo
-        if(!Array.isArray(photo)) photo = [photo]
-        this.setTipImg(photo)
+        this.setTipImg(photo, 'check')
+        return
+      }
+      if(item.pass === false) {
+        this.setTipImg(photo, 'pass')
       }
     })
   },
-  setTipImg(list) {
-    const def = 'http://img.yingyinbi.com/DSC06782qG.jpg'
+  setTipImg(list, checkOrPass = 'check') {
+    const def = checkOrPass === 'pass' ? 'http://img.yingyinbi.com/tips-false.png' : 'http://img.yingyinbi.com/tips-wait.png'
     list.forEach(item => {
       item.url = def
     })
