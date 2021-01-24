@@ -1,6 +1,6 @@
 // miniprogram/pages/components/add-picture-article/add-picture-article.js
 const app = getApp()
-import { qinuiUpload, msgSecCheck, showToast, uploadModal } from '../../../utils/index'
+import { qinuiUpload, msgSecCheck, showToast, reqSubscribe } from '../../../utils/index'
 import Toast from '/vant-weapp/toast/toast.js'
 Page({
   data: {
@@ -93,12 +93,25 @@ Page({
         // comment: [],
         // 文字是否能过
         textPass,
+        subcrible: '',
+        sendMessage: false,
       }
     }).then(res => {
       this.setData({
         uploading: 0
       })
-      showToast(true, msg, this.initUser)
+      showToast(true, msg, this.afterUpload, res)
+    })
+  },
+  afterUpload({ _id }) {
+    wx.showModal({
+      content: '图片上传成功，是否订阅审核提醒？',
+      success: (res) => {
+        if (res.confirm) {
+          reqSubscribe(_id, 'photography-class')
+        }
+        this.initUser()
+      }
     })
   },
   initUser() {

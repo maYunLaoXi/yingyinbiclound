@@ -5,6 +5,7 @@ export const requestSubscribeMessage = (templateId) => {
     wx.requestSubscribeMessage({
       tmplIds: [templateId],
       success: (res) => {
+        console.log(res)
         if (res[templateId] === 'accept') {
           resolve(res)
         } else {

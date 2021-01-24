@@ -1,5 +1,5 @@
 // miniprogram/pages/show-activity/show-activity.js
-import { qinuiUpload, msgSecCheck, showToast, uploadModal } from '../../utils/index'
+import { qinuiUpload, msgSecCheck, showToast } from '../../utils/index'
 
 Page({
 

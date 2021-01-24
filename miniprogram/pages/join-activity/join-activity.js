@@ -1,6 +1,6 @@
 // miniprogram/pages/join-activity.js
 const app = getApp()
-import { qinuiUpload, msgSecCheck, uploadModal } from '../../utils/index'
+import { qinuiUpload, msgSecCheck, reqSubscribe } from '../../utils/index'
 import Toast from '/vant-weapp/toast/toast.js'
 Page({
   data: {
@@ -14,6 +14,7 @@ Page({
     uploading: 0,
     progress: 0,
     total: 0,
+    subcribeTemplate: '251QI5xt5KCVLN9OrxMaEcKFTsy5cH1kyyQ_IKxvfKs'
   },
   onLoad(){
     const { address } = app.globalData.userInfo
@@ -95,7 +96,7 @@ Page({
     })
     const { pass: textPass } = await msgSecCheck(title + article)
 
-    await db.collection('activity-data').add({
+    const { _id: dataId } = await db.collection('activity-data').add({
       data: {
         createTime: db.serverDate(),
         name,
@@ -110,7 +111,9 @@ Page({
         check: false,
         pass,
         textPass,
-        start: []
+        start: [],
+        subcrible: '',
+        sendMessage: false,
       }
     })
     let tips = '图片上传成功，是否订阅审核提醒？'
@@ -119,11 +122,11 @@ Page({
     // }
     wx.showModal({
       content: tips,
-      success (res) {
+      success: (res) => {
         if (res.confirm) {
-          wx.navigateBack()
+          reqSubscribe(dataId, 'activity-data')
         } else if (res.cancel) {
-          console.log('用户点击取消')
+          wx.navigateBack()
         }
       }
     })

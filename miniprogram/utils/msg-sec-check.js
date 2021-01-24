@@ -20,7 +20,7 @@ export const msgSecCheck = (msg) => {
 }
 
 // 上传提示并反回
-export const showToast =(pass, msg, cb) => {
+export const showToast =(pass, msg, cb, res) => {
   if(pass) {
     wx.showToast({
       title: '上传完成',
@@ -28,7 +28,7 @@ export const showToast =(pass, msg, cb) => {
       duration: 1000,
     })
     setTimeout(_ => {
-      if(cb)cb()
+      if(cb)cb(res)
       else wx.navigateBack()
     }, 1000)
   }else {
