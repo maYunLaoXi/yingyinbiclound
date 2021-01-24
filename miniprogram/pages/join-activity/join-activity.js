@@ -110,15 +110,18 @@ Page({
         start: []
       }
     })
-    let tips = '图片已快马送达作者手中，请留意接下来的小程序和公众号消息'
+    let tips = '图片上传成功，是否订阅审核提醒？'
     // if(isShow && !pass) {
     //   tips = msg
     // }
     wx.showModal({
       content: tips,
-      showCancel: false,
       success (res) {
-        wx.navigateBack()
+        if (res.confirm) {
+          wx.navigateBack()
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
       }
     })
 
