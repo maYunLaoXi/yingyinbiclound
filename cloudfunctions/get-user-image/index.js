@@ -39,7 +39,9 @@ function handleRes(data) {
       _id: item._id,
       photo: item.photo[0],
       share: item.share,
-      start: item.start
+      start: item.start,
+      check: item.check,
+      pass: item.pass
     })
   })
   return res

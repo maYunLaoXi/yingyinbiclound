@@ -64,7 +64,7 @@ Page({
     const { title, article, isJoinDevelop, address } = this.data
 
     let result = await msgSecCheck(title + article)
-    // const { pass, msg = '' } = result
+    const { pass: textPass } = result
     const pass = false, msg = '';
     const db = wx.cloud.database()
 
@@ -90,7 +90,9 @@ Page({
         // 审核
         pass,
         // 评论
-        // comment: [],  
+        // comment: [],
+        // 文字是否能过
+        textPass,
       }
     }).then(res => {
       this.setData({

@@ -54,19 +54,12 @@ Page({
     if(!title && !article && !imageList.length){
       return
     }
-    // await uploadModal('提交的图片用于与作者交流，最终将由管理员处置')
-    let checkObj = { pass: false, msg: ''}
 
     this.setData({
       uploading: 1,
       total: imageList.length,
     })
-    // if(isOpenShow){
-    //   const result = await msgSecCheck(title + article)
-    //   checkObj.pass = result.pass
-    //   checkObj.msg = result.msg
-    // }
-    const { pass, msg } = checkObj
+    const { pass: textPass } = await msgSecCheck(title + article)
 
     const uploadRes = await qinuiUpload({
       path: imageList,
@@ -89,6 +82,7 @@ Page({
         check: false,
         isHideUserInfo,
         pass,
+        textPass,
         read: false
       }
     })

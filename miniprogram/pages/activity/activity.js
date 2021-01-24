@@ -162,7 +162,6 @@ Page({
   // 点击查看图片
   toImageShowNav(e) {
     const { item, name } = e.detail
-    debugger
     app.globalData.imageShowData = item
     wx.navigateTo({
       url: `/pages/image-show/image-show?from=${name}&collection=${name}`

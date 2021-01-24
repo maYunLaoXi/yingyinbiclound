@@ -85,7 +85,7 @@ function handleList(list, imageView) {
 function mapData(data, receive, isClass) {
   const list = []
   data.forEach(item => {
-    const { title, article, check, show, _id, start } = item
+    const { title, article, check, show, _id, start, pass } = item
     const address = isClass ? item.activity.address : item.address
     const activity_id = isClass ? item.activity.activity_id : item.activity_id
     const showData = receive.filter(showItem => showItem.data_id === _id)
@@ -96,6 +96,7 @@ function mapData(data, receive, isClass) {
       title,
       show,
       check,
+      pass,
       photo: item.photo[0],
       showData,
       address,

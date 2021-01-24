@@ -93,6 +93,8 @@ Page({
       photoClass: 'activity' + actName,
       progress: this.uploadProgerss
     })
+    const { pass: textPass } = await msgSecCheck(title + article)
+
     await db.collection('activity-data').add({
       data: {
         createTime: db.serverDate(),
@@ -107,6 +109,7 @@ Page({
         activity_id: _id,
         check: false,
         pass,
+        textPass,
         start: []
       }
     })
@@ -125,7 +128,7 @@ Page({
       }
     })
 
-    // 如果没有私有云可使用些方法存在云存储
+    // 如果没有私有云可使用此方法存在云存储
     // uploadToCloud(imgList, 'activity/' + actName).then(res => {
     
     // }).catch(err => {
@@ -135,7 +138,6 @@ Page({
     //   })
     // })
   },
-
   // 上传提示
   showToast() {
     Toast.loading({
