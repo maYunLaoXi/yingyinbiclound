@@ -1,7 +1,7 @@
 // 获取可在活动页中展示的作品（包括show）
 const cloud = require('wx-server-sdk')
 
-cloud.init({ env: 'development-zgtnu'})
+cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV })
 const db = cloud.database()
 
 // 云函数入口函数

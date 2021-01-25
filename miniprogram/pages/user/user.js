@@ -63,6 +63,15 @@ Page({
   },
   toImageShow(e) {
     const { id, show, hideShowBtn, activityId = '', item } = e.currentTarget.dataset
+    if (!item) return
+    if (!item.check) {
+      this.wxToast('图片正在审核中')
+      return
+    }
+    if (!item.pass) {
+      this.wxToast('图片审核不通过，请联系公众号')
+      return
+    }
     let collection = show ? 'activity-receive' : 'activity-data'
     // 此图片来自photography-class
     if(item && item.fromPhotoClass) collection = 'photography-class'
@@ -114,10 +123,10 @@ Page({
         pageSize
       }
     }).then(res => {
-      console.log(res)
       const { imageList, imageListPage } = this.data
-      const { data, page, pageSize, totalPage, totalSize } = res.result
+      const { data, page, totalPage, totalSize } = res.result
       if(imageListPage === page) return
+      this.checkIfChecked(data)
       this.setData({
         imageListPage: page,
         imageListTotalSize: totalSize,
@@ -159,9 +168,8 @@ Page({
   },
   setTipImg(list, checkOrPass = 'check') {
     const def = checkOrPass === 'pass' ? 'http://img.yingyinbi.com/tips-false.png' : 'http://img.yingyinbi.com/tips-wait.png'
-    list.forEach(item => {
-      item.url = def
-    })
+    const item = list[0]
+    item.url = def
   },
   toUserEdit(){
     wx.navigateTo({
@@ -176,7 +184,7 @@ Page({
         dataset: {
           id: item._id,
           hideShowBtn: true,
-          item: { fromPhotoClass: true }
+          item: { ...item, fromPhotoClass: true }
         }
       }
     })
@@ -271,5 +279,12 @@ Page({
         activityList[index1].list[index2].showData.splice(index3, 1)
       }
       this.setData({ activityList })
+  },
+  wxToast(msg) {
+    if (!msg) return
+    wx.showToast({
+      icon: 'none',
+      title: msg,
+    })
   }
 })
