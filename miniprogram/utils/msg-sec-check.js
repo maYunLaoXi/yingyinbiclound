@@ -42,3 +42,20 @@ export const showToast =(pass, msg, cb, res) => {
     })
   }
 }
+
+export const modalMsgCheck = async msg => {
+  const res = await msgSecCheck(msg)
+  if (!res.pass) {
+    return new Promise(reject => {
+      wx.showModal({
+        title: '警示',
+        content: '你输入的内容涉及敏感， 无法提交',
+        showCancel: false,
+        success: () => {
+          reject(res)
+        }
+      })
+    })
+  }
+  return res
+}

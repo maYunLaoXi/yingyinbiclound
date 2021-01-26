@@ -1,6 +1,6 @@
 // miniprogram/pages/join-activity.js
 const app = getApp()
-import { qinuiUpload, msgSecCheck, reqSubscribe } from '../../utils/index'
+import { qinuiUpload, modalMsgCheck, reqSubscribe } from '../../utils/index'
 import Toast from '/vant-weapp/toast/toast.js'
 Page({
   data: {
@@ -79,22 +79,18 @@ Page({
 
     const db = wx.cloud.database()
 
+    let pass = false
+    const { pass: textPass } = await modalMsgCheck(title + article)
+    if (!textPass) return
     this.setData({
       uploading: 1,
       total: imgList.length
     })
-    let pass = false, msg = ''
-    // if(isShow) {
-    //   const msgRes = await msgSecCheck(title + article)
-    //   pass = msgRes.pass
-    //   msg = msgRes.msg ? msgRes.msg : ''
-    // }
     const uploadedList = await qinuiUpload({
       path: imgList,
       photoClass: 'activity' + actName,
       progress: this.uploadProgerss
     })
-    const { pass: textPass } = await msgSecCheck(title + article)
 
     const { _id: dataId } = await db.collection('activity-data').add({
       data: {
@@ -110,7 +106,6 @@ Page({
         activity_id: _id,
         check: false,
         pass,
-        textPass,
         start: [],
         subcrible: '',
         sendMessage: false,

@@ -1,5 +1,5 @@
 // miniprogram/pages/show-activity/show-activity.js
-import { qinuiUpload, msgSecCheck, showToast } from '../../utils/index'
+import { qinuiUpload, modalMsgCheck, showToast } from '../../utils/index'
 
 Page({
 
@@ -54,12 +54,13 @@ Page({
     if(!title && !article && !imageList.length){
       return
     }
+    const { pass: textPass } = await modalMsgCheck(title + article)
+    if (!textPass) return
 
     this.setData({
       uploading: 1,
       total: imageList.length,
     })
-    const { pass: textPass } = await msgSecCheck(title + article)
 
     const uploadRes = await qinuiUpload({
       path: imageList,
@@ -82,7 +83,6 @@ Page({
         check: false,
         isHideUserInfo,
         pass,
-        textPass,
         read: false
       }
     })

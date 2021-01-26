@@ -1,6 +1,6 @@
 // miniprogram/pages/components/add-picture-article/add-picture-article.js
 const app = getApp()
-import { qinuiUpload, msgSecCheck, showToast, reqSubscribe } from '../../../utils/index'
+import { qinuiUpload, modalMsgCheck, showToast, reqSubscribe } from '../../../utils/index'
 import Toast from '/vant-weapp/toast/toast.js'
 Page({
   data: {
@@ -29,15 +29,15 @@ Page({
     this.setData({ imageList: list.detail })
   },
   async upload() { 
-    const { imageList, picClass } = this.data
-    const promiseAll = []
+    const { imageList, picClass, title, article } = this.data
     const classObj = picClass ? picClass : { nameEn: 'other'}
 
     if(!imageList.length) {
       Toast('你还没有选择图片')
       return
     }
-    // await uploadModal('提交的图片用于与作者交流，最终将由管理员处置')
+    const { pass: textPass } = await modalMsgCheck(title + article)
+    if (!textPass) return
     // 进度提示
     this.setData({
       uploading: 1,
@@ -61,10 +61,7 @@ Page({
   // 上传
   async cloudDbUpload({ photo, picClass }){
     
-    const { title, article, isJoinDevelop, address } = this.data
-
-    let result = await msgSecCheck(title + article)
-    const { pass: textPass } = result
+    const { isJoinDevelop, address } = this.data
     const pass = false, msg = '';
     const db = wx.cloud.database()
 
@@ -91,8 +88,6 @@ Page({
         pass,
         // 评论
         // comment: [],
-        // 文字是否能过
-        textPass,
         subcrible: '',
         sendMessage: false,
       }
