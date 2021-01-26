@@ -1,6 +1,6 @@
 // miniprogram/pages/join-activity.js
 const app = getApp()
-import { qinuiUpload, modalMsgCheck, reqSubscribe } from '../../utils/index'
+import { qinuiUpload, modalMsgCheck, reqSubscribe, sendEmail } from '../../utils/index'
 import Toast from '/vant-weapp/toast/toast.js'
 Page({
   data: {
@@ -112,9 +112,8 @@ Page({
       }
     })
     let tips = '图片上传成功，是否订阅审核提醒？'
-    // if(isShow && !pass) {
-    //   tips = msg
-    // }
+    
+    sendEmail('activity-data', _id)
     wx.showModal({
       content: tips,
       success: (res) => {

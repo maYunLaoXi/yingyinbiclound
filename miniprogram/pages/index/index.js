@@ -104,7 +104,6 @@ Page({
       });
     })
   },
-
   // 获取数据库的用户信息
   getDbUserInfo(userInfo){
     const getInfo =  tiemFromLast('updateUserInfo') < 10 

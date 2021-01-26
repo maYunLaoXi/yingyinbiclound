@@ -28,3 +28,11 @@ export function updateDbSubscribleInfo(dataId, collection, subcribeTemplate) {
     }
   })
 }
+
+// 给管理员发邮件
+export const sendEmail = (collection, _id) => {
+  return wx.cloud.callFunction({
+    name: 'nodemailer',
+    data: { collection, _id }
+  })
+}
