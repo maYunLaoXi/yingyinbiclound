@@ -20,11 +20,11 @@
   <textarea maxlength="-1"  bindinput="articleInput" placeholder="正文(可选)"></textarea>
 </view>
 <view class="cu-form-group margin-top">
-  <view class="title">提示影音笔查看</view>
+  <view class="title">公开show</view>
   <switch bindchange="ifOpenShow" checked="{{isOpenShow}}"></switch>
 </view>
 <view class="solid-bottom text-xs padding">
-  <text class="text-gray">提示影音笔查看打开时，作者会从可用的联系方式联你，如果没有，请留意接下来的公众号推文</text>
+  <text class="text-gray">公开show即可展示在活动页，不公开则只有你和影音笔作者可见</text>
 </view>
 <!-- <view class="cu-form-group margin-top">
   <view class="title">匿名公开show</view>

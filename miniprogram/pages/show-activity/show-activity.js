@@ -1,5 +1,5 @@
 // miniprogram/pages/show-activity/show-activity.js
-import { qinuiUpload, modalMsgCheck, showToast } from '../../utils/index'
+import { qinuiUpload, modalMsgCheck, showToast, sendEmail } from '../../utils/index'
 
 Page({
 
@@ -70,7 +70,7 @@ Page({
     this.uploading = 0
     const db = wx.cloud.database()
 
-    await db.collection('activity-receive').add({
+    const res = await db.collection('activity-receive').add({
       // data 字段表示需新增的 JSON 数据
       data: {
         createTime: db.serverDate(), // 务服器产生时间
@@ -82,11 +82,12 @@ Page({
         show: isOpenShow,
         check: false,
         isHideUserInfo,
-        pass,
+        pass: false,
         read: false
       }
     })
-    showToast(true, msg, () => {
+    sendEmail('activity-receive', res._id)
+    showToast(true, '感谢你的支持，生活愉快！', () => {
       wx.switchTab({
         url: '/pages/user/user'
       })

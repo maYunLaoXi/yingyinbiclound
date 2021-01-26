@@ -1,6 +1,6 @@
 // miniprogram/pages/components/add-picture-article/add-picture-article.js
 const app = getApp()
-import { qinuiUpload, modalMsgCheck, showToast, reqSubscribe } from '../../../utils/index'
+import { qinuiUpload, modalMsgCheck, showToast, reqSubscribe, sendEmail } from '../../../utils/index'
 import Toast from '/vant-weapp/toast/toast.js'
 Page({
   data: {
@@ -61,7 +61,7 @@ Page({
   // 上传
   async cloudDbUpload({ photo, picClass }){
     
-    const { isJoinDevelop, address } = this.data
+    const { isJoinDevelop, address, title, article } = this.data
     const pass = false, msg = '';
     const db = wx.cloud.database()
 
@@ -95,15 +95,16 @@ Page({
       this.setData({
         uploading: 0
       })
+      sendEmail('photography-class', res._id)
       showToast(true, msg, this.afterUpload, res)
     })
   },
   afterUpload({ _id }) {
     wx.showModal({
       content: '图片上传成功，是否订阅审核提醒？',
-      success: (res) => {
+      success: async (res) => {
         if (res.confirm) {
-          reqSubscribe(_id, 'photography-class')
+          await reqSubscribe(_id, 'photography-class')
         }
         this.initUser()
       }

@@ -116,12 +116,11 @@ Page({
     sendEmail('activity-data', _id)
     wx.showModal({
       content: tips,
-      success: (res) => {
+      success: async (res) => {
         if (res.confirm) {
-          reqSubscribe(dataId, 'activity-data')
-        } else if (res.cancel) {
-          wx.navigateBack()
+          await reqSubscribe(dataId, 'activity-data')
         }
+        wx.navigateBack()
       }
     })
 

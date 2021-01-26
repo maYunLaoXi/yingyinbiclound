@@ -1,20 +1,20 @@
 // 上传后的订阅
-import { requestSubscribeMessage } from './wxApiPromise'
+import { requestSubscribeMessage, WxshowToast } from './wxApiPromise'
 
 export async function reqSubscribe(dataId, collection, subcribeTemplate = '251QI5xt5KCVLN9OrxMaEcKFTsy5cH1kyyQ_IKxvfKs') {
   if (!dataId || !collection) return
-
   const res = await requestSubscribeMessage(subcribeTemplate)
   let msg = '订阅失败'
 
   if (res[subcribeTemplate] === 'accept') {
     msg = '订阅成功'
-    if (dataId) updateDbSubscribleInfo(dataId, collection, subcribeTemplate)
+    if (dataId) await updateDbSubscribleInfo(dataId, collection, subcribeTemplate)
   }
-  wx.showToast({
+  await WxshowToast({
     icon: 'none',
     title: msg,
   })
+  return res
 }
 
 export function updateDbSubscribleInfo(dataId, collection, subcribeTemplate) {

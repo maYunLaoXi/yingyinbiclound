@@ -36,7 +36,7 @@ export const showToast =(pass, msg, cb, res) => {
       title: '提示',
       content: msg,
       success (res) {
-        if(cb)cb
+        if(cb)cb()
         else wx.navigateBack()
       }
     })
