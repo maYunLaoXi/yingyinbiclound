@@ -10,6 +10,8 @@ Page({
     title: '',
     article: '',
     isShow: false,
+    // 加速
+    expedite: false,
     // upload提示 
     uploading: 0,
     progress: 0,
@@ -39,6 +41,11 @@ Page({
   handleShow(e) {
     this.setData({
       isShow: e.detail.value
+    })
+  },
+  handleExpedite(e) {
+    this.setData({
+      expedite: e.detail.value
     })
   },
   getImageList(e){
