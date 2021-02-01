@@ -8,11 +8,11 @@
   <textarea maxlength="-1" disabled="{{modalName!=null}}" bindinput="articleInput" placeholder="正文(可选)"></textarea>
 </view>
 <view class="cu-form-group margin-top">
-  <view class="title">展示在活动页</view>
+  <view class="title">加速审核</view>
   <switch bindchange="handleShow" checked="{{isShow}}"></switch>
 </view>
 <view class="solid-bottom text-xs padding">
-  <text class="text-gray">同意展示的作品将会在活动页里的活动精选中展示</text>
+  <text class="text-gray">加速审核会给作者发送加速消息，加快图片的审核</text>
 </view>
 <van-collapse value="{{ activeNames }}" bind:change="onChange">
   <van-collapse-item name="1">
