@@ -1,28 +1,8 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/userConsole/userConsole",
-    "pages/user/user",
-    "pages/activity/activity",
-    "pages/waterfall/waterfall",
-    "pages/components/waterfall/waterfall",
-    "pages/components/portrait/portrait",
-    "pages/components/add-picture-article/add-picture-article",
-    "pages/components/navigation-bar/navigation-bar",
-    "pages/components/class-swiper/class-swiper",
-    "pages/components/img-article/img-article",
-    "pages/components/add-image-comp/add-image-comp",
-    "pages/join-activity/join-activity",
-    "pages/select-address/index",
-    "pages/address-edit-add/index",
-    "pages/image-show/image-show",
-    "pages/show-activity/show-activity",
-    "pages/user-info/user-info",
-    "pages/set-user-bg/set-user-bg",
-    "pages/components/nine-image/nine-image"
+    "pages/end-show/end-show"
   ],
   "window": {
-    "navigationStyle": "custom",
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "影音笔",
@@ -30,37 +10,5 @@
     "backgroundTextStyle": "dark",
     "enablePullDownRefresh": true
   },
-  "sitemapLocation": "sitemap.json",
-  "tabBar": {
-    "color": "#cccccc",
-    "selectedColor": "#000000",
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "images/icons/home-gray.png",
-        "selectedIconPath": "images/icons/home.png"
-      },
-      {
-        "pagePath": "pages/activity/activity",
-        "text": "活动",
-        "iconPath": "images/icons/wx-gray.png",
-        "selectedIconPath": "images/icons/wx.png"
-      },
-      {
-        "pagePath": "pages/user/user",
-        "text": "我的",
-        "iconPath": "images/icons/face-gray.png",
-        "selectedIconPath": "images/icons/face.png"
-      }
-    ]
-  },
-  "usingComponents": {
-    "cu-custom": "/colorui/components/cu-custom"
-  },
-  "permission": {
-    "scope.userLocation": {
-      "desc": "你的位置信息将用于设定收件地址"
-    }
-  }
+  "sitemapLocation": "sitemap.json"
 }
