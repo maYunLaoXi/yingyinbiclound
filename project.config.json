@@ -37,141 +37,116 @@
   "libVersion": "2.11.1",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
-  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
   "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
-      "list": []
-    },
-    "plugin": {
-      "current": -1,
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
-    "gamePlugin": {
-      "current": -1,
-      "list": []
-    },
     "miniprogram": {
-      "current": 0,
       "list": [
         {
-          "id": -1,
           "name": "db guide",
           "pathName": "pages/databaseGuide/databaseGuide",
           "query": ""
         },
         {
-          "id": 1,
           "name": "pages/component/waterfall/waterfall",
           "pathName": "pages/component/waterfall/waterfall",
           "query": "",
           "scene": null
         },
         {
-          "id": -1,
           "name": "pages/components/add-picture-article/add-picture-article",
           "pathName": "pages/components/add-picture-article/add-picture-article",
           "query": "",
           "scene": null
         },
         {
-          "id": -1,
           "name": "pages/drag-test/index",
           "pathName": "pages/drag-test/index",
           "query": "",
           "scene": null
         },
         {
-          "id": -1,
           "name": "pages/components/portrait/portrait",
           "pathName": "pages/components/portrait/portrait",
           "query": "",
           "scene": null
         },
         {
-          "id": -1,
           "name": "pages/components/portrait/portrait",
           "pathName": "pages/components/portrait/portrait",
           "query": "",
           "scene": null
         },
         {
-          "id": -1,
           "name": "pages/activity/activity",
           "pathName": "pages/activity/activity",
           "query": "",
           "scene": null
         },
         {
-          "id": -1,
           "name": "pages/join-activity/join-activity",
           "pathName": "pages/join-activity/join-activity",
           "query": "",
           "scene": null
         },
         {
-          "id": -1,
           "name": "pages/address-edit-add/index",
           "pathName": "pages/address-edit-add/index",
           "query": "",
           "scene": null
         },
         {
-          "id": -1,
           "name": "pages/address-edit-add/index",
           "pathName": "pages/address-edit-add/index",
           "query": "",
           "scene": null
         },
         {
-          "id": -1,
           "name": "pages/user/user",
           "pathName": "pages/user/user",
           "query": "",
           "scene": null
         },
         {
-          "id": -1,
           "name": "pages/show-activity/show-activity",
           "pathName": "pages/show-activity/show-activity",
           "query": "",
           "scene": null
         },
         {
-          "id": -1,
           "name": "pages/image-show/image-show",
           "pathName": "pages/image-show/image-show",
           "query": "",
           "scene": null
         },
         {
-          "id": -1,
           "name": "pages/user-info/user-info",
           "pathName": "pages/user-info/user-info",
           "query": "",
           "scene": null
         },
         {
-          "id": -1,
           "name": "pages/activity/activity",
           "pathName": "pages/activity/activity",
           "query": "",
           "scene": null
         },
         {
-          "id": -1,
           "name": "1011",
           "pathName": "pages/index/index",
+          "query": "",
           "scene": 1011
         }
       ]
     }
+  },
+  "compileType": "miniprogram",
+  "srcMiniprogramRoot": "miniprogram/",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
   }
 }
